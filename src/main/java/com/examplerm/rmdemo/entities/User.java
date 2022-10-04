@@ -1,11 +1,16 @@
 package com.examplerm.rmdemo.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.examplerm.rmdemo.entities.pivots.User_Playlist;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,4 +35,7 @@ public class User {
 
     @Column(nullable = false)
     private String bondingFacebook;
+
+    @OneToMany(mappedBy = "user")  
+    private List<User_Playlist> user_Playlists;
 }
