@@ -38,4 +38,7 @@ public class Podcast {
 
     @OneToMany(mappedBy = "podcast")  
     private List<Podcast_Library> podcast_Libraries; 
+
+    @OneToMany(mappedBy = "podcast")
+    private List<Chapter> chapters;
 }

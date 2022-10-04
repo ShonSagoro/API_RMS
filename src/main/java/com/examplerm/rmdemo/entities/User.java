@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.examplerm.rmdemo.entities.pivots.User_Playlist;
@@ -38,4 +39,10 @@ public class User {
 
     @OneToMany(mappedBy = "user")  
     private List<User_Playlist> user_Playlists;
+
+    @OneToOne(mappedBy = "user")
+    private TokenFacebook tokenFacebook;
+
+    @OneToOne(mappedBy = "user")
+    private Library library;
 }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.examplerm.rmdemo.entities.pivots.Album_Library;
@@ -34,4 +35,6 @@ public class Library {
     @OneToMany(mappedBy = "library")  
     private List<Playlist_Library> playlist_Libraries;
    
+    @OneToOne(mappedBy = "library")
+    private User user;
 }
