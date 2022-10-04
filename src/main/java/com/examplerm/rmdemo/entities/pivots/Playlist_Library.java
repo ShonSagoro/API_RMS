@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.entities.Playlist;
 
 @Entity
@@ -17,7 +18,7 @@ public class Playlist_Library {
     private Long id;
 
     @ManyToOne
-    private Playlist artist;
+    private Playlist playlist;
 
     @ManyToOne
     private Library library;

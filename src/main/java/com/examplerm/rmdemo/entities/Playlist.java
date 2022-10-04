@@ -37,7 +37,6 @@ public class Playlist {
     
     @Column(nullable = false)
     private String duration;
-
     
     @OneToMany(mappedBy = "playlist")  
     private List<Playlist_Library> playlist_Libraries;
