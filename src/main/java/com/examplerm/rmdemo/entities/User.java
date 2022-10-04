@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,9 +41,11 @@ public class User {
     @OneToMany(mappedBy = "user")  
     private List<User_Playlist> user_Playlists;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinColumn(name="tokenFacebook_id", referencedColumnName = "id")
     private TokenFacebook tokenFacebook;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinColumn(name="library_id", referencedColumnName = "id")
     private Library library;
 }
