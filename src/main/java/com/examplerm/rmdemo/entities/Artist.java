@@ -25,13 +25,13 @@ public class Artist {
     private Long id;
 
     @Column(nullable = false)
-    private String title;
+    private String name;
 
     @Column(nullable = false)
-    private String description;
+    private String listener;
     
     @Column(nullable = false)
-    private String duration;
+    private String discography;
 
     @OneToMany(mappedBy = "artist")  
     private List<Artist_Library> artist_Libraries; 

@@ -64,7 +64,7 @@ public class FileServiceImpl implements IFileService{
 	}
 	
 
-	@PostConstruct //es el primer metodo que se ejecute cuando se inyecte este servicio (this.class)
+	@PostConstruct 
 	private void initializeAmazon() {
 		AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 		s3client = AmazonS3ClientBuilder

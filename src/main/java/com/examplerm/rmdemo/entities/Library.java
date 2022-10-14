@@ -15,8 +15,12 @@ import com.examplerm.rmdemo.entities.pivots.Artist_Library;
 import com.examplerm.rmdemo.entities.pivots.Playlist_Library;
 import com.examplerm.rmdemo.entities.pivots.Podcast_Library;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "libraries")
+@Getter @Setter
 public class Library {
 
     @Id

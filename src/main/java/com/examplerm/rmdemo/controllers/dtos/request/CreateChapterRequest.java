@@ -5,12 +5,13 @@ import lombok.NonNull;
 import lombok.Setter;
 
 @Getter @Setter
-public class CreateSongRequest {
+public class CreateChapterRequest {
+    
     @NonNull
-    private String name;
+    private String title;
+
+    private String description;
+
     @NonNull
     private String duration;
-    @NonNull
-    private String ArtistName;
-    private String Album;
 }

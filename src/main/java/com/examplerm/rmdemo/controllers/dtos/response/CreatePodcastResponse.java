@@ -4,13 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class CreateSongResponse {
+public class CreatePodcastResponse {
+
     private Long id;
 
     private String name;
 
-    private String duration;
+    private String description;
 
-    private String autor;
+    private String category;
+
+    private String creationDate;
     
 }
