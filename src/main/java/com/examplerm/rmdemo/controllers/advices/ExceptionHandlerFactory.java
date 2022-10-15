@@ -1,4 +1,4 @@
-package com.examplerm.rmdemo.controllers.dtos.advices;
+package com.examplerm.rmdemo.controllers.advices;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

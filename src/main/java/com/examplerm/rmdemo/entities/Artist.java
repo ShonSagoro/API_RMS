@@ -28,10 +28,7 @@ public class Artist {
     private String name;
 
     @Column(nullable = false)
-    private String listener;
-    
-    @Column(nullable = false)
-    private String discography;
+    private Integer listener;
 
     @OneToMany(mappedBy = "artist")  
     private List<Artist_Library> artist_Libraries; 
@@ -40,7 +37,7 @@ public class Artist {
     private List<Song> songs;
 
     @OneToMany(mappedBy = "artist")
-    private List<Album> album;
+    private List<Album> albums;
 
     
     

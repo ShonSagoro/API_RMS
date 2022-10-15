@@ -8,6 +8,4 @@ public class CreateArtistRequest {
 
     private String name;
 
-    private String discography;
-
 }

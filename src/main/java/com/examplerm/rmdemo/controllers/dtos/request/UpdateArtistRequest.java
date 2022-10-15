@@ -8,8 +8,6 @@ public class UpdateArtistRequest {
 
     private String name;
 
-    private String listener;
-
-    private String discography;
+    private Integer listener;
     
 }

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class UpdatePlaylistrRequest {
+public class UpdatePlaylistRequest {
 
     private String name;
 

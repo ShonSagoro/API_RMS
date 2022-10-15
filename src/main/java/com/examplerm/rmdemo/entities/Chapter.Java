@@ -26,6 +26,9 @@ public class Chapter {
     private String description;
 
     @Column(nullable = false)
+    private String creationDate;
+
+    @Column(nullable = false)
     private String duration;
 
     @ManyToOne

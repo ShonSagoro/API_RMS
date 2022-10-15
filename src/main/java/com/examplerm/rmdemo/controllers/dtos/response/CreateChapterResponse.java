@@ -14,4 +14,6 @@ public class CreateChapterResponse {
 
     private String duration;
 
+    private String dateCreation;
+
 }

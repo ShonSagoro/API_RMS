@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter @Getter
 public class GetChapterResponse {
-        
+    
     private Long id;
 
     private String title;
@@ -13,5 +13,8 @@ public class GetChapterResponse {
     private String description;
 
     private String duration;
+
+    private String dateCreation;
+
 
 }

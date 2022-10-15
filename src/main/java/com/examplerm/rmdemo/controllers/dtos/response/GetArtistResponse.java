@@ -1,5 +1,9 @@
 package com.examplerm.rmdemo.controllers.dtos.response;
 
+import java.util.List;
+
+import com.examplerm.rmdemo.entities.Album;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +14,8 @@ public class GetArtistResponse {
 
     private String name;
 
-    private String discography;
-
-    private String listener;
+    private Integer listener;
+    
+    private List<Album> albums;
 
 }
