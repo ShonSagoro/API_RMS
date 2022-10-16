@@ -106,7 +106,6 @@ public class SongServiceImpl implements ISongService {
         response.setId(song.getId());
         response.setName(song.getName());
         response.setDuration(song.getDuration());
-
         return response;
     }
 

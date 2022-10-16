@@ -32,7 +32,6 @@ public class UserServiceImpl implements IUserService {
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.OK)
                 .build();
-
     }
 
     public BaseResponse create(CreateUserRequest request) {

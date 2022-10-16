@@ -17,4 +17,5 @@ public class GetAlbumResponse {
     private String discography;
 
     private String description;
+
 }

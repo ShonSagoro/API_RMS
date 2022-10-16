@@ -88,7 +88,7 @@ public class AlbumServiceImpl implements IAlbumService {
 
     private Album update(Album album, UpdateAlbumRequest request) {
         album.setName(request.getName());
-        album.setDiscography(request.getDiscography());
+
         album.setDateCreation(request.getDateCreation());
         album.setDescription(request.getDescription());
         album.setDuration(request.getDuration());
@@ -99,7 +99,7 @@ public class AlbumServiceImpl implements IAlbumService {
 
         Album album = new Album();
         album.setName(request.getName());
-        album.setDiscography(request.getDiscography());
+
         album.setDescription(request.getDescription());
         album.setDateCreation(request.getDateCreation());
         album.setDuration(request.getDuration());
@@ -113,7 +113,6 @@ public class AlbumServiceImpl implements IAlbumService {
         response.setDuration(album.getDuration());
         response.setDateCreation(album.getDateCreation());
         response.setDescription(album.getDescription());
-        response.setDiscography(album.getDiscography());
         return response;
     }
 

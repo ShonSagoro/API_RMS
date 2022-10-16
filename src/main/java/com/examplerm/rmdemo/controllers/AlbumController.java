@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("album")
 public class AlbumController {
+
     @Autowired
     private IAlbumService service;
 
@@ -20,6 +21,7 @@ public class AlbumController {
     public BaseResponse list(){
         return service.list();
     }
+
     @PostMapping
     public BaseResponse create(@RequestBody CreateAlbumRequest request){
         return service.create(request);
@@ -39,6 +41,5 @@ public class AlbumController {
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
-
 
 }

@@ -25,7 +25,6 @@ public class UserController {
     @GetMapping("{id}")
     public BaseResponse get(@PathVariable Long id){
             return service.get(id);
-
     }
 
     @PutMapping("{id}")

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("song")
 public class SongController {
+
     @Autowired
     private ISongService service;
 
@@ -36,5 +37,4 @@ public class SongController {
     public BaseResponse update(@PathVariable Long id, @RequestBody UpdateSongRequest request){
         return service.update(id, request);
     }
-
 }

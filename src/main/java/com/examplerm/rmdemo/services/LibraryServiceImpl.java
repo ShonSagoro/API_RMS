@@ -11,6 +11,7 @@ import com.examplerm.rmdemo.controllers.dtos.response.GetLibraryResponse;
 
 @Service
 public class LibraryServiceImpl implements ILibraryService {
+
     @Autowired
     private ILibraryRepository repository;
 
@@ -18,7 +19,6 @@ public class LibraryServiceImpl implements ILibraryService {
     public Library create() {
         Library library = new Library();
         return repository.save(library);
-
     }
 
     @Override
@@ -30,19 +30,15 @@ public class LibraryServiceImpl implements ILibraryService {
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.OK)
                 .build();
-
     }
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
-
     }
 
     private GetLibraryResponse from(Library library) {
         GetLibraryResponse response = new GetLibraryResponse();
         response.setId(library.getId());
-
-
         return response;
     }
 
