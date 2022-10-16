@@ -23,7 +23,6 @@ import lombok.Setter;
 @Entity
 @Getter@Setter
 @Table(name = "libraries")
-@Getter @Setter
 public class Library {
 
     @Id
