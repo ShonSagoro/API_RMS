@@ -12,9 +12,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.examplerm.rmdemo.entities.pivots.Album_Library;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="albums")
+@Getter@Setter
 public class Album {
 
     @Id

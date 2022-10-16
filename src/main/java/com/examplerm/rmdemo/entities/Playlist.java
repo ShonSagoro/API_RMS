@@ -18,7 +18,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "platlists")
+@Table(name = "playlists")
 @Getter @Setter
 public class Playlist {
 

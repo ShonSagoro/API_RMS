@@ -35,9 +35,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String bondingFacebook;
-
     @OneToMany(mappedBy = "user")  
     private List<User_Playlist> user_Playlists;
 

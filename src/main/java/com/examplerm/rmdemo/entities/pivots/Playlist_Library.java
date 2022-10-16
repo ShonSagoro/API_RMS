@@ -11,7 +11,7 @@ import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.entities.Playlist;
 
 @Entity
-@Table(name = "artist_library")
+@Table(name = "playlist_library")
 public class Playlist_Library {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
