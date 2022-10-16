@@ -1,11 +1,11 @@
 package com.examplerm.rmdemo.controllers.dtos.response;
-import lombok.Builder;
+
 import org.springframework.http.HttpStatus;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-@Builder @Getter @Setter
+@Builder @Getter
 public class BaseResponse {
     private Object data;
     private String message;

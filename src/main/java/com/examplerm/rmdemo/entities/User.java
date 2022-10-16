@@ -39,10 +39,6 @@ public class User {
     private List<User_Playlist> user_Playlists;
 
     @OneToOne
-    @JoinColumn(name="tokenFacebook_id", referencedColumnName = "id")
-    private TokenFacebook tokenFacebook;
-
-    @OneToOne
     @JoinColumn(name="library_id", referencedColumnName = "id")
     private Library library;
 }

@@ -17,9 +17,13 @@ import com.examplerm.rmdemo.entities.pivots.Podcast_Library;
 import lombok.Getter;
 import lombok.Setter;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Getter@Setter
 @Table(name = "libraries")
+@Getter @Setter
 public class Library {
 
     @Id

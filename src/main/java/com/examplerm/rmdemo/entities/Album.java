@@ -12,12 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.examplerm.rmdemo.entities.pivots.Album_Library;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name="albums")
-@Getter@Setter
+@Setter @Getter
 public class Album {
 
     @Id
@@ -30,20 +31,16 @@ public class Album {
     @Column(nullable = false)
     private String duration;
     
+    private String description;
+    
     @Column(nullable = false)
     private String dateCreation;
-
-    @Column(nullable = false)
-    private String discography;
-
-    @Column(nullable = false)
-    private String description;
-
-    @OneToMany(mappedBy = "album")  
-    private List<Album_Library> album_library;
-
+    
     @ManyToOne
     private Artist artist;
+    
+    @OneToMany(mappedBy = "album")  
+    private List<Album_Library> album_library;
 
     @OneToMany(mappedBy = "album")
     private List<Song> songs;

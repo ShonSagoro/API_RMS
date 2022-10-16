@@ -23,8 +23,10 @@ public class Chapter {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
+    private String creationDate;
 
     @Column(nullable = false)
     private String duration;
