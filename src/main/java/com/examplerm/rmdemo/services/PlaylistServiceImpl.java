@@ -29,7 +29,7 @@ public class PlaylistServiceImpl implements IPlaylistService{
         GetPlaylistResponse response= from(repository.save(playlist)); 
         return BaseResponse.builder()
             .data(response)
-            .message("Playlist has been playlist")
+            .message("Playlist has been created")
             .httpStatus(HttpStatus.OK).build();
     }
 

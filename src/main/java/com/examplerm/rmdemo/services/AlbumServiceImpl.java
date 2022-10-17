@@ -10,8 +10,6 @@ import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +24,7 @@ public class AlbumServiceImpl implements IAlbumService {
         GetAlbumResponse response=from(id);
         return BaseResponse.builder()
                 .data(response)
-                .message("Album has been getted")
+                .message("Album has been found")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.OK).build();
 

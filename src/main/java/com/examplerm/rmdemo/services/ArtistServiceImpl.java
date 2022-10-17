@@ -27,7 +27,7 @@ public class ArtistServiceImpl implements IArtistService{
         GetArtistResponse response=from(repository.save(artist));
         return BaseResponse.builder()
             .data(response)
-            .message("Artist has been create")
+            .message("Artist has been created")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }

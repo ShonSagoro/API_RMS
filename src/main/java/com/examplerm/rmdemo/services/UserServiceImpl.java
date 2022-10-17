@@ -68,6 +68,7 @@ public class UserServiceImpl implements IUserService {
     public void delete(Long id) {
         //uso del método
         repository.deleteById(id);
+        libraryService.delete(id);
 
     }
 

@@ -14,14 +14,13 @@ import com.examplerm.rmdemo.entities.pivots.Album_Library;
 import com.examplerm.rmdemo.entities.pivots.Artist_Library;
 import com.examplerm.rmdemo.entities.pivots.Playlist_Library;
 import com.examplerm.rmdemo.entities.pivots.Podcast_Library;
-import lombok.Getter;
-import lombok.Setter;
 
 import lombok.Getter;
 import lombok.Setter;
+
 
 @Entity
-@Getter@Setter
+@Getter @Setter
 @Table(name = "libraries")
 public class Library {
 
