@@ -66,22 +66,10 @@ public class UserServiceImpl implements IUserService {
     }
     @Override
     public void delete(Long id) {
-        //uso del método
+        GetUserResponse response=from(id);
+        libraryService.delete(response.getLibrary_id());
         repository.deleteById(id);
-        libraryService.delete(id);
-
     }
-
-    /*Podría haber un método que haga uso del Join
-    en el repositorio para eliminar tanto id_librería
-    como id_User cuando se elimine a un user, para que
-    así pase a traer todo de una vez. Igual y se puede
-    implementar el delete on cascade, just saying xd*/
-
-    /*NOTA: Me avisan qué onda, para que me quede tranquila
-    con el join, con el delete on cascade o me ponga manos
-    a la obra en crear otra forma de eliminar ambos de una vez*/
-
 
     @Override
     public User save(User user) {
