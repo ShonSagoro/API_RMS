@@ -12,7 +12,7 @@ import com.examplerm.rmdemo.entities.Library;
 
 @Entity
 @Table(name = "artist_library")
-public class Artist_Library {
+public class ArtistLibrary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -8,17 +8,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.examplerm.rmdemo.entities.Library;
-import com.examplerm.rmdemo.entities.Podcast;
+import com.examplerm.rmdemo.entities.Playlist;
 
 @Entity
-@Table(name = "podcast_library")
-public class Podcast_Library {
+@Table(name = "playlist_library")
+public class PlaylistLibrary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne 
-    private Podcast podcast;
+    @ManyToOne
+    private Playlist playlist;
 
     @ManyToOne
     private Library library;

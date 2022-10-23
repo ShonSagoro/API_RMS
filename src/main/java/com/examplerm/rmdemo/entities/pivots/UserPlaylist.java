@@ -7,19 +7,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.entities.Playlist;
+import com.examplerm.rmdemo.entities.User;
 
 @Entity
-@Table(name = "playlist_library")
-public class Playlist_Library {
+@Table(name = "user_playlist")
+public class UserPlaylist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Playlist playlist;
+    @ManyToOne 
+    private User user;
 
     @ManyToOne
-    private Library library;
+    private Playlist playlist;
 }

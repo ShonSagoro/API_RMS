@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.examplerm.rmdemo.entities.pivots.Podcast_Library;
+import com.examplerm.rmdemo.entities.pivots.PodcastLibrary;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +36,7 @@ public class Podcast {
     private String creationDate;
 
     @OneToMany(mappedBy = "podcast")  
-    private List<Podcast_Library> podcast_Libraries; 
+    private List<PodcastLibrary> podcast_Libraries; 
 
     @OneToMany(mappedBy = "podcast")
     private List<Chapter> chapters;

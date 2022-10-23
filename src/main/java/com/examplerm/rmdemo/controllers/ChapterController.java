@@ -1,6 +1,7 @@
 package com.examplerm.rmdemo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,23 +23,27 @@ public class ChapterController {
     private IChapterService service;
 
     @GetMapping
-    public BaseResponse list(){
-        return service.list();
+    public ResponseEntity<BaseResponse> list(){
+        BaseResponse baseResponse= service.list();
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
     @GetMapping("{id}")
-    public BaseResponse get(@PathVariable long id){
-        return service.get(id);
+    public ResponseEntity<BaseResponse> get(@PathVariable long id){
+        BaseResponse baseResponse= service.get(id);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
     @PostMapping
-    public BaseResponse create(@RequestBody CreateChapterRequest request){
-        return service.create(request);
+    public ResponseEntity<BaseResponse> create(@RequestBody CreateChapterRequest request){
+        BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
     @PutMapping("{id}")
-    public BaseResponse update(@PathVariable Long id, @RequestBody UpdateChapterRequest request){
-        return service.update(id, request);
+    public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdateChapterRequest request){
+        BaseResponse baseResponse= service.update(id, request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
     @DeleteMapping("{id}")

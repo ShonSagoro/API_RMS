@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.examplerm.rmdemo.entities.pivots.User_Playlist;
+import com.examplerm.rmdemo.entities.pivots.UserPlaylist;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +36,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")  
-    private List<User_Playlist> user_Playlists;
+    private List<UserPlaylist> user_Playlists;
 
     @OneToOne
     @JoinColumn(name="library_id", referencedColumnName = "id")

@@ -5,6 +5,7 @@ import com.examplerm.rmdemo.controllers.dtos.request.UpdateSongRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,18 +16,24 @@ public class SongController {
     private ISongService service;
 
     @PostMapping
-    public BaseResponse create(@RequestBody CreateSongRequest request){
-        return service.create(request);
+    public ResponseEntity<BaseResponse> create(@RequestBody CreateSongRequest request){
+        BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
     }
 
     @GetMapping
-    public BaseResponse list(){
-        return service.list();
+    public ResponseEntity<BaseResponse> list(){
+        BaseResponse baseResponse= service.list();
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
     }
 
     @GetMapping("{id}")
-    public BaseResponse get(@PathVariable long id){
-        return service.get(id);
+    public ResponseEntity<BaseResponse> get(@PathVariable long id){
+        BaseResponse baseResponse= service.get(id);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
     }
 
     @DeleteMapping("{id}")
@@ -34,7 +41,9 @@ public class SongController {
         service.delete(id);
     }
     @PutMapping("{id}")
-    public BaseResponse update(@PathVariable Long id, @RequestBody UpdateSongRequest request){
-        return service.update(id, request);
+    public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdateSongRequest request){
+        BaseResponse baseResponse= service.update(id, request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
     }
 }

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.examplerm.rmdemo.entities.pivots.Album_Library;
+import com.examplerm.rmdemo.entities.pivots.AlbumLibrary;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +40,7 @@ public class Album {
     private Artist artist;
     
     @OneToMany(mappedBy = "album")  
-    private List<Album_Library> album_library;
+    private List<AlbumLibrary> album_library;
 
     @OneToMany(mappedBy = "album")
     private List<Song> songs;

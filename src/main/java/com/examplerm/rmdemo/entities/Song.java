@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.examplerm.rmdemo.entities.pivots.Song_Playlist;
+import com.examplerm.rmdemo.entities.pivots.SongPlaylist;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +32,7 @@ public class Song {
     private String duration;
   
     @OneToMany(mappedBy = "song")  
-    private List<Song_Playlist> song_Playlists;
+    private List<SongPlaylist> song_Playlists;
 
     @ManyToOne
     private Artist artist;

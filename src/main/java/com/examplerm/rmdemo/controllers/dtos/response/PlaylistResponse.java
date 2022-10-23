@@ -3,8 +3,8 @@ package com.examplerm.rmdemo.controllers.dtos.response;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter @Getter
-public class CreatePlaylistResponse {
+@Getter @Setter
+public class PlaylistResponse {
 
     private Long id;
 
@@ -12,6 +12,8 @@ public class CreatePlaylistResponse {
 
     private String description;
 
-    private String dateCreation;
+    private String category;
 
+    private String creationDate;
+    
 }
