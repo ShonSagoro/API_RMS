@@ -12,6 +12,8 @@ public class GetSongResponse {
     private String duration;
 
     private String creationDate;
+    
+    private String songUrl;
 
     private AlbumResponse album;
 

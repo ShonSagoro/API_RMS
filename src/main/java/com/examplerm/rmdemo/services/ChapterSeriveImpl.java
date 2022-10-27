@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateChapterRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateChapterRequest;
@@ -18,6 +19,7 @@ import com.examplerm.rmdemo.entities.Chapter;
 import com.examplerm.rmdemo.entities.Podcast;
 import com.examplerm.rmdemo.repositories.IChapterRepository;
 import com.examplerm.rmdemo.services.interfaces.IChapterService;
+import com.examplerm.rmdemo.services.interfaces.IFileService;
 import com.examplerm.rmdemo.services.interfaces.IPodcastService;
 
 @Service
@@ -29,9 +31,13 @@ public class ChapterSeriveImpl implements IChapterService{
     @Autowired 
     private IPodcastService podcastService;
 
+    @Autowired
+    private IFileService fileService;
+
     @Override
-    public BaseResponse create(CreateChapterRequest request) {
-        Chapter chapter= from(request);
+    public BaseResponse create(CreateChapterRequest request, MultipartFile file) {
+        String chapterUrl=fileService.upload(file);
+        Chapter chapter= from(request, chapterUrl);
         GetChapterResponse response=from(repository.save(chapter));
         return BaseResponse.builder()
             .data(response)
@@ -109,6 +115,7 @@ public class ChapterSeriveImpl implements IChapterService{
         response.setTitle(chapter.getTitle());
         response.setDescription(chapter.getDescription());
         response.setDuration(chapter.getDuration());
+        response.setChapterUrl(chapter.getChapterUrl());
         response.setCreationDate(chapter.getCreationDate());
         response.setPodcast(from(chapter.getPodcast()));
         return response;
@@ -125,11 +132,12 @@ public class ChapterSeriveImpl implements IChapterService{
 
     }
 
-    private Chapter from(CreateChapterRequest request){
+    private Chapter from(CreateChapterRequest request, String chapterUrl){
         Chapter chapter= new Chapter();
         chapter.setTitle(request.getTitle());
         chapter.setDescription(request.getDescription());
         chapter.setDuration(request.getDuration());
+        chapter.setChapterUrl(chapterUrl);
         chapter.setCreationDate(getDate());
         chapter.setPodcast(podcastService.findById(request.getPodcastId()));
         return chapter;

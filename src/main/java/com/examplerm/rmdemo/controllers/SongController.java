@@ -18,7 +18,7 @@ public class SongController {
 
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreateSongRequest request, @RequestParam MultipartFile file){
-        BaseResponse baseResponse= service.create(request);
+        BaseResponse baseResponse= service.create(request, file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
 
     }

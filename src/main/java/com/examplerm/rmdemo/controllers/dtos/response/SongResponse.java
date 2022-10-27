@@ -13,6 +13,8 @@ public class SongResponse {
 
     private String creationDate;
 
+    private String songUrl;
+
     private AlbumResponse album;
 
     private ArtistResponse artist;

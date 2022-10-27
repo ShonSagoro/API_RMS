@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateChapterRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateChapterRequest;
@@ -35,8 +37,8 @@ public class ChapterController {
     }
 
     @PostMapping
-    public ResponseEntity<BaseResponse> create(@RequestBody CreateChapterRequest request){
-        BaseResponse baseResponse= service.create(request);
+    public ResponseEntity<BaseResponse> create(@RequestBody CreateChapterRequest request, @RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.create(request, file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 

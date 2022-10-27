@@ -78,6 +78,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setId(song.getId());
         response.setName(song.getName());
         response.setDuration(song.getDuration());
+        response.setSongUrl(song.getSongUrl());
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));
         return response;
@@ -128,6 +129,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setName(song.getName());
         response.setCreationDate(song.getCreationDate());
         response.setDuration(song.getDuration());
+        response.setSongUrl(song.getSongUrl());
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));
         return response;

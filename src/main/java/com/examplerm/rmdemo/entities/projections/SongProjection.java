@@ -12,6 +12,8 @@ public interface SongProjection {
     
     String getCreationDate();
 
+    String getSongUrl();
+
     Artist getArtist();
     
     Album getAlbum();

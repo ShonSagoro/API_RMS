@@ -1,6 +1,7 @@
 package com.examplerm.rmdemo.services.interfaces;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateChapterRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateChapterRequest;
@@ -9,7 +10,7 @@ import com.examplerm.rmdemo.entities.Chapter;
 
 @Service
 public interface IChapterService {
-    BaseResponse create(CreateChapterRequest request);
+    BaseResponse create(CreateChapterRequest request, MultipartFile file);
     
     BaseResponse update(Long id, UpdateChapterRequest request);
     

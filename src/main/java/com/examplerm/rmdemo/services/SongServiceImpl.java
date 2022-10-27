@@ -12,10 +12,12 @@ import com.examplerm.rmdemo.entities.Song;
 import com.examplerm.rmdemo.repositories.ISongRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
+import com.examplerm.rmdemo.services.interfaces.IFileService;
 import com.examplerm.rmdemo.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +35,9 @@ public class SongServiceImpl implements ISongService {
 
     @Autowired
     private IAlbumService albumService;
+    
+    @Autowired
+    private IFileService fileService;
 
     @Override
     public BaseResponse get(Long id) {
@@ -47,8 +52,9 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
-    public BaseResponse create(CreateSongRequest request) {
-        Song song = from(request);
+    public BaseResponse create(CreateSongRequest request, MultipartFile file) {
+        String songUrl= fileService.upload(file);
+        Song song = from(request, songUrl);
         GetSongResponse response = from(repository.save(song));
         return BaseResponse.builder()
                 .data(response)
@@ -98,13 +104,14 @@ public class SongServiceImpl implements ISongService {
         return repository.save(song);
     }
 
-    private Song from(CreateSongRequest request) {
+    private Song from(CreateSongRequest request, String songUrl) {
         Song song = new Song();
         song.setName(request.getName());
         song.setDuration(request.getDuration());
         song.setAlbum(albumService.findById(request.getAlbumId()));
         song.setArtist(artistService.findById(request.getArtistId()));
         song.setCreationDate(getDate());
+        song.setSongUrl(songUrl);
         return song;
     }
 
@@ -114,6 +121,7 @@ public class SongServiceImpl implements ISongService {
         response.setName(song.getName());
         response.setDuration(song.getDuration());
         response.setCreationDate(song.getCreationDate());
+        response.setSongUrl(song.getSongUrl());
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));
         return response;
