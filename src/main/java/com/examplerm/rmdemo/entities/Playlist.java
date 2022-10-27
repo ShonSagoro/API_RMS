@@ -40,7 +40,6 @@ public class Playlist {
     @OneToMany(mappedBy = "playlist")  
     private List<PlaylistLibrary> playlist_Libraries;
     
-    
     @OneToMany(mappedBy = "playlist")  
     private List<SongPlaylist> song_Playlists;
     

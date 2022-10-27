@@ -2,11 +2,13 @@ package com.examplerm.rmdemo.services.interfaces;
 
 import org.springframework.stereotype.Service;
 
+import com.examplerm.rmdemo.controllers.dtos.request.CreateSongPlaylistRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 
 @Service
 public interface ISongPlaylistService {
-    //http://localhost:8080/user/id_user/id_library/id_playlist/id_song
+
+    BaseResponse create(CreateSongPlaylistRequest request);
 
     BaseResponse listAllSongByIdPlaylist(Long playlistId);
 

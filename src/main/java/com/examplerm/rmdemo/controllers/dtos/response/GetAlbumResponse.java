@@ -7,15 +7,15 @@ import lombok.Setter;
 public class GetAlbumResponse {
 
     private Long id;
-
+    
     private String name;
-
+    
     private String duration;
-
-    private String dateCreation;
-
-    private String discography;
-
+    
     private String description;
+    
+    private String creationDate;
+    
+    private ArtistResponse artist;
 
 }

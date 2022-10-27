@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class LibraryResponse {
-
+public class GetPlaylistLibraryResponse {
     private Long id;
-    
+
+    private PlaylistResponse playlist;
+
+    private LibraryResponse library;
 }

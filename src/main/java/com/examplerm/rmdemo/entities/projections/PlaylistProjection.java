@@ -8,7 +8,7 @@ public interface PlaylistProjection {
 
     String getDescription();
 
-    String getCategory();
+    String getDuration();
 
     String getCreationDate();
 }

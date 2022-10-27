@@ -15,5 +15,4 @@ public class GetPodcastResponse {
     private String category;
 
     private String creationDate;
-    
 }

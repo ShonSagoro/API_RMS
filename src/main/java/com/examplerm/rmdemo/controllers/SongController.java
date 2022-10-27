@@ -7,6 +7,7 @@ import com.examplerm.rmdemo.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("song")
@@ -16,7 +17,7 @@ public class SongController {
     private ISongService service;
 
     @PostMapping
-    public ResponseEntity<BaseResponse> create(@RequestBody CreateSongRequest request){
+    public ResponseEntity<BaseResponse> create(@RequestBody CreateSongRequest request, @RequestParam MultipartFile file){
         BaseResponse baseResponse= service.create(request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
 

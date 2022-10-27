@@ -11,11 +11,9 @@ public class SongResponse {
 
     private String duration;
 
-    private String category;
-
     private String creationDate;
 
-    private Long albumId;
+    private AlbumResponse album;
 
-    private Long artistId;
+    private ArtistResponse artist;
 }

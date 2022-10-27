@@ -12,9 +12,6 @@ import com.examplerm.rmdemo.entities.projections.PlaylistProjection;
 @Repository
 public interface IPlaylistLibraryRepository extends JpaRepository<PlaylistLibrary, Long>{
     
-    @Query(value="INSERT INTO playlist_library VALUE (:libraryId , :playlistId)", nativeQuery = true)
-    void createRelation(Long libraryId, Long playlistId);
-    
     @Query(value = "select playlists.* from playlist_library " +
     "inner join libraries on playlist_library.library_id = libraries.id " +
     "inner join playlists on playlist_library.podcast_id = playlists.id " +

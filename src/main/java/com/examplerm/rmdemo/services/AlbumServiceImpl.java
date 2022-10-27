@@ -2,14 +2,21 @@ package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateAlbumRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateAlbumRequest;
+import com.examplerm.rmdemo.controllers.dtos.response.ArtistResponse;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.controllers.dtos.response.GetAlbumResponse;
 import com.examplerm.rmdemo.entities.Album;
+import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.repositories.IAlbumRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
+import com.examplerm.rmdemo.services.interfaces.IArtistService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +25,8 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Autowired
     private IAlbumRepository repository;
+
+    @Autowired IArtistService artistService;
 
     @Override
     public BaseResponse get(Long id) {
@@ -29,12 +38,14 @@ public class AlbumServiceImpl implements IAlbumService {
                 .httpStatus(HttpStatus.OK).build();
 
     }
+    
     @Override
     public BaseResponse create(CreateAlbumRequest request) {
 
         Album album = from(request);
+        GetAlbumResponse response= from(repository.save(album));
         return BaseResponse.builder()
-                .data(from(repository.save(album)))
+                .data(response)
                 .message("Album created correctly")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.OK).build();
@@ -42,10 +53,10 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Override
     public BaseResponse update(Long id, UpdateAlbumRequest request) {
-        Album album = findOneAndEnsureExist(id);
+        Album album = repository.findById(id)
+            .orElseThrow(()-> new RuntimeException("The Album does not exist"));
         album = update(album, request);
         GetAlbumResponse response=from(album);
-
         return BaseResponse.builder()
                 .data(response)
                 .message("Album has been updated correctly")
@@ -53,6 +64,7 @@ public class AlbumServiceImpl implements IAlbumService {
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
+
     @Override
     public BaseResponse list() {
         List<GetAlbumResponse> response= repository.findAll()
@@ -68,39 +80,31 @@ public class AlbumServiceImpl implements IAlbumService {
     }
 
     @Override
-    public Album findOneAndEnsureExist(Long id) {
+    public Album findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The album does not exist"));
     }
+
     @Override
     public void delete(Long id) {
-
         repository.deleteById(id);
-
-    }
-    @Override
-    public Album save(Album album) {
-        return repository.save(album);
     }
 
 
     private Album update(Album album, UpdateAlbumRequest request) {
         album.setName(request.getName());
-
-        album.setDateCreation(request.getDateCreation());
         album.setDescription(request.getDescription());
         album.setDuration(request.getDuration());
         return repository.save(album);
     }
 
     private Album from(CreateAlbumRequest request) {
-
         Album album = new Album();
         album.setName(request.getName());
-
         album.setDescription(request.getDescription());
-        album.setDateCreation(request.getDateCreation());
+        album.setCreationDate(getDate());
         album.setDuration(request.getDuration());
+        album.setArtist(artistService.findById(request.getIdArtist()));
         return repository.save(album);
     }
 
@@ -109,8 +113,17 @@ public class AlbumServiceImpl implements IAlbumService {
         response.setId(album.getId());
         response.setName(album.getName());
         response.setDuration(album.getDuration());
-        response.setDateCreation(album.getDateCreation());
+        response.setCreationDate(album.getCreationDate());
         response.setDescription(album.getDescription());
+        response.setArtist(from(album.getArtist()));
+        return response;
+    }
+
+    private ArtistResponse from(Artist artist){
+        ArtistResponse response= new ArtistResponse();
+        response.setId(artist.getId());
+        response.setName(artist.getName());
+        response.setListener(artist.getListener());
         return response;
     }
 
@@ -120,4 +133,14 @@ public class AlbumServiceImpl implements IAlbumService {
                 .orElseThrow(() -> new RuntimeException("The album does not exist"));
     }
 
+    private String getDate(){
+        LocalDateTime dateNow= LocalDateTime.now();
+        String date=dateNow.format(getFormat());
+        return date;
+    }
+
+    private DateTimeFormatter getFormat(){
+        DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        return format;
+    }
 }

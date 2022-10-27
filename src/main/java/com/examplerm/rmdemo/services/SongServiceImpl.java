@@ -2,15 +2,23 @@ package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateSongRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateSongRequest;
+import com.examplerm.rmdemo.controllers.dtos.response.AlbumResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.ArtistResponse;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.controllers.dtos.response.GetSongResponse;
+import com.examplerm.rmdemo.entities.Album;
+import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.Song;
 import com.examplerm.rmdemo.repositories.ISongRepository;
+import com.examplerm.rmdemo.services.interfaces.IAlbumService;
+import com.examplerm.rmdemo.services.interfaces.IArtistService;
 import com.examplerm.rmdemo.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +27,12 @@ public class SongServiceImpl implements ISongService {
 
     @Autowired
     private ISongRepository repository;
+
+    @Autowired 
+    private IArtistService artistService;
+
+    @Autowired
+    private IAlbumService albumService;
 
     @Override
     public BaseResponse get(Long id) {
@@ -35,8 +49,9 @@ public class SongServiceImpl implements ISongService {
     @Override
     public BaseResponse create(CreateSongRequest request) {
         Song song = from(request);
+        GetSongResponse response = from(repository.save(song));
         return BaseResponse.builder()
-                .data(from(repository.save(song)))
+                .data(response)
                 .message("Song created correctly")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
@@ -58,7 +73,7 @@ public class SongServiceImpl implements ISongService {
 
     @Override
     public BaseResponse update(Long id, UpdateSongRequest request) {
-        Song song = findOneAndEnsureExist(id);
+        Song song = findById(id);
         song = update(song, request);
         GetSongResponse response=from(song);
 
@@ -71,21 +86,11 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
-    public Song findOneAndEnsureExist(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("The song does not exist"));
-    }
-    @Override
     public void delete(Long id) {
 
         repository.deleteById(id);
 
     }
-    @Override
-    public Song save(Song song) {
-        return repository.save(song);
-    }
-
 
     private Song update(Song song, UpdateSongRequest request) {
         song.setName(request.getName());
@@ -94,10 +99,12 @@ public class SongServiceImpl implements ISongService {
     }
 
     private Song from(CreateSongRequest request) {
-
         Song song = new Song();
         song.setName(request.getName());
         song.setDuration(request.getDuration());
+        song.setAlbum(albumService.findById(request.getAlbumId()));
+        song.setArtist(artistService.findById(request.getArtistId()));
+        song.setCreationDate(getDate());
         return song;
     }
 
@@ -106,13 +113,51 @@ public class SongServiceImpl implements ISongService {
         response.setId(song.getId());
         response.setName(song.getName());
         response.setDuration(song.getDuration());
+        response.setCreationDate(song.getCreationDate());
+        response.setAlbum(from(song.getAlbum()));
+        response.setArtist(from(song.getArtist()));
         return response;
     }
 
+    private AlbumResponse from(Album album){
+        AlbumResponse response= new AlbumResponse();
+        response.setId(album.getId());
+        response.setName(album.getName());
+        response.setDuration(album.getDuration());
+        response.setCreationDate(album.getCreationDate());
+        response.setDescription(album.getDescription());
+        response.setArtist(from(album.getArtist()));
+        return response;
+    }
+
+    
+    private ArtistResponse from(Artist artist){
+        ArtistResponse response= new ArtistResponse();
+        response.setId(artist.getId());
+        response.setName(artist.getName());
+        response.setListener(artist.getListener());
+        return response;
+    }
+    
     private GetSongResponse from(Long idSong) {
         return repository.findById(idSong)
                 .map(this::from)
                 .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
 
+    public Song findById(Long idSong){
+        return repository.findById(idSong)
+        .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+
+    private String getDate(){
+        LocalDateTime dateNow= LocalDateTime.now();
+        String date=dateNow.format(getFormat());
+        return date;
+    }
+
+    private DateTimeFormatter getFormat(){
+        DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        return format;
+    }
 }

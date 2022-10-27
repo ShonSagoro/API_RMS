@@ -7,9 +7,12 @@ import com.examplerm.rmdemo.entities.Library;
 
 @Service
 public interface ILibraryService {
+
     Library create();
 
     BaseResponse get(Long id);
 
     void delete(Long id);
+
+    Library findById(Long id);
 }

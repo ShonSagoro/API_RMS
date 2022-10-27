@@ -47,10 +47,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public BaseResponse update(Long id, UpdateUserRequest request) {
 
-        User user = findOneAndEnsureExist(id);
+        User user = repository.findById(id)
+            .orElseThrow(()-> new RuntimeException("The User does not exist"));
         user = update(user, request);
-
         GetUserResponse response=from(user);
+
         return BaseResponse.builder()
                 .data(response)
                 .message("The user has been updated")
@@ -60,22 +61,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User findOneAndEnsureExist(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("The user does not exist"));
-    }
-    @Override
     public void delete(Long id) {
-        GetUserResponse response=from(id);
-        libraryService.delete(response.getLibrary_id());
+        User user=findById(id);
+        libraryService.delete(user.getLibrary().getId());
         repository.deleteById(id);
     }
-
-    @Override
-    public User save(User user) {
-        return repository.save(user);
-    }
-
 
     private User update(User user, UpdateUserRequest request) {
         user.setName(request.getName());
@@ -84,7 +74,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     private User from(CreateUserRequest request,Library library) {
-
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
@@ -97,10 +86,7 @@ public class UserServiceImpl implements IUserService {
         GetUserResponse response = new GetUserResponse();
         response.setId(user.getId());
         response.setName(user.getName());
-        response.setPassword(user.getPassword());
         response.setEmail(user.getEmail());
-        response.setLibrary_id(user.getLibrary().getId());
-
         return response;
     }
 
@@ -108,5 +94,11 @@ public class UserServiceImpl implements IUserService {
         return repository.findById(idUser)
                 .map(this::from)
                 .orElseThrow(() -> new RuntimeException("The user does not exist"));
+    }
+
+    @Override
+    public User findById(Long id) {
+        return repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("The user does not exist"));
     }
 }

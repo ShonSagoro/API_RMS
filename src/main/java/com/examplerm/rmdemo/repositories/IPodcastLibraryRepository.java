@@ -12,9 +12,6 @@ import com.examplerm.rmdemo.entities.projections.PodcastProjection;
 @Repository
 public interface IPodcastLibraryRepository extends JpaRepository<PodcastLibrary, Long> {
     
-    @Query(value="INSERT INTO podcast_library VALUE (:libraryId , :podcastId)", nativeQuery = true)
-    void createRelation(Long libraryId, Long podcastId);
-    
     @Query(value = "select podcasts.* from podcast_library " +
     "inner join libraries on podcast_library.library_id = libraries.id " +
     "inner join podcasts on podcast_library.podcast_id = podcasts.id " +

@@ -117,5 +117,11 @@ public class PodcastServiceImpl implements IPodcastService{
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
     }
+
+    @Override
+    public Podcast findById(Long id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

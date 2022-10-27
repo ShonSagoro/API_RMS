@@ -10,9 +10,7 @@ public class CreateAlbumRequest {
 
     private String duration;
 
-    private String dateCreation;
-
-    private String discography;
-
     private String description;
+
+    private Long idArtist;
 }

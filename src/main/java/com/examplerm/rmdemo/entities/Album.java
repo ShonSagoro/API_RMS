@@ -34,7 +34,7 @@ public class Album {
     private String description;
     
     @Column(nullable = false)
-    private String dateCreation;
+    private String creationDate;
     
     @ManyToOne
     private Artist artist;

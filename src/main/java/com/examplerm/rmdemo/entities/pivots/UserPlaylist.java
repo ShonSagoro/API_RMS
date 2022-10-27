@@ -10,8 +10,12 @@ import javax.persistence.Table;
 import com.examplerm.rmdemo.entities.Playlist;
 import com.examplerm.rmdemo.entities.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "user_playlist")
+@Getter @Setter
 public class UserPlaylist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

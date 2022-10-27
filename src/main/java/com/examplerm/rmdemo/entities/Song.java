@@ -30,6 +30,12 @@ public class Song {
 
     @Column(nullable = false)
     private String duration;
+    
+    @Column(nullable = false)
+    private String creationDate;
+
+    @Column(nullable = false)
+    private String songUrl;
   
     @OneToMany(mappedBy = "song")  
     private List<SongPlaylist> song_Playlists;

@@ -18,9 +18,9 @@ public interface IAlbumService {
 
     BaseResponse list();
 
-    Album findOneAndEnsureExist(Long id);
-
     void delete(Long id);
+    
+    Album findById(Long id);
 
-    Album save(Album album);
+
 }

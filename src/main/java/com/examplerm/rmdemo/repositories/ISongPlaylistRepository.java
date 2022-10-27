@@ -12,9 +12,6 @@ import com.examplerm.rmdemo.entities.projections.SongProjection;
 @Repository
 public interface ISongPlaylistRepository extends JpaRepository<SongPlaylist, Long>{
     
-    @Query(value = "INSERT INTO song_playlist VALUE (:playlistId , :songId)",nativeQuery=true)
-    void createRelation(Long playlistId, Long songId);
-    
     @Query(value = "select songs.* from song_playlist " +
     "inner join songs on song_playlist.song_id = songs.id " +
     "inner join playlists on song_playlist.playlist_id = playlists.id " +

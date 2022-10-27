@@ -16,9 +16,7 @@ public interface ISongService {
 
     BaseResponse update(Long id, UpdateSongRequest request);
 
-    Song findOneAndEnsureExist(Long id);
-
     void delete(Long id);
 
-    Song save(Song song);
+    Song findById(Long id);
 }

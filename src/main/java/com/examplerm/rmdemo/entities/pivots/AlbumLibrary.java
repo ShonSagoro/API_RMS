@@ -10,9 +10,13 @@ import javax.persistence.Table;
 import com.examplerm.rmdemo.entities.Album;
 import com.examplerm.rmdemo.entities.Library;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Entity
 @Table(name = "album_library")
+@Getter @Setter
 public class AlbumLibrary {
     
     @Id

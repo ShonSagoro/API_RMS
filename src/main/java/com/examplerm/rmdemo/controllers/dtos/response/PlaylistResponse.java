@@ -12,7 +12,7 @@ public class PlaylistResponse {
 
     private String description;
 
-    private String category;
+    private String duration;
 
     private String creationDate;
     

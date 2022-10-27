@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter @Setter
 public class CreatePodcastLibraryRequest {
 
-    private Long podcast_id;
+    private Long idPodcast;
     
-    private Long library_id;
+    private Long idLibrary;
 
 }

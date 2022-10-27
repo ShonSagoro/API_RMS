@@ -14,5 +14,4 @@ public class CreatePodcastRequest {
 
     private String category;
 
-    // private String creationDate; lo hace automatico
 }

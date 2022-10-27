@@ -12,5 +12,7 @@ public class GetPlaylistResponse {
 
     private String description;
 
-    private String dateCreation;
+    private String duration;
+
+    private String creationDate;
 }
