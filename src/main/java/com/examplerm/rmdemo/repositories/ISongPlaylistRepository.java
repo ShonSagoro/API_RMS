@@ -18,6 +18,9 @@ public interface ISongPlaylistRepository extends JpaRepository<SongPlaylist, Lon
     "where song_playlist.playlist_id = :playlistId", nativeQuery = true)
     List<SongProjection> listAllSongByIdPlaylist(Long playlistId);
 
-    @Query(value = "DELETE FROM podcast_library WHERE podcast_id= :playlistId", nativeQuery= true)
+    @Query(value = "DELETE FROM song_playlist WHERE playlist_id= :playlistId", nativeQuery= true)
     void deleteSongsByIdPlaylist(Long playlistId);
+
+    @Query(value = "DELETE FROM song_playlist WHERE playlist_id= :playlistId AND song_id= :songId", nativeQuery= true)
+    void deleteBySongId(Long playlistId, Long songId);
 }
