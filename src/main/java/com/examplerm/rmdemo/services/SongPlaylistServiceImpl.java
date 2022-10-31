@@ -135,6 +135,11 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         return response;
     }
 
+    @Override
+    public void deleteSongByIdSongAndPlaylist(Long songId, Long playlistId) {
+        repository.deleteSongByIdSongAndPlaylist(songId, playlistId);   
+    }
+
    
     
 }

@@ -14,5 +14,7 @@ public interface ISongPlaylistService {
 
     void deleteSongsByIdPlaylist(Long playlistId);
 
+    void deleteSongByIdSongAndPlaylist(Long songId,Long playlistId);
+
 
 }

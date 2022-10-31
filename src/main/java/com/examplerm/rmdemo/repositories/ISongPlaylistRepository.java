@@ -22,5 +22,5 @@ public interface ISongPlaylistRepository extends JpaRepository<SongPlaylist, Lon
     void deleteSongsByIdPlaylist(Long playlistId);
 
     @Query(value = "DELETE FROM song_playlist WHERE playlist_id= :playlistId AND song_id= :songId", nativeQuery= true)
-    void deleteBySongId(Long playlistId, Long songId);
+    void deleteSongByIdSongAndPlaylist(Long songId,Long playlistId);
 }
