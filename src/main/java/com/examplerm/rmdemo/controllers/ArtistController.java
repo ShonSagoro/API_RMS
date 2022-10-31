@@ -8,12 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateArtistRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateArtistRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
 
+@RestController
+@RequestMapping("artist")
 public class ArtistController {
     @Autowired
     private IArtistService service;
@@ -46,4 +50,5 @@ public class ArtistController {
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+    
 }

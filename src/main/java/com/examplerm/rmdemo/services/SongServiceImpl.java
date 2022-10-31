@@ -52,9 +52,8 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
-    public BaseResponse create(CreateSongRequest request, MultipartFile file) {
-        String songUrl= fileService.upload(file);
-        Song song = from(request, songUrl);
+    public BaseResponse create(CreateSongRequest request) {
+        Song song = from(request);
         GetSongResponse response = from(repository.save(song));
         return BaseResponse.builder()
                 .data(response)
@@ -104,14 +103,14 @@ public class SongServiceImpl implements ISongService {
         return repository.save(song);
     }
 
-    private Song from(CreateSongRequest request, String songUrl) {
+    private Song from(CreateSongRequest request) {
         Song song = new Song();
         song.setName(request.getName());
         song.setDuration(request.getDuration());
         song.setAlbum(albumService.findById(request.getAlbumId()));
         song.setArtist(artistService.findById(request.getArtistId()));
         song.setCreationDate(getDate());
-        song.setSongUrl(songUrl);
+        song.setSongUrl(request.getSongUrl());
         return song;
     }
 
@@ -167,5 +166,15 @@ public class SongServiceImpl implements ISongService {
     private DateTimeFormatter getFormat(){
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
+    }
+
+    @Override
+    public BaseResponse upload(MultipartFile file) {
+        String songUrl= fileService.upload(file);
+        return BaseResponse.builder()
+                .data(songUrl)
+                .message("Song uploaded correctly")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.CREATED).build();
     }
 }

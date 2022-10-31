@@ -95,7 +95,7 @@ public class ArtistServiceImpl implements IArtistService{
     private Artist from(CreateArtistRequest request){
         Artist Artist= new Artist();
         Artist.setName(request.getName());
-        Artist.setListener(0);
+        Artist.setListener((Integer) 0);
         return Artist;
     }
 

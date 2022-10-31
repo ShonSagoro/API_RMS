@@ -1,5 +1,6 @@
 package com.examplerm.rmdemo.controllers.dtos.request;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,5 +14,7 @@ public class CreateSongRequest {
    private Long artistId;
 
    private Long albumId;
+
+   private String songUrl;
 
 }

@@ -11,13 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ISongService {
     BaseResponse get(Long id);
 
-    BaseResponse create(CreateSongRequest request, MultipartFile file);
+    BaseResponse create(CreateSongRequest request);
 
+    BaseResponse upload(MultipartFile file);
+    
     BaseResponse list();
-
+    
     BaseResponse update(Long id, UpdateSongRequest request);
-
+    
     void delete(Long id);
-
+    
     Song findById(Long id);
 }

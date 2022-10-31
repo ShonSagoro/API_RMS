@@ -35,9 +35,8 @@ public class ChapterSeriveImpl implements IChapterService{
     private IFileService fileService;
 
     @Override
-    public BaseResponse create(CreateChapterRequest request, MultipartFile file) {
-        String chapterUrl=fileService.upload(file);
-        Chapter chapter= from(request, chapterUrl);
+    public BaseResponse create(CreateChapterRequest request) {
+        Chapter chapter= from(request);
         GetChapterResponse response=from(repository.save(chapter));
         return BaseResponse.builder()
             .data(response)
@@ -45,6 +44,15 @@ public class ChapterSeriveImpl implements IChapterService{
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
+
+    @Override
+    public BaseResponse upload(MultipartFile file){
+        String chapterUrl= fileService.upload(file);
+        return BaseResponse.builder()
+            .data(chapterUrl)
+            .message("Song uploaded correctly")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.CREATED).build();    }
 
     @Override
     public void delete(Long id) {
@@ -132,12 +140,12 @@ public class ChapterSeriveImpl implements IChapterService{
 
     }
 
-    private Chapter from(CreateChapterRequest request, String chapterUrl){
+    private Chapter from(CreateChapterRequest request){
         Chapter chapter= new Chapter();
         chapter.setTitle(request.getTitle());
         chapter.setDescription(request.getDescription());
         chapter.setDuration(request.getDuration());
-        chapter.setChapterUrl(chapterUrl);
+        chapter.setChapterUrl(request.getChapterUrl());
         chapter.setCreationDate(getDate());
         chapter.setPodcast(podcastService.findById(request.getPodcastId()));
         return chapter;
