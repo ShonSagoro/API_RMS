@@ -30,6 +30,9 @@ public class Chapter {
 
     @Column(nullable = false)
     private String duration;
+    
+    @Column(nullable = false)
+    private String chapterUrl;
 
     @ManyToOne
     private Podcast podcast;

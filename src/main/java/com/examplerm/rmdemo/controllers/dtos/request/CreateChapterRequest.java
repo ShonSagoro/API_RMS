@@ -14,4 +14,6 @@ public class CreateChapterRequest {
 
     @NonNull
     private String duration;
+
+    private Long podcastId;
 }

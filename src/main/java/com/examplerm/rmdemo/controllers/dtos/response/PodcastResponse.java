@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class CreatePodcastResponse {
-
+public class PodcastResponse {
+    
     private Long id;
 
     private String name;
@@ -15,5 +15,4 @@ public class CreatePodcastResponse {
     private String category;
 
     private String creationDate;
-    
 }

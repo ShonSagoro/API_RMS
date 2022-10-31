@@ -10,9 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.examplerm.rmdemo.entities.pivots.Playlist_Library;
-import com.examplerm.rmdemo.entities.pivots.Song_Playlist;
-import com.examplerm.rmdemo.entities.pivots.User_Playlist;
+import com.examplerm.rmdemo.entities.pivots.PlaylistLibrary;
+import com.examplerm.rmdemo.entities.pivots.SongPlaylist;
+import com.examplerm.rmdemo.entities.pivots.UserPlaylist;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -38,12 +38,11 @@ public class Playlist {
     private String duration;
     
     @OneToMany(mappedBy = "playlist")  
-    private List<Playlist_Library> playlist_Libraries;
-    
-    
-    @OneToMany(mappedBy = "playlist")  
-    private List<Song_Playlist> song_Playlists;
+    private List<PlaylistLibrary> playlist_Libraries;
     
     @OneToMany(mappedBy = "playlist")  
-    private List<User_Playlist> user_Playlists;
+    private List<SongPlaylist> song_Playlists;
+    
+    @OneToMany(mappedBy = "playlist")  
+    private List<UserPlaylist> user_Playlists;
 }

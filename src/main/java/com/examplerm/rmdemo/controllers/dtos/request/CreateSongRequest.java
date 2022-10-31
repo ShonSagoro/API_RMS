@@ -5,6 +5,13 @@ import lombok.Setter;
 
 @Getter@Setter
 public class CreateSongRequest {
+
    private String name;
+
    private String duration;
+
+   private Long artistId;
+
+   private Long albumId;
+
 }

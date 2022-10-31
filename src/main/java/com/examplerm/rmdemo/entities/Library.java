@@ -10,10 +10,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.examplerm.rmdemo.entities.pivots.Album_Library;
-import com.examplerm.rmdemo.entities.pivots.Artist_Library;
-import com.examplerm.rmdemo.entities.pivots.Playlist_Library;
-import com.examplerm.rmdemo.entities.pivots.Podcast_Library;
+import com.examplerm.rmdemo.entities.pivots.AlbumLibrary;
+import com.examplerm.rmdemo.entities.pivots.ArtistLibrary;
+import com.examplerm.rmdemo.entities.pivots.PlaylistLibrary;
+import com.examplerm.rmdemo.entities.pivots.PodcastLibrary;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,16 +29,16 @@ public class Library {
     private Long id;
 
     @OneToMany(mappedBy = "library")  
-    private List<Album_Library> album_library;
+    private List<AlbumLibrary> album_library;
 
     @OneToMany(mappedBy = "library")  
-    private List<Artist_Library> artist_Libraries; 
+    private List<ArtistLibrary> artist_Libraries; 
 
     @OneToMany(mappedBy = "library")  
-    private List<Podcast_Library> podcast_Libraries; 
+    private List<PodcastLibrary> podcast_Libraries; 
 
     @OneToMany(mappedBy = "library")  
-    private List<Playlist_Library> playlist_Libraries;
+    private List<PlaylistLibrary> playlist_Libraries;
    
     @OneToOne(mappedBy = "library")
     private User user;

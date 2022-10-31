@@ -7,19 +7,24 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.Library;
-import com.examplerm.rmdemo.entities.Podcast;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "podcast_library")
-public class Podcast_Library {
+@Table(name = "artist_library")
+@Getter @Setter
+public class ArtistLibrary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne 
-    private Podcast podcast;
+    @ManyToOne
+    private Artist artist;
 
     @ManyToOne
     private Library library;
 }
+

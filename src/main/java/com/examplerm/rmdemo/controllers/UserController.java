@@ -6,7 +6,7 @@ import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 
 import com.examplerm.rmdemo.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,18 +18,24 @@ public class UserController {
     private IUserService service;
 
     @PostMapping
-    public BaseResponse create(@RequestBody CreateUserRequest request) {
-        return service.create(request);
+    public ResponseEntity<BaseResponse> create(@RequestBody CreateUserRequest request) {
+        BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
     }
 
     @GetMapping("{id}")
-    public BaseResponse get(@PathVariable Long id){
-            return service.get(id);
+    public ResponseEntity<BaseResponse> get(@PathVariable Long id){
+        BaseResponse baseResponse= service.get(id);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
     }
 
     @PutMapping("{id}")
-    public BaseResponse update(@RequestBody UpdateUserRequest request, @PathVariable Long id){
-        return service.update(id,request);
+    public ResponseEntity<BaseResponse>  update(@RequestBody UpdateUserRequest request, @PathVariable Long id){
+        BaseResponse baseResponse= service.update(id,request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
     }
 
     @DeleteMapping("{id}")

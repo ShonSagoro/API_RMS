@@ -4,16 +4,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class CreateChapterResponse {
-    
+public class ChapterResponse {
+
     private Long id;
 
     private String title;
 
     private String description;
 
+    private String creationDate;
+
     private String duration;
 
-    private String dateCreation;
+    private String chapterUrl;
 
+    private PodcastResponse podcast;
+    
 }

@@ -42,9 +42,15 @@ public class LibraryServiceImpl implements ILibraryService {
         return response;
     }
 
-    private GetLibraryResponse from(Long idUser) {
-        return repository.findById(idUser)
+    private GetLibraryResponse from(Long id) {
+        return repository.findById(id)
                 .map(this::from)
+                .orElseThrow(() -> new RuntimeException("The user does not exist"));
+    }
+
+    @Override
+    public Library findById(Long id) {
+        return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The user does not exist"));
     }
 }

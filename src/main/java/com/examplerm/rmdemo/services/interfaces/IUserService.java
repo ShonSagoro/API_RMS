@@ -9,14 +9,13 @@ import com.examplerm.rmdemo.entities.User;
 public interface IUserService {
 
     BaseResponse update(Long id, UpdateUserRequest request);
+    
+    BaseResponse get(Long id);
+    
+    BaseResponse create(CreateUserRequest request);
 
-    User findOneAndEnsureExist(Long id);
+    User findById(Long id);
 
     void delete(Long id);
-
-    User save(User user);
-
-    BaseResponse get(Long id);
-
-    BaseResponse create(CreateUserRequest request);
+    
 }

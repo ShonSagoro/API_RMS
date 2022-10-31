@@ -35,7 +35,6 @@ public class ArtistServiceImpl implements IArtistService{
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
-        
     }
 
     @Override
@@ -90,7 +89,6 @@ public class ArtistServiceImpl implements IArtistService{
         GetArtistResponse response= new GetArtistResponse();
         response.setId(artist.getId());
         response.setName(artist.getName());
-        response.setAlbums(null);
         return response;
     }
 
@@ -99,6 +97,12 @@ public class ArtistServiceImpl implements IArtistService{
         Artist.setName(request.getName());
         Artist.setListener(0);
         return Artist;
+    }
+
+    @Override
+    public Artist findById(Long id) {
+        return repository.findById(id)
+            .orElseThrow(()-> new RuntimeException("The Artist does not exist"));
     }
     
     

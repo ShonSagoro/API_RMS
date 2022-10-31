@@ -7,11 +7,8 @@ import lombok.Setter;
 public class UpdateAlbumRequest {
     private String name;
 
+    private String description;
+
     private String duration;
 
-    private String dateCreation;
-
-    private String discography;
-
-    private String description;
 }

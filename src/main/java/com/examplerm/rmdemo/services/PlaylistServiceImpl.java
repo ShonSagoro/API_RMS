@@ -36,7 +36,6 @@ public class PlaylistServiceImpl implements IPlaylistService{
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
-        
     }
   
     @Override
@@ -98,7 +97,7 @@ public class PlaylistServiceImpl implements IPlaylistService{
         GetPlaylistResponse response= new GetPlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setDateCreation(getDate());
+        response.setCreationDate(playlist.getDateCreation());
         response.setDescription(playlist.getDescription());
         return response;
     }
@@ -118,6 +117,12 @@ public class PlaylistServiceImpl implements IPlaylistService{
     private DateTimeFormatter getFormat(){
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
+    }
+
+    @Override
+    public Playlist findById(Long id) {
+        return repository.findById(id)
+        .orElseThrow(()->new RuntimeException("The playlist does not exist"));
     }
 
 

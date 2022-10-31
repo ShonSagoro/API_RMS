@@ -7,8 +7,10 @@ import lombok.Setter;
 public class GetUserResponse {
 
     private Long id;
+
     private String name;
-    private String password;
+
     private String email;
-    private Long library_id;
+
+    private LibraryResponse library;
 }
