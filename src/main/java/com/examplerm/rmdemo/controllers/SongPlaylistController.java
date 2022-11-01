@@ -27,5 +27,6 @@ public class SongPlaylistController {
     @DeleteMapping("songs/playlist/{playlistId}")
     public void deleteSongsByIdPlaylist(@PathVariable Long playlistId){
         service.deleteSongsByIdPlaylist(playlistId);
-    }    
+    }
+
 }

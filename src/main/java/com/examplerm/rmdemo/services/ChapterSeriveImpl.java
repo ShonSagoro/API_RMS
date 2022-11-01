@@ -89,7 +89,6 @@ public class ChapterSeriveImpl implements IChapterService{
             .httpStatus(HttpStatus.OK).build();
     }
 
-    
     private Chapter update(Chapter chapter, UpdateChapterRequest request){
         chapter.setTitle(request.getTitle());
         chapter.setDescription(request.getDescription());
@@ -102,7 +101,6 @@ public class ChapterSeriveImpl implements IChapterService{
                 .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
     }
 
-    
     @Override
     public Chapter findById(Long id) {
         return repository.findById(id)

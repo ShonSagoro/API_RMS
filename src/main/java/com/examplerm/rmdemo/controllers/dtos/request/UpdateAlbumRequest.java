@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter@Setter
 public class UpdateAlbumRequest {
+
     private String name;
 
     private String description;

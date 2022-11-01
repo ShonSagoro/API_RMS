@@ -40,7 +40,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
     @Override
     public BaseResponse create(CreateSongPlaylistRequest request) {
         SongPlaylist songPlaylist= from(request);
-        GetSongPlaylistResponse response = from(songPlaylist);
+        GetSongPlaylistResponse response = from(repository.save(songPlaylist));
         return BaseResponse.builder()
             .data(response)
             .message("Relation between Song and Playlist has been created correctly")
@@ -93,8 +93,8 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setDescription(album.getDescription());
         response.setArtist(from(album.getArtist()));
         return response;
-    }
 
+    }
     
     private ArtistResponse from(Artist artist){
         ArtistResponse response= new ArtistResponse();
@@ -103,7 +103,6 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setListener(artist.getListener());
         return response;
     }
-
 
     @Override
     public BaseResponse listAllSongByIdPlaylist(Long playlistId) {
@@ -135,6 +134,4 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         return response;
     }
 
-   
-    
 }

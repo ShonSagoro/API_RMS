@@ -5,9 +5,11 @@ import lombok.Setter;
 
 @Getter @Setter
 public class GetPlaylistLibraryResponse {
+
     private Long id;
 
     private PlaylistResponse playlist;
 
     private LibraryResponse library;
+
 }

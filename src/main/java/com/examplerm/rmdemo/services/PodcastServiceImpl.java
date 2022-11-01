@@ -19,6 +19,7 @@ import com.examplerm.rmdemo.services.interfaces.IPodcastService;
 
 @Service
 public class PodcastServiceImpl implements IPodcastService{
+
     @Autowired
     private IPodcastRepository repository;
 
@@ -76,7 +77,6 @@ public class PodcastServiceImpl implements IPodcastService{
             .httpStatus(HttpStatus.OK).build();
     }
 
-    
     private Podcast update(Podcast podcast, UpdatePodcastRequest request){
         podcast.setName(request.getName());
         podcast.setDescription(request.getDescription());
@@ -89,6 +89,7 @@ public class PodcastServiceImpl implements IPodcastService{
                 map(this::from)
                 .orElseThrow(()-> new RuntimeException("The podcast does not exist"));
     }
+
     private GetPodcastResponse from(Podcast podcast){
         GetPodcastResponse response= new GetPodcastResponse();
         response.setId(podcast.getId());

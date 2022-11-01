@@ -16,4 +16,5 @@ public class CreateChapterRequest {
     private String duration;
 
     private Long podcastId;
+
 }

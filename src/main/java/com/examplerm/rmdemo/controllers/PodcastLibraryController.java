@@ -14,6 +14,7 @@ import com.examplerm.rmdemo.services.interfaces.IPodcastLibraryService;
 @RestController
 @RequestMapping("podcast-playlist")
 public class PodcastLibraryController {
+
     @Autowired
     private IPodcastLibraryService service;
 
@@ -27,4 +28,5 @@ public class PodcastLibraryController {
     public void deletePodcastsByIdLibrary(@PathVariable Long playlistId){
         service.deletePodcastsByIdLibrary(playlistId);
     }
+
 }

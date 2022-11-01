@@ -45,6 +45,6 @@ public class SongController {
     public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdateSongRequest request){
         BaseResponse baseResponse= service.update(id, request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
+
 }

@@ -4,6 +4,7 @@ import com.examplerm.rmdemo.entities.Album;
 import com.examplerm.rmdemo.entities.Artist;
 
 public interface SongProjection {
+
     Long getId();
 
     String getName();
@@ -17,4 +18,5 @@ public interface SongProjection {
     Artist getArtist();
     
     Album getAlbum();
+
 }

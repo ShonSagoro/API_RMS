@@ -17,6 +17,7 @@ import lombok.Setter;
 @Table(name = "playlist_library")
 @Getter @Setter
 public class PlaylistLibrary {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,4 +27,5 @@ public class PlaylistLibrary {
 
     @ManyToOne
     private Library library;
+
 }

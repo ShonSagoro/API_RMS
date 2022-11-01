@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Getter@Setter
 public class CreateAlbumRequest {
+
     private String name;
 
     private String duration;
@@ -13,4 +14,5 @@ public class CreateAlbumRequest {
     private String description;
 
     private Long idArtist;
+
 }

@@ -22,8 +22,8 @@ public class PlaylistServiceImpl implements IPlaylistService{
 
     @Autowired
     private IPlaylistRepository repository;
+
     @Override
-    
     public BaseResponse create(CreatePlaylistRequest request) {
         Playlist playlist= from(request);
         GetPlaylistResponse response= from(repository.save(playlist)); 
@@ -78,7 +78,6 @@ public class PlaylistServiceImpl implements IPlaylistService{
     private Playlist update(Playlist playlist, UpdatePlaylistRequest request){
         playlist.setName(request.getName());
         playlist.setDescription(request.getDescription());
-        playlist.setDuration(request.getDuration());
         return playlist;
 
     }
@@ -87,7 +86,6 @@ public class PlaylistServiceImpl implements IPlaylistService{
         Playlist playlist=new Playlist();
         playlist.setName(request.getName());
         playlist.setDescription(request.getDescription());
-        playlist.setDuration(request.getDuration());
         playlist.setDateCreation(getDate());
         return playlist;
 
@@ -99,6 +97,7 @@ public class PlaylistServiceImpl implements IPlaylistService{
         response.setName(playlist.getName());
         response.setCreationDate(playlist.getDateCreation());
         response.setDescription(playlist.getDescription());
+        response.setDuration(playlist.getDuration());
         return response;
     }
 
@@ -124,6 +123,5 @@ public class PlaylistServiceImpl implements IPlaylistService{
         return repository.findById(id)
         .orElseThrow(()->new RuntimeException("The playlist does not exist"));
     }
-
 
 }

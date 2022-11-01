@@ -21,6 +21,7 @@ import com.examplerm.rmdemo.services.interfaces.IChapterService;
 @RestController
 @RequestMapping("chapter")
 public class ChapterController {
+
     @Autowired
     private IChapterService service;
 
@@ -52,4 +53,5 @@ public class ChapterController {
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
 }

@@ -18,6 +18,7 @@ import com.examplerm.rmdemo.services.interfaces.IPodcastService;
 @RestController
 @RequestMapping("podcast")
 public class PodcastController {
+
     @Autowired
     private IPodcastService service;
 
@@ -46,5 +47,4 @@ public class PodcastController {
         service.delete(id);
     }
 
-    
 }

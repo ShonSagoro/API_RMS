@@ -11,6 +11,5 @@ public class GetArtistResponse {
     private String name;
 
     private Integer listener;
-    
 
 }

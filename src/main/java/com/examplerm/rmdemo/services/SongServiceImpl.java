@@ -62,6 +62,7 @@ public class SongServiceImpl implements ISongService {
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
     }
+
     @Override
     public BaseResponse list() {
         List<GetSongResponse> response= repository.findAll()

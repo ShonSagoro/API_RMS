@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class UserResponse {
+
     private Long id;
 
     private String name;
@@ -12,4 +13,5 @@ public class UserResponse {
     private String email;
 
     private LibraryResponse library;
+
 }

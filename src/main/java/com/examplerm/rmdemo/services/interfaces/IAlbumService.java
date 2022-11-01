@@ -7,7 +7,7 @@ import com.examplerm.rmdemo.controllers.dtos.request.UpdateAlbumRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.entities.Album;
 
-@Service
+
 public interface IAlbumService {
 
     BaseResponse get(Long id);

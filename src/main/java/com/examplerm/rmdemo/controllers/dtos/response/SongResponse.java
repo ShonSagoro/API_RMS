@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class SongResponse {
+
     private Long id;
 
     private String name;
@@ -18,4 +19,5 @@ public class SongResponse {
     private AlbumResponse album;
 
     private ArtistResponse artist;
+
 }

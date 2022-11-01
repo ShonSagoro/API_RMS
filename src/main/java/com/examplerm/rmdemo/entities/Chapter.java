@@ -36,4 +36,5 @@ public class Chapter {
 
     @ManyToOne
     private Podcast podcast;
+
 }
