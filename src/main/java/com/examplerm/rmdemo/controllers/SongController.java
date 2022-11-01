@@ -30,12 +30,6 @@ public class SongController {
 
     }
 
-    @PostMapping("upload")
-    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
-        BaseResponse baseResponse= service.upload(file);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
-
     @GetMapping
     public ResponseEntity<BaseResponse> list(){
         BaseResponse baseResponse= service.list();
