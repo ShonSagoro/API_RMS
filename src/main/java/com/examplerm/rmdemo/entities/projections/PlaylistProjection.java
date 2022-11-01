@@ -11,4 +11,5 @@ public interface PlaylistProjection {
     String getDuration();
 
     String getCreationDate();
+
 }

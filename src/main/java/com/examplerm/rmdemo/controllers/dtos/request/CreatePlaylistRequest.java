@@ -11,4 +11,5 @@ public class CreatePlaylistRequest {
     private String description;
 
     private String duration;
+
 }

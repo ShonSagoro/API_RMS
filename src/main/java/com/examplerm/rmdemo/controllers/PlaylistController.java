@@ -26,32 +26,29 @@ public class PlaylistController {
     public ResponseEntity<BaseResponse> list(){
         BaseResponse baseResponse= service.list();
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
 
     @GetMapping("{id}")
     public ResponseEntity<BaseResponse> get(@PathVariable long id){
         BaseResponse baseResponse= service.get(id);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
 
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreatePlaylistRequest request){
         BaseResponse baseResponse= service.create(request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
 
     @PutMapping("{id}")
     public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdatePlaylistRequest request){
         BaseResponse baseResponse= service.update(id, request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
 }

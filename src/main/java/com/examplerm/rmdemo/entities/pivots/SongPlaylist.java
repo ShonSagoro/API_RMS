@@ -17,6 +17,7 @@ import lombok.Setter;
 @Table(name = "song_playlist")
 @Getter @Setter
 public class SongPlaylist {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

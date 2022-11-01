@@ -45,4 +45,5 @@ public class Song {
 
     @ManyToOne
     private Album album;
+
 }

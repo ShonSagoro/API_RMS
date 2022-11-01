@@ -21,6 +21,7 @@ import com.examplerm.rmdemo.services.interfaces.IChapterService;
 @RestController
 @RequestMapping("chapter")
 public class ChapterController {
+
     @Autowired
     private IChapterService service;
 
@@ -41,9 +42,8 @@ public class ChapterController {
         BaseResponse baseResponse= service.create(request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
-    
     @PostMapping("upload")
-    public ResponseEntity<BaseResponse> create(@RequestParam MultipartFile file){
+    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
         BaseResponse baseResponse= service.upload(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
@@ -58,4 +58,5 @@ public class ChapterController {
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
 }

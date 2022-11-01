@@ -13,4 +13,5 @@ public class GetUserResponse {
     private String email;
 
     private LibraryResponse library;
+
 }

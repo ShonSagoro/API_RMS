@@ -61,6 +61,17 @@ public class SongServiceImpl implements ISongService {
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
     }
+
+    @Override
+    public BaseResponse upload(MultipartFile file){
+        String songUrl= fileService.upload(file);
+        return BaseResponse.builder()
+                .data(songUrl)
+                .message("Song uploaded correctly")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.CREATED).build();
+    }
+
     @Override
     public BaseResponse list() {
         List<GetSongResponse> response= repository.findAll()
@@ -168,13 +179,4 @@ public class SongServiceImpl implements ISongService {
         return format;
     }
 
-    @Override
-    public BaseResponse upload(MultipartFile file) {
-        String songUrl= fileService.upload(file);
-        return BaseResponse.builder()
-                .data(songUrl)
-                .message("Song uploaded correctly")
-                .success(Boolean.TRUE)
-                .httpStatus(HttpStatus.CREATED).build();
-    }
 }

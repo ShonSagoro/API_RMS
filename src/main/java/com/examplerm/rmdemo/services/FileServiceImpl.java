@@ -21,6 +21,7 @@ import com.examplerm.rmdemo.services.interfaces.IFileService;
 
 @Service
 public class FileServiceImpl implements IFileService{
+
     private AmazonS3 s3client;
 
 	private String ENDPOINT_URL = "s3.us-east-2.amazonaws.com";
@@ -62,7 +63,6 @@ public class FileServiceImpl implements IFileService{
 	    s3client.putObject(new PutObjectRequest(BUCKET_NAME, fileName, file)
 	            .withCannedAcl(CannedAccessControlList.PublicRead));
 	}
-	
 
 	@PostConstruct 
 	private void initializeAmazon() {

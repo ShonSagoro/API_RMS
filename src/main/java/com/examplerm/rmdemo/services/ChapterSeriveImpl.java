@@ -47,12 +47,13 @@ public class ChapterSeriveImpl implements IChapterService{
 
     @Override
     public BaseResponse upload(MultipartFile file){
-        String chapterUrl= fileService.upload(file);
+        String chapterUrl=fileService.upload(file);
         return BaseResponse.builder()
             .data(chapterUrl)
-            .message("Song uploaded correctly")
+            .message("Chapter uploaded correctly")
             .success(Boolean.TRUE)
-            .httpStatus(HttpStatus.CREATED).build();    }
+            .httpStatus(HttpStatus.OK).build();
+    }
 
     @Override
     public void delete(Long id) {
@@ -97,7 +98,6 @@ public class ChapterSeriveImpl implements IChapterService{
             .httpStatus(HttpStatus.OK).build();
     }
 
-    
     private Chapter update(Chapter chapter, UpdateChapterRequest request){
         chapter.setTitle(request.getTitle());
         chapter.setDescription(request.getDescription());
@@ -110,7 +110,6 @@ public class ChapterSeriveImpl implements IChapterService{
                 .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
     }
 
-    
     @Override
     public Chapter findById(Long id) {
         return repository.findById(id)

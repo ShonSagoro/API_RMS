@@ -36,12 +36,10 @@ public class AlbumServiceImpl implements IAlbumService {
                 .message("Album has been found")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.OK).build();
-
     }
     
     @Override
     public BaseResponse create(CreateAlbumRequest request) {
-
         Album album = from(request);
         GetAlbumResponse response= from(repository.save(album));
         return BaseResponse.builder()
@@ -89,7 +87,6 @@ public class AlbumServiceImpl implements IAlbumService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
-
 
     private Album update(Album album, UpdateAlbumRequest request) {
         album.setName(request.getName());

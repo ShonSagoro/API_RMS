@@ -1,10 +1,10 @@
 package com.examplerm.rmdemo.services;
 
-
 import com.examplerm.rmdemo.controllers.dtos.request.CreateUserRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateUserRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.controllers.dtos.response.GetUserResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.LibraryResponse;
 import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.entities.User;
 import com.examplerm.rmdemo.repositories.IUserRepository;
@@ -87,6 +87,13 @@ public class UserServiceImpl implements IUserService {
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
+        response.setLibrary(from(user.getLibrary()));
+        return response;
+    }
+
+    private LibraryResponse from(Library library){
+        LibraryResponse response=new LibraryResponse();
+        response.setId(library.getId());
         return response;
     }
 

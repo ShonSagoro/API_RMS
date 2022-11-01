@@ -31,6 +31,7 @@ public class LibraryServiceImpl implements ILibraryService {
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
+
     @Override
     public void delete(Long id) {
         repository.deleteById(id);

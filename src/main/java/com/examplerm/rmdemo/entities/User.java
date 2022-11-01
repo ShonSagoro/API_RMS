@@ -41,4 +41,5 @@ public class User {
     @OneToOne
     @JoinColumn(name="library_id", referencedColumnName = "id")
     private Library library;
+
 }

@@ -36,7 +36,7 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
     @Override
     public BaseResponse create(CreatePlaylistLibraryRequest request) {
         PlaylistLibrary playlistLibrary= from(request);
-        GetPlaylistLibraryResponse response= from(playlistLibrary);
+        GetPlaylistLibraryResponse response= from(repository.save(playlistLibrary));
         return BaseResponse.builder()
             .data(response)
             .message("Relation between Playlist and Library has been created correctly")
@@ -74,9 +74,7 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
         response.setId(library.getId());
         return response;
     }
-    
 
-    
     @Override
     public BaseResponse listAllPlaylistByIdLibrary(Long librarytId) {
         List<PlaylistProjection> playlists= repository.listAllPlaylistByLibraryId(librarytId);
@@ -88,7 +86,7 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
             .message("Playlist list by library id")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
-        }
+    }
 
     @Override
     public void deletePlaylistsByIdLibrary(Long libraryId) {
@@ -105,5 +103,4 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
         return response;
     }
 
-  
 }

@@ -28,4 +28,5 @@ public class AlbumLibrary {
 
     @ManyToOne
     private Library library;
+
 }

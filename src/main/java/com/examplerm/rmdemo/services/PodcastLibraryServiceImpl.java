@@ -36,7 +36,7 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
     @Override
     public BaseResponse create(CreatePodcastLibraryRequest request) {
         PodcastLibrary podcastLibrary = from(request);
-        GetPodcastLibraryResponse response= from(podcastLibrary);
+        GetPodcastLibraryResponse response= from(repository.save(podcastLibrary));
         return BaseResponse.builder()
             .data(response)
             .message("Relation between Podcast and Library has been created correctly")
@@ -74,7 +74,6 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
         response.setId(library.getId());
         return response;
     }
-
 
     @Override
     public BaseResponse listAllPodcastsByIdLibrary(Long libraryId) {

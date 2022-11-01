@@ -19,11 +19,13 @@ import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.Playlist;
 import com.examplerm.rmdemo.entities.Song;
 import com.examplerm.rmdemo.entities.pivots.SongPlaylist;
+import com.examplerm.rmdemo.entities.projections.PlaylistProjection;
 import com.examplerm.rmdemo.entities.projections.SongProjection;
 import com.examplerm.rmdemo.repositories.ISongPlaylistRepository;
 import com.examplerm.rmdemo.services.interfaces.IPlaylistService;
 import com.examplerm.rmdemo.services.interfaces.ISongPlaylistService;
 import com.examplerm.rmdemo.services.interfaces.ISongService;
+
 
 @Service
 public class SongPlaylistServiceImpl implements ISongPlaylistService{
@@ -40,7 +42,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
     @Override
     public BaseResponse create(CreateSongPlaylistRequest request) {
         SongPlaylist songPlaylist= from(request);
-        GetSongPlaylistResponse response = from(songPlaylist);
+        GetSongPlaylistResponse response = from(repository.save(songPlaylist));
         return BaseResponse.builder()
             .data(response)
             .message("Relation between Song and Playlist has been created correctly")
@@ -93,8 +95,8 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setDescription(album.getDescription());
         response.setArtist(from(album.getArtist()));
         return response;
-    }
 
+    }
     
     private ArtistResponse from(Artist artist){
         ArtistResponse response= new ArtistResponse();
@@ -104,7 +106,6 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         return response;
     }
 
-
     @Override
     public BaseResponse listAllSongByIdPlaylist(Long playlistId) {
         List<SongProjection> songs= repository.listAllSongByIdPlaylist(playlistId);
@@ -113,7 +114,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
             .collect(Collectors.toList());
         return BaseResponse.builder()
             .data(response)
-            .message("Song list by playlist id")
+            .message("Songs list by playlist id")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
@@ -136,10 +137,39 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
     }
 
     @Override
+<<<<<<< HEAD
     public void deleteSongByIdSongAndPlaylist(Long songId, Long playlistId) {
         repository.deleteSongByIdSongAndPlaylist(songId, playlistId);   
     }
 
    
     
+=======
+    public BaseResponse listAllPlaylistByIdSong(Long songId) {
+        List<PlaylistProjection> playlist= repository.listAllPlaylistByIdSong(songId);
+        List<PlaylistResponse> response= playlist.stream()
+        .map(this::from)
+        .collect(Collectors.toList());
+        return BaseResponse.builder()
+         .data(response)
+            .message("Playlists list by song id")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
+
+    private PlaylistResponse from(PlaylistProjection playlist){
+        PlaylistResponse response= new PlaylistResponse();
+        response.setId(playlist.getId());
+        response.setName(playlist.getName());
+        response.setDuration(playlist.getDuration());
+        response.setDescription(playlist.getDescription());
+        response.setCreationDate(playlist.getCreationDate());
+        return response;
+    }
+    @Override
+    public void deleteSongFromUserByTheirIds(Long songId, Long playlistId) {
+        repository.deleteSongFromUserByTheirIds(songId, playlistId);         
+    }
+
+>>>>>>> kari
 }

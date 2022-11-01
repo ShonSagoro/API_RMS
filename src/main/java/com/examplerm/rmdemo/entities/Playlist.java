@@ -45,4 +45,5 @@ public class Playlist {
     
     @OneToMany(mappedBy = "playlist")  
     private List<UserPlaylist> user_Playlists;
+
 }

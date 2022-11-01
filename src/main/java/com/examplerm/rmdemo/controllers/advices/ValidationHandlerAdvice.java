@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 
 public class ValidationHandlerAdvice extends ResponseEntityExceptionHandler{
+
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> errors= new HashMap<>();
 

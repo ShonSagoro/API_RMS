@@ -17,9 +17,9 @@ import com.examplerm.rmdemo.services.interfaces.IArtistService;
 
 @Service
 public class ArtistServiceImpl implements IArtistService{
+
     @Autowired 
     private IArtistRepository repository;
-
 
     @Override
     public BaseResponse create(CreateArtistRequest request) {
@@ -104,6 +104,5 @@ public class ArtistServiceImpl implements IArtistService{
         return repository.findById(id)
             .orElseThrow(()-> new RuntimeException("The Artist does not exist"));
     }
-    
-    
+
 }

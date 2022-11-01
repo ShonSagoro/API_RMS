@@ -15,4 +15,5 @@ public class PodcastResponse {
     private String category;
 
     private String creationDate;
+
 }
