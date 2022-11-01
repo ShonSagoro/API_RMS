@@ -33,8 +33,12 @@ public class UserPlaylistController {
     }
 
     @DeleteMapping("playlists/{playlistId}/user/{userId}")
-    public void deletePlaylistByIdfromUserId(@PathVariable Long playlistId,@PathVariable Long userId){
-        service.deletePlaylistByIdfromUserId(playlistId,userId);
+    public void deletePlaylistFromUserByThierIds(@PathVariable Long playlistId,@PathVariable Long userId){
+        service.deletePlaylistFromUserByThierIds(playlistId,userId);
+    }
+    @DeleteMapping("playlists/user/{userId}")
+    public void deletePlaylistsByIdUser(@PathVariable Long userId){
+        service.deletePlaylistsByIdUser(userId);
     }
 
 }

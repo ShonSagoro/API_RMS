@@ -9,7 +9,11 @@ public interface ISongPlaylistService {
 
     BaseResponse listAllSongByIdPlaylist(Long playlistId);
 
+    BaseResponse listAllPlaylistByIdSong(Long songId);
+
     void deleteSongsByIdPlaylist(Long playlistId);
+    
+    void deleteSongFromUserByTheirIds(Long songId,Long playlistId);
 
 
 }

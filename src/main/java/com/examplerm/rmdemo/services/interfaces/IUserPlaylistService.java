@@ -11,6 +11,8 @@ public interface IUserPlaylistService {
 
     BaseResponse listAllUsersByPlaylistId(Long playlistId);
 
-    void deletePlaylistByIdfromUserId(Long playlistId, Long userId);
+    void deletePlaylistsByIdUser(Long songId);
+
+    void deletePlaylistFromUserByThierIds(Long playlistId, Long userId);
 
 }

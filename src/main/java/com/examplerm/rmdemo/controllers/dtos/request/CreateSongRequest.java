@@ -14,4 +14,6 @@ public class CreateSongRequest {
 
    private Long albumId;
 
+   private String songUrl;
+
 }

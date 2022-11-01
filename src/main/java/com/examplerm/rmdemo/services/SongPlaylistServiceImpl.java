@@ -19,11 +19,13 @@ import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.Playlist;
 import com.examplerm.rmdemo.entities.Song;
 import com.examplerm.rmdemo.entities.pivots.SongPlaylist;
+import com.examplerm.rmdemo.entities.projections.PlaylistProjection;
 import com.examplerm.rmdemo.entities.projections.SongProjection;
 import com.examplerm.rmdemo.repositories.ISongPlaylistRepository;
 import com.examplerm.rmdemo.services.interfaces.IPlaylistService;
 import com.examplerm.rmdemo.services.interfaces.ISongPlaylistService;
 import com.examplerm.rmdemo.services.interfaces.ISongService;
+
 
 @Service
 public class SongPlaylistServiceImpl implements ISongPlaylistService{
@@ -112,7 +114,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
             .collect(Collectors.toList());
         return BaseResponse.builder()
             .data(response)
-            .message("Song list by playlist id")
+            .message("Songs list by playlist id")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
@@ -132,6 +134,33 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));
         return response;
+    }
+
+    @Override
+    public BaseResponse listAllPlaylistByIdSong(Long songId) {
+        List<PlaylistProjection> playlist= repository.listAllPlaylistByIdSong(songId);
+        List<PlaylistResponse> response= playlist.stream()
+        .map(this::from)
+        .collect(Collectors.toList());
+        return BaseResponse.builder()
+         .data(response)
+            .message("Playlists list by song id")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
+
+    private PlaylistResponse from(PlaylistProjection playlist){
+        PlaylistResponse response= new PlaylistResponse();
+        response.setId(playlist.getId());
+        response.setName(playlist.getName());
+        response.setDuration(playlist.getDuration());
+        response.setDescription(playlist.getDescription());
+        response.setCreationDate(playlist.getCreationDate());
+        return response;
+    }
+    @Override
+    public void deleteSongFromUserByTheirIds(Long songId, Long playlistId) {
+        repository.deleteSongFromUserByTheirIds(songId, playlistId);         
     }
 
 }

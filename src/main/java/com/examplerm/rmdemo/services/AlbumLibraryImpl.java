@@ -7,8 +7,6 @@ import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.entities.pivots.AlbumLibrary;
 import com.examplerm.rmdemo.entities.projections.AlbumProjection;
-import com.examplerm.rmdemo.entities.projections.ArtistProjection;
-import com.examplerm.rmdemo.entities.projections.SongProjection;
 import com.examplerm.rmdemo.repositories.IAlbumLibraryRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumLibraryService;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;

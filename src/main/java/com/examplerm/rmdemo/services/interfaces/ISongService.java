@@ -10,7 +10,9 @@ public interface ISongService {
 
     BaseResponse get(Long id);
 
-    BaseResponse create(CreateSongRequest request, MultipartFile file);
+    BaseResponse create(CreateSongRequest request);
+
+    BaseResponse upload(MultipartFile file);
 
     BaseResponse list();
 

@@ -25,7 +25,10 @@ public interface IUserPlaylistRepository extends JpaRepository<UserPlaylist, Lon
             "where user_playlist.playlist_id = :playlistId", nativeQuery = true)
     List<UserProjection> listAllUsersByIdPlaylist(Long playlistId);
 
+    @Query(value = "DELETE FROM user_playlist WHERE user_id= :userId", nativeQuery = true)
+    void deletePlaylistsByIdUser(Long userId);
+
     @Query(value = "DELETE FROM user_playlist WHERE user_id= :userId AND playlist_id= :playlistId", nativeQuery= true)
-    void deletePlaylistbyIdUserId(Long playlistId, Long userId);
+    void deletePlaylistFromUserByThierIds(Long playlistId, Long userId);
 
 }

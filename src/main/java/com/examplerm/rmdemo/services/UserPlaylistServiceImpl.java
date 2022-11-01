@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserPlaylistImpl implements IUserPlaylistService {
+public class UserPlaylistServiceImpl implements IUserPlaylistService {
 
     @Autowired
     private IUserPlaylistRepository repository;
@@ -101,8 +101,13 @@ public class UserPlaylistImpl implements IUserPlaylistService {
     }
 
     @Override
-    public void deletePlaylistByIdfromUserId(Long playlistId, Long userId) {
-        repository.deletePlaylistbyIdUserId(playlistId,userId);
+    public void deletePlaylistFromUserByThierIds(Long playlistId, Long userId) {
+        repository.deletePlaylistFromUserByThierIds(playlistId,userId);
+    }
+
+    @Override
+    public void deletePlaylistsByIdUser(Long userId){
+        repository.deletePlaylistsByIdUser(userId);
     }
 
     private PlaylistResponse from(PlaylistProjection playlist){

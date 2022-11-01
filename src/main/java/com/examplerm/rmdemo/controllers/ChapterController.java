@@ -38,8 +38,13 @@ public class ChapterController {
     }
 
     @PostMapping
-    public ResponseEntity<BaseResponse> create(@RequestBody CreateChapterRequest request, @RequestParam MultipartFile file){
-        BaseResponse baseResponse= service.create(request, file);
+    public ResponseEntity<BaseResponse> create(@RequestBody CreateChapterRequest request){
+        BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+    @PostMapping("upload")
+    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.upload(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 

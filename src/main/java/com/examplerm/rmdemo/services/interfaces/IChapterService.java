@@ -10,7 +10,9 @@ import com.examplerm.rmdemo.entities.Chapter;
 
 public interface IChapterService {
 
-    BaseResponse create(CreateChapterRequest request, MultipartFile file);
+    BaseResponse create(CreateChapterRequest request);
+
+    BaseResponse upload(MultipartFile file);
     
     BaseResponse update(Long id, UpdateChapterRequest request);
     
