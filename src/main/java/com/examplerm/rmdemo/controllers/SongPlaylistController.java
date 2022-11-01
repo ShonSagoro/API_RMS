@@ -36,19 +36,10 @@ public class SongPlaylistController {
     @DeleteMapping("songs/playlist/{playlistId}")
     public void deleteSongsByIdPlaylist(@PathVariable Long playlistId){
         service.deleteSongsByIdPlaylist(playlistId);
-<<<<<<< HEAD
-    }    
-
-    @DeleteMapping("song/{songId}/playlist/{playlistId}")
-    public void deleteSongByIdSongAndPlaylist(@PathVariable Long songId,@PathVariable Long playlistId){
-        service.deleteSongByIdSongAndPlaylist(songId, playlistId);
-    }
-=======
     }
     @DeleteMapping("song/{songId}/playlist/{playlistId}")
     public void deleteSongsByIdPlaylist(@PathVariable Long songId, @PathVariable Long playlistId){
         service.deleteSongFromUserByTheirIds(songId, playlistId);
     }
 
->>>>>>> kari
 }

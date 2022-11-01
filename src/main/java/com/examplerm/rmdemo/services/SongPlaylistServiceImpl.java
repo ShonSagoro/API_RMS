@@ -137,14 +137,6 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
     }
 
     @Override
-<<<<<<< HEAD
-    public void deleteSongByIdSongAndPlaylist(Long songId, Long playlistId) {
-        repository.deleteSongByIdSongAndPlaylist(songId, playlistId);   
-    }
-
-   
-    
-=======
     public BaseResponse listAllPlaylistByIdSong(Long songId) {
         List<PlaylistProjection> playlist= repository.listAllPlaylistByIdSong(songId);
         List<PlaylistResponse> response= playlist.stream()
@@ -171,5 +163,5 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         repository.deleteSongFromUserByTheirIds(songId, playlistId);         
     }
 
->>>>>>> kari
+
 }

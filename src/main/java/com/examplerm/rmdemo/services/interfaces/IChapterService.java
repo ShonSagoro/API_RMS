@@ -9,10 +9,6 @@ import com.examplerm.rmdemo.entities.Chapter;
 
 
 public interface IChapterService {
-<<<<<<< HEAD
-=======
-
->>>>>>> kari
     BaseResponse create(CreateChapterRequest request);
 
     BaseResponse upload(MultipartFile file);
