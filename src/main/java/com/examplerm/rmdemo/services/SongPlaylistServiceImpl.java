@@ -80,6 +80,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setId(song.getId());
         response.setName(song.getName());
         response.setDuration(song.getDuration());
+        response.setCreationDate(song.getCreationDate());
         response.setSongUrl(song.getSongUrl());
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));

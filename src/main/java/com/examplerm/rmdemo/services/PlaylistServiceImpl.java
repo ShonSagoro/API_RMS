@@ -30,6 +30,7 @@ public class PlaylistServiceImpl implements IPlaylistService{
         return BaseResponse.builder()
             .data(response)
             .message("Playlist has been created")
+            .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
 
@@ -86,6 +87,7 @@ public class PlaylistServiceImpl implements IPlaylistService{
         Playlist playlist=new Playlist();
         playlist.setName(request.getName());
         playlist.setDescription(request.getDescription());
+        playlist.setDuration(request.getDuration());
         playlist.setDateCreation(getDate());
         return playlist;
 
