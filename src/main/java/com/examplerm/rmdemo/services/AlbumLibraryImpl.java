@@ -10,6 +10,7 @@ import com.examplerm.rmdemo.entities.projections.AlbumProjection;
 import com.examplerm.rmdemo.repositories.IAlbumLibraryRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumLibraryService;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
+import com.examplerm.rmdemo.services.interfaces.IArtistService;
 import com.examplerm.rmdemo.services.interfaces.ILibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,9 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
 
     @Autowired
     private ILibraryService libraryService;
+    
+    @Autowired
+    private IArtistService artistService;
 
     @Override
     public BaseResponse create(CreateAlbumLibraryRequest request) {
@@ -61,10 +65,10 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
         AlbumResponse response= new AlbumResponse();
         response.setId(album.getId());
         response.setName(album.getName());
-        response.setArtist(from(album.getArtist()));
         response.setDescription(album.getDescription());
         response.setDuration(album.getDuration());
         response.setCreationDate(album.getCreationDate());
+        response.setArtist(from(album.getArtist()));
         return response;
     }
 
@@ -104,9 +108,9 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
         AlbumResponse response= new AlbumResponse();
         response.setId(album.getId());
         response.setName(album.getName());
-        response.setCreationDate(album.getCreationDate());
+        response.setCreationDate(album.getCreation_Date());
         response.setDuration(album.getDuration());
-        response.setArtist(from(album.getArtist()));
+        response.setArtist(from(artistService.findById(album.getArtist_Id())));
         return response;
     }
 

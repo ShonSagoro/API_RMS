@@ -4,12 +4,12 @@ public interface PodcastProjection {
 
     Long getId();
 
-    String getName();
-
-    String getDescription();
-
     String getCategory();
-
-    String getCreationDate();
-
+    
+    String getCreation_Date();
+    
+    String getDescription();
+    
+    String getName();
+    
 }

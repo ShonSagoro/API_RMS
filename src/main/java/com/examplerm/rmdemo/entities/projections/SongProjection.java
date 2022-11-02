@@ -1,22 +1,19 @@
 package com.examplerm.rmdemo.entities.projections;
 
-import com.examplerm.rmdemo.entities.Album;
-import com.examplerm.rmdemo.entities.Artist;
-
 public interface SongProjection {
-
+    
     Long getId();
-
-    String getName();
-
+    
+    String getCreation_Date();
+    
     String getDuration();
     
-    String getCreationDate();
-
-    String getSongUrl();
-
-    Artist getArtist();
+    String getName();
     
-    Album getAlbum();
+    String getSong_Url();
+    
+    Long getArtist_Id();
+    
+    Long getAlbum_Id();
 
 }

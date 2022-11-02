@@ -6,6 +6,6 @@ public interface ArtistProjection {
 
     String getName();
 
-    Long getListener();
+    Integer getListener();
 
 }

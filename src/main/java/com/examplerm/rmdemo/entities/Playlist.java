@@ -32,7 +32,7 @@ public class Playlist {
     private String description;
     
     @Column(nullable = false)
-    private String dateCreation;
+    private String creationDate;
     
     @Column(nullable = false)
     private String duration;

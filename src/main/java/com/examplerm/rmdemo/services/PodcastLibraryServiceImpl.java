@@ -100,7 +100,7 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
         response.setName(podcast.getName());
         response.setCategory(podcast.getCategory());
         response.setDescription(podcast.getDescription());
-        response.setCreationDate(podcast.getCreationDate());
+        response.setCreationDate(podcast.getCreation_Date());
         return response;
     }
 

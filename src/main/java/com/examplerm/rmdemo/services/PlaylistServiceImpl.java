@@ -88,7 +88,7 @@ public class PlaylistServiceImpl implements IPlaylistService{
         playlist.setName(request.getName());
         playlist.setDescription(request.getDescription());
         playlist.setDuration(request.getDuration());
-        playlist.setDateCreation(getDate());
+        playlist.setCreationDate(getDate());
         return playlist;
 
     }
@@ -97,7 +97,7 @@ public class PlaylistServiceImpl implements IPlaylistService{
         GetPlaylistResponse response= new GetPlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setCreationDate(playlist.getDateCreation());
+        response.setCreationDate(playlist.getCreationDate());
         response.setDescription(playlist.getDescription());
         response.setDuration(playlist.getDuration());
         return response;

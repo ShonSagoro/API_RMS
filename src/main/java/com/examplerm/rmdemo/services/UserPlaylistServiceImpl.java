@@ -61,7 +61,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         PlaylistResponse response= new PlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setCreationDate(playlist.getDateCreation());
+        response.setCreationDate(playlist.getCreationDate());
         response.setDescription(playlist.getDescription());
         return response;
     }
@@ -114,7 +114,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         PlaylistResponse response= new PlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setCreationDate(playlist.getCreationDate());
+        response.setCreationDate(playlist.getDate_Creation());
         response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
         return response;
@@ -125,6 +125,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
+        response.setLibrary(user.getLibrary_id());
         return response;
     }
 

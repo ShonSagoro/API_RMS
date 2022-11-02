@@ -28,8 +28,13 @@ public class SongPlaylistController {
     }
 
     @GetMapping("songs/playlist/{playlistId}")
-    public ResponseEntity<BaseResponse> listAllSongByIdPlaylist(@PathVariable Long playlistId){
-        BaseResponse baseResponse= service.listAllSongByIdPlaylist(playlistId);
+    public ResponseEntity<BaseResponse> listAllSongsByIdPlaylist(@PathVariable Long playlistId){
+        BaseResponse baseResponse= service.listAllSongsByIdPlaylist(playlistId);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+    @GetMapping("playlists/song/{songId}")
+    public ResponseEntity<BaseResponse> listAllPlaylistByIdSong(@PathVariable Long songId){
+        BaseResponse baseResponse= service.listAllPlaylistByIdSong(songId);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 

@@ -94,6 +94,7 @@ public class ArtistLibraryImpl implements IArtistLibraryService {
         ArtistResponse response= new ArtistResponse();
         response.setId(artist.getId());
         response.setName(artist.getName());
+        response.setListener(artist.getListener());
         return response;
     }
 

@@ -17,9 +17,9 @@ public interface ISongPlaylistRepository extends JpaRepository<SongPlaylist, Lon
     "inner join songs on song_playlist.song_id = songs.id " +
     "inner join playlists on song_playlist.playlist_id = playlists.id " +
     "where song_playlist.playlist_id = :playlistId", nativeQuery = true)
-    List<SongProjection> listAllSongByIdPlaylist(Long playlistId);
+    List<SongProjection> listAllSongsByIdPlaylist(Long playlistId);
     
-    @Query(value = "select songs.* from song_playlist " +
+    @Query(value = "select playlists.* from song_playlist " +
     "inner join songs on song_playlist.song_id = songs.id " +
     "inner join playlists on song_playlist.playlist_id = playlists.id " +
     "where song_playlist.song_id = :songId", nativeQuery = true)

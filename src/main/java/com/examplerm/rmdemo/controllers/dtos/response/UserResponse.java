@@ -12,6 +12,6 @@ public class UserResponse {
 
     private String email;
 
-    private LibraryResponse library;
+    private Long library;
 
 }

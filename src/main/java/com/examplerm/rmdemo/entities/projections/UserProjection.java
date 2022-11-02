@@ -8,4 +8,6 @@ public interface UserProjection {
 
     String getEmail();
 
+    Long getLibrary_id();
+
 }

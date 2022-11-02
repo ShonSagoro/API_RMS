@@ -4,12 +4,12 @@ public interface PlaylistProjection {
     
     Long getId();
 
-    String getName();
-
+    String getDate_Creation();
+    
     String getDescription();
-
+    
     String getDuration();
-
-    String getCreationDate();
+    
+    String getName();
 
 }
