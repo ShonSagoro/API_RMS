@@ -2,7 +2,10 @@ package com.examplerm.rmdemo.repositories;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +21,9 @@ public interface IPodcastLibraryRepository extends JpaRepository<PodcastLibrary,
     "where podcast_library.library_id = :libraryId", nativeQuery = true)
     List<PodcastProjection> listAllPodcastByLibraryId(Long libraryId);
 
-    @Query(value = "DELETE FROM podcast_library WHERE library_id= :libraryId", nativeQuery= true)
-    void deletePodcastsByIdLibrary(Long libraryId);
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM podcast_library WHERE podcast_id= :podcastId and library_id= :libraryId", nativeQuery= true)
+    void deletePodcastFromLibraryByThierIds(Long podcastId, Long libraryId);
+
 }

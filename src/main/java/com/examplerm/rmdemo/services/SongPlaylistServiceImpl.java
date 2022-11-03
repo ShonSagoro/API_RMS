@@ -165,7 +165,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setName(playlist.getName());
         response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
-        response.setCreationDate(playlist.getDate_Creation());
+        response.setCreationDate(playlist.getCreation_Date());
         return response;
     }
     @Override

@@ -63,8 +63,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void delete(Long id) {
         User user=findById(id);
-        libraryService.delete(user.getLibrary().getId());
         repository.deleteById(id);
+        libraryService.delete(user.getLibrary().getId());
     }
 
     private User update(User user, UpdateUserRequest request) {

@@ -11,7 +11,6 @@ public interface IPlaylistLibraryService {
 
         BaseResponse listAllPlaylistByIdLibrary(Long librarytId);
     
-        void deletePlaylistsByIdLibrary(Long libraryId);
-
+        void deletePlaylistFromLibraryByThierIds(Long playlistId, Long libraryId);
         
 }

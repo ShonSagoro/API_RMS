@@ -23,7 +23,7 @@ import com.examplerm.rmdemo.services.interfaces.IFileService;
 import com.examplerm.rmdemo.services.interfaces.IPodcastService;
 
 @Service
-public class ChapterSeriveImpl implements IChapterService{
+public class ChapterServiceImpl implements IChapterService{
     
     @Autowired
     private IChapterRepository repository;

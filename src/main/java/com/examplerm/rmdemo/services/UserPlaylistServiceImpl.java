@@ -32,7 +32,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
     @Override
     public BaseResponse create(CreateUserPlaylistRequest request) {
         UserPlaylist userPlaylist= from(request);
-        GetUserPlaylistResponse response = from(userPlaylist);
+        GetUserPlaylistResponse response = from(repository.save(userPlaylist));
         return BaseResponse.builder()
                 .data(response)
                 .message("Relation between User and Playlist has been created correctly")
@@ -62,6 +62,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setId(playlist.getId());
         response.setName(playlist.getName());
         response.setCreationDate(playlist.getCreationDate());
+        response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
         return response;
     }
@@ -71,7 +72,12 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
+        response.setLibrary(from(user.getLibrary()));
         return response;
+    }
+
+    private Long from(Library library){
+        return library.getId();
     }
 
     @Override
@@ -114,7 +120,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         PlaylistResponse response= new PlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setCreationDate(playlist.getDate_Creation());
+        response.setCreationDate(playlist.getCreation_Date());
         response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
         return response;

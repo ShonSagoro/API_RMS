@@ -21,8 +21,8 @@ public class UserPlaylistController {
     }
 
     @GetMapping("playlists/user/{userId}")
-    public ResponseEntity<BaseResponse> listAllPlaylistsByUserId(@PathVariable Long UserId){
-        BaseResponse baseResponse=service.listAllPlaylistsByUserId(UserId);
+    public ResponseEntity<BaseResponse> listAllPlaylistsByUserId(@PathVariable Long userId){
+        BaseResponse baseResponse=service.listAllPlaylistsByUserId(userId);
         return new ResponseEntity<>(baseResponse,baseResponse.getHttpStatus());
     }
 

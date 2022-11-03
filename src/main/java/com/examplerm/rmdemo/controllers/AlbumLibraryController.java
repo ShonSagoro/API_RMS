@@ -20,15 +20,15 @@ public class AlbumLibraryController {
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
-    @GetMapping("album/library/{libraryId}")
+    @GetMapping("albums/library/{libraryId}")
     public ResponseEntity<BaseResponse> listAllAlbumsByIdLibrary(@PathVariable Long libraryId){
         BaseResponse baseResponse= service.listAllAlbumsByIdLibrary(libraryId);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
     @DeleteMapping("album/{albumId}/library/{libraryId}")
-    public void deleteAlbumsByIdLibrary(@PathVariable Long albumId, @PathVariable Long libraryId){
-        service.deleteAlbumsByIdFromLibraryId(albumId, libraryId);
+    public void deleteAlbumFromLibraryByThierIds(@PathVariable Long albumId, @PathVariable Long libraryId){
+        service.deleteAlbumFromLibraryByThierIds(albumId, libraryId);
     }
 
 }

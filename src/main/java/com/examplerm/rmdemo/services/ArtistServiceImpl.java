@@ -89,6 +89,7 @@ public class ArtistServiceImpl implements IArtistService{
         GetArtistResponse response= new GetArtistResponse();
         response.setId(artist.getId());
         response.setName(artist.getName());
+        response.setListener(artist.getListener());
         return response;
     }
 

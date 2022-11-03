@@ -96,6 +96,7 @@ public class PodcastServiceImpl implements IPodcastService{
         response.setName(podcast.getName());
         response.setDescription(podcast.getDescription());
         response.setCategory(podcast.getCategory());
+        response.setCreationDate(podcast.getCreationDate());
         return response;
     }
 
@@ -121,8 +122,8 @@ public class PodcastServiceImpl implements IPodcastService{
 
     @Override
     public Podcast findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        return repository.findById(id)
+         .orElseThrow(()-> new RuntimeException("The podcast does not exist"));
     }
     
 }

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AlbumLibraryImpl implements IAlbumLibraryService {
+public class AlbumLibraryServiceImpl implements IAlbumLibraryService {
 
     @Autowired
     private IAlbumLibraryRepository repository;
@@ -100,8 +100,8 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
     }
 
     @Override
-    public void deleteAlbumsByIdFromLibraryId(Long albumId, Long libraryId) {
-        repository.deleteAlbumsByIdFromLibraryId(albumId,libraryId);
+    public void deleteAlbumFromLibraryByThierIds(Long albumId, Long libraryId) {
+        repository.deleteAlbumFromLibraryByThierIds(albumId,libraryId);
     }
 
     private AlbumResponse from(AlbumProjection album){
