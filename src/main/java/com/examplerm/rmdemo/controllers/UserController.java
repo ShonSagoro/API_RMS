@@ -8,6 +8,7 @@ import com.examplerm.rmdemo.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -20,6 +21,13 @@ public class UserController {
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreateUserRequest request) {
         BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
+    }
+
+    @PostMapping("upload")
+    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.upload(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
 
     }

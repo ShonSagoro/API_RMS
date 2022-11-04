@@ -14,4 +14,6 @@ public class UserResponse {
 
     private Long library;
 
+    private String photoUrl;
+
 }

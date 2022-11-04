@@ -17,5 +17,6 @@ public interface IUserService {
     User findById(Long id);
 
     void delete(Long id);
-    
+
+    BaseResponse upload(MultipartFile file);
 }

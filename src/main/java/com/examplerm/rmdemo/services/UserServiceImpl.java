@@ -13,9 +13,13 @@ import com.examplerm.rmdemo.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UserServiceImpl implements IUserService {
+
+    @Autowired
+    private IFileService fileService;
 
     @Autowired
     private IUserRepository repository;
@@ -70,6 +74,7 @@ public class UserServiceImpl implements IUserService {
     private User update(User user, UpdateUserRequest request) {
         user.setName(request.getName());
         user.setPassword(request.getPassword());
+        user.setPhotoUrl(request.getPhotoUrl());
         return repository.save(user);
     }
 
@@ -78,6 +83,7 @@ public class UserServiceImpl implements IUserService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
+        user.setPhotoUrl(request.getPhotoUrl());
         user.setLibrary(library);
         return user;
     }
@@ -88,6 +94,7 @@ public class UserServiceImpl implements IUserService {
         response.setName(user.getName());
         response.setEmail(user.getEmail());
         response.setLibrary(from(user.getLibrary()));
+        response.setPhotoUrl(user.getPhotoUrl());
         return response;
     }
 
@@ -107,5 +114,14 @@ public class UserServiceImpl implements IUserService {
     public User findById(Long id) {
         return repository.findById(id)
             .orElseThrow(() -> new RuntimeException("The user does not exist"));
+    }
+    @Override
+    public BaseResponse upload(MultipartFile file){
+        String photoUrl= fileService.upload(file);
+        return BaseResponse.builder()
+                .data(photoUrl)
+                .message("Photo of user uploaded correctly")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.CREATED).build();
     }
 }

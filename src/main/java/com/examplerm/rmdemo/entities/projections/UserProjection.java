@@ -10,4 +10,6 @@ public interface UserProjection {
 
     Long getLibrary_id();
 
+    String getPhoto_Url();
+
 }

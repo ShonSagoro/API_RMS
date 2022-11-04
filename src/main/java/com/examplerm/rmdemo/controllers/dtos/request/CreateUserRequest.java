@@ -16,4 +16,7 @@ public class CreateUserRequest {
     @NonNull
     private String email;
 
+    @NonNull
+    private String photoUrl;
+
 }
