@@ -24,13 +24,13 @@ public class FileServiceImpl implements IFileService{
 
     private AmazonS3 s3client;
 
-	private String ENDPOINT_URL = "s3.us-east-2.amazonaws.com";
+	private String ENDPOINT_URL = "****************************";
 	
-	private String BUCKET_NAME = "musicawsbucket";
+	private String BUCKET_NAME = "****************************";
 	
-	private String ACCESS_KEY = "AKIAZW7V374CV752ZYEO";
+	private String ACCESS_KEY = "****************************";
 	
-	private String SECRET_KEY = "v3PoaEvvqy+LHZq1Xc3sqaVBQ7VdmbitFF1e/1p+";
+	private String SECRET_KEY = "****************************";
 
     @Override
     public String upload(MultipartFile multipartFile) {
