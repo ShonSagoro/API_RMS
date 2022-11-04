@@ -8,6 +8,7 @@ import com.examplerm.rmdemo.controllers.dtos.response.LibraryResponse;
 import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.entities.User;
 import com.examplerm.rmdemo.repositories.IUserRepository;
+import com.examplerm.rmdemo.services.interfaces.IFileService;
 import com.examplerm.rmdemo.services.interfaces.ILibraryService;
 import com.examplerm.rmdemo.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

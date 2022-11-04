@@ -1,5 +1,7 @@
 package com.examplerm.rmdemo.services.interfaces;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.examplerm.rmdemo.controllers.dtos.request.CreateUserRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateUserRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
