@@ -18,10 +18,14 @@ public interface IChapterService {
     BaseResponse update(Long id, UpdateChapterRequest request);
     
     BaseResponse get(Long id);
+
+    BaseResponse get(String name);
     
     BaseResponse list();
     
     void delete(Long id);
     
     Chapter findById(Long id);
+
+    Chapter findByName(String name);
 }

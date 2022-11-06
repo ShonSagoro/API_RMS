@@ -12,6 +12,8 @@ public interface IAlbumService {
 
     BaseResponse get(Long id);
 
+    BaseResponse get(String name);
+
     BaseResponse uploadPhoto(MultipartFile file);
 
     BaseResponse create(CreateAlbumRequest request);
@@ -24,5 +26,6 @@ public interface IAlbumService {
     
     Album findById(Long id);
 
+    Album findByName(String name);
 
 }

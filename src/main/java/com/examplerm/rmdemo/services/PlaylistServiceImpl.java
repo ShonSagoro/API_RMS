@@ -66,6 +66,14 @@ public class PlaylistServiceImpl implements IPlaylistService{
             .message("Playlist has been getted")
             .httpStatus(HttpStatus.OK).build();
     }
+    @Override
+    public BaseResponse get(String name) {
+        GetPlaylistResponse response=from(name);
+        return BaseResponse.builder()
+            .data(response)
+            .message("Playlist has been getted")
+            .httpStatus(HttpStatus.OK).build();
+    }
 
     @Override
     public BaseResponse list() {
@@ -116,6 +124,11 @@ public class PlaylistServiceImpl implements IPlaylistService{
             .map(this::from)
             .orElseThrow(()->new RuntimeException("The playlist does not exist"));
     }
+    private GetPlaylistResponse from(String name){
+        return repository.findByName(name)
+            .map(this::from)
+            .orElseThrow(()->new RuntimeException("The playlist does not exist"));
+    }
 
     private String getDate(){
         LocalDateTime dateNow=LocalDateTime.now();
@@ -131,6 +144,11 @@ public class PlaylistServiceImpl implements IPlaylistService{
     @Override
     public Playlist findById(Long id) {
         return repository.findById(id)
+        .orElseThrow(()->new RuntimeException("The playlist does not exist"));
+    }
+    @Override
+    public Playlist findByName(String name) {
+        return repository.findByName(name)
         .orElseThrow(()->new RuntimeException("The playlist does not exist"));
     }
 

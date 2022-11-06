@@ -46,5 +46,9 @@ public class Album {
 
     @OneToMany(mappedBy = "album")
     private List<Song> songs;
+
+    public Album orElseThrow(Object object) {
+        return null;
+    }
     
 }

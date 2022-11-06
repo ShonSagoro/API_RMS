@@ -77,6 +77,16 @@ public class ArtistServiceImpl implements IArtistService{
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
+    
+    @Override
+    public BaseResponse get(String name) {
+        GetArtistResponse response=from(name);
+        return BaseResponse.builder()
+            .data(response)
+            .message("Artist has been getted")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
 
     private Artist update(Artist artist, UpdateArtistRequest request){
         artist.setName(request.getName());
@@ -87,6 +97,11 @@ public class ArtistServiceImpl implements IArtistService{
 
     private GetArtistResponse from(Long id){
         return repository.findById(id).
+                map(this::from)
+                .orElseThrow(()-> new RuntimeException("The Artist does not exist"));
+    }
+    private GetArtistResponse from(String name){
+        return repository.findByName(name).
                 map(this::from)
                 .orElseThrow(()-> new RuntimeException("The Artist does not exist"));
     }
@@ -111,6 +126,11 @@ public class ArtistServiceImpl implements IArtistService{
     @Override
     public Artist findById(Long id) {
         return repository.findById(id)
+            .orElseThrow(()-> new RuntimeException("The Artist does not exist"));
+    }
+    @Override
+    public Artist findByName(String name) {
+        return repository.findByName(name)
             .orElseThrow(()-> new RuntimeException("The Artist does not exist"));
     }
 

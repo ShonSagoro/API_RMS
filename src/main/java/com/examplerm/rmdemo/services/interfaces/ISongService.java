@@ -10,6 +10,8 @@ public interface ISongService {
 
     BaseResponse get(Long id);
 
+    BaseResponse get(String name);
+
     BaseResponse create(CreateSongRequest request);
 
     BaseResponse uploadPhoto(MultipartFile file);
@@ -23,4 +25,6 @@ public interface ISongService {
     void delete(Long id);
     
     Song findById(Long id);
+
+    Song findByName(String name);
 }
