@@ -66,6 +66,7 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
         response.setCreationDate(playlist.getCreationDate());
         response.setDescription(playlist.getDescription());
         response.setDuration(playlist.getDuration());
+        response.setPhotoUrl(playlist.getPhotoUrl());
         return response;
 
     }
@@ -97,6 +98,7 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
         response.setDuration(playlist.getDuration());
         response.setCreationDate(playlist.getCreation_Date());
         response.setDescription(playlist.getDescription());
+        response.setPhotoUrl(playlist.getPhoto_Url());
         return response;
     }
 

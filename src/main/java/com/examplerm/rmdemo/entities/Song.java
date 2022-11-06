@@ -36,6 +36,8 @@ public class Song {
 
     @Column(nullable = false)
     private String songUrl;
+
+    private String photoUrl;
   
     @OneToMany(mappedBy = "song")  
     private List<SongPlaylist> song_Playlists;

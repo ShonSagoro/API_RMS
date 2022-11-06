@@ -12,4 +12,6 @@ public interface PlaylistProjection {
     
     String getName();
 
+    String getPhoto_Url();
+
 }

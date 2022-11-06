@@ -30,6 +30,8 @@ public class Artist {
     @Column(nullable = false)
     private Integer listener;
 
+    private String photoUrl;
+
     @OneToMany(mappedBy = "artist")  
     private List<ArtistLibrary> artist_Libraries; 
 

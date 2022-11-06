@@ -8,4 +8,6 @@ public interface ArtistProjection {
 
     Integer getListener();
 
+    String getPhoto_Url();
+
 }

@@ -17,4 +17,6 @@ public class CreateSongRequest {
 
    private String songUrl;
 
+   private String photoUrl;
+
 }

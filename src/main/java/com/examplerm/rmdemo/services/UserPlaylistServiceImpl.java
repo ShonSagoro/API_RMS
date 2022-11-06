@@ -64,6 +64,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setCreationDate(playlist.getCreationDate());
         response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
+        response.setPhotoUrl(playlist.getPhotoUrl());
         return response;
     }
 
@@ -124,6 +125,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setCreationDate(playlist.getCreation_Date());
         response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
+        response.setPhotoUrl(playlist.getPhoto_Url());
         return response;
     }
 
@@ -133,6 +135,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setName(user.getName());
         response.setEmail(user.getEmail());
         response.setLibrary(user.getLibrary_id());
+        response.setPhotoUrl(user.getPhoto_Url());
         response.setPhotoUrl(user.getPhoto_Url());
         return response;
     }

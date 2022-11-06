@@ -16,9 +16,15 @@ public class SongController {
     @Autowired
     private ISongService service;
 
-    @PostMapping("upload")
-    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
-        BaseResponse baseResponse= service.upload(file);
+    @PostMapping("upload/song")
+    public ResponseEntity<BaseResponse> uploadSong(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadSong(file);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+
+    }
+    @PostMapping("upload/photo")
+    public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadPhoto(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
 
     }

@@ -36,6 +36,8 @@ public class Playlist {
     
     @Column(nullable = false)
     private String duration;
+
+    private String photoUrl;
     
     @OneToMany(mappedBy = "playlist")  
     private List<PlaylistLibrary> playlist_Libraries;

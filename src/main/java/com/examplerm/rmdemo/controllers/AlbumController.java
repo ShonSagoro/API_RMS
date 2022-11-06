@@ -9,6 +9,7 @@ import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("album")
@@ -26,6 +27,12 @@ public class AlbumController {
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreateAlbumRequest request){
         BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
+    @PostMapping("upload/photo")
+    public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadPhoto(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 

@@ -12,7 +12,9 @@ public interface ISongService {
 
     BaseResponse create(CreateSongRequest request);
 
-    BaseResponse upload(MultipartFile file);
+    BaseResponse uploadPhoto(MultipartFile file);
+
+    BaseResponse uploadSong(MultipartFile file);
 
     BaseResponse list();
     

@@ -15,4 +15,7 @@ public class CreateChapterRequest {
     private Long podcastId;
 
     private String chapterUrl;
+
+    private String photoUrl;
+
 }

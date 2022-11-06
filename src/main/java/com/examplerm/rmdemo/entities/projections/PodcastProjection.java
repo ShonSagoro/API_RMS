@@ -11,5 +11,7 @@ public interface PodcastProjection {
     String getDescription();
     
     String getName();
+
+    String getPhoto_Url();
     
 }

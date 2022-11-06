@@ -10,10 +10,12 @@ import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.repositories.IAlbumRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
+import com.examplerm.rmdemo.services.interfaces.IFileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +28,11 @@ public class AlbumServiceImpl implements IAlbumService {
     @Autowired
     private IAlbumRepository repository;
 
-    @Autowired IArtistService artistService;
+    @Autowired 
+    private IArtistService artistService;
+
+    @Autowired
+    private IFileService fileService;
 
     @Override
     public BaseResponse get(Long id) {
@@ -92,6 +98,7 @@ public class AlbumServiceImpl implements IAlbumService {
         album.setName(request.getName());
         album.setDescription(request.getDescription());
         album.setDuration(request.getDuration());
+        album.setPhotoUrl(request.getPhotoUrl());
         return repository.save(album);
     }
 
@@ -101,6 +108,7 @@ public class AlbumServiceImpl implements IAlbumService {
         album.setDescription(request.getDescription());
         album.setCreationDate(getDate());
         album.setDuration(request.getDuration());
+        album.setPhotoUrl(request.getPhotoUrl());
         album.setArtist(artistService.findById(request.getIdArtist()));
         return repository.save(album);
     }
@@ -113,6 +121,7 @@ public class AlbumServiceImpl implements IAlbumService {
         response.setCreationDate(album.getCreationDate());
         response.setDescription(album.getDescription());
         response.setArtist(from(album.getArtist()));
+        response.setPhotoUrl(album.getPhotoUrl());
         return response;
     }
 
@@ -121,6 +130,7 @@ public class AlbumServiceImpl implements IAlbumService {
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
 
@@ -139,5 +149,15 @@ public class AlbumServiceImpl implements IAlbumService {
     private DateTimeFormatter getFormat(){
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
+    }
+
+    @Override
+    public BaseResponse uploadPhoto(MultipartFile file) {
+        String photoUrl=fileService.upload(file);
+        return BaseResponse.builder()
+            .data(photoUrl)
+            .message("The photo uploaded correctly")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
     }
 }

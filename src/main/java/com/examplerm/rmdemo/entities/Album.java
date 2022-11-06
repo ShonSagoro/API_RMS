@@ -35,6 +35,8 @@ public class Album {
     
     @Column(nullable = false)
     private String creationDate;
+
+    private String photoUrl;
     
     @ManyToOne
     private Artist artist;

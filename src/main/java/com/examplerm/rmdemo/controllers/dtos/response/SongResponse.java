@@ -16,6 +16,8 @@ public class SongResponse {
 
     private String songUrl;
 
+    private String photoUrl;
+
     private AlbumResponse album;
 
     private ArtistResponse artist;

@@ -12,5 +12,7 @@ public interface AlbumProjection {
     
     String getName();
 
+    String getPhoto_Url();
+
     Long getArtist_Id();
 }

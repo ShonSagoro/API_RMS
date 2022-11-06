@@ -11,5 +11,7 @@ public class UpdatePodcastRequest {
     private String description;
 
     private String category;
+
+    private String photoUrl;
     
 }

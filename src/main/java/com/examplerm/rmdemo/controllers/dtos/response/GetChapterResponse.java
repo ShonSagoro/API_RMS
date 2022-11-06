@@ -17,6 +17,8 @@ public class GetChapterResponse {
     private String duration;
 
     private String chapterUrl;
+    
+    private String photoUrl;
 
     private PodcastResponse podcast;
 

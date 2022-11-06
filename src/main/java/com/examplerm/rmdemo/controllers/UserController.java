@@ -25,9 +25,9 @@ public class UserController {
 
     }
 
-    @PostMapping("upload")
-    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
-        BaseResponse baseResponse= service.upload(file);
+    @PostMapping("upload/photo")
+    public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadPhoto(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
 
     }

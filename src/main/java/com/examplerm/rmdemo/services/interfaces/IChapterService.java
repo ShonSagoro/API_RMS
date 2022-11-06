@@ -11,7 +11,9 @@ import com.examplerm.rmdemo.entities.Chapter;
 public interface IChapterService {
     BaseResponse create(CreateChapterRequest request);
 
-    BaseResponse upload(MultipartFile file);
+    BaseResponse uploadPhoto(MultipartFile file);
+
+    BaseResponse uploadChapter(MultipartFile file);
     
     BaseResponse update(Long id, UpdateChapterRequest request);
     

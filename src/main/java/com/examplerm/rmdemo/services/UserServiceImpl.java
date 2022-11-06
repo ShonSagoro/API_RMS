@@ -117,11 +117,11 @@ public class UserServiceImpl implements IUserService {
             .orElseThrow(() -> new RuntimeException("The user does not exist"));
     }
     @Override
-    public BaseResponse upload(MultipartFile file){
+    public BaseResponse uploadPhoto(MultipartFile file){
         String photoUrl= fileService.upload(file);
         return BaseResponse.builder()
                 .data(photoUrl)
-                .message("Photo of user uploaded correctly")
+                .message("The photo of user uploaded correctly")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
     }

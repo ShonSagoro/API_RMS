@@ -66,6 +66,7 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
         response.setCategory(podcast.getCategory());
         response.setDescription(podcast.getDescription());
         response.setCreationDate(podcast.getCreationDate());
+        response.setPhotoUrl(podcast.getPhotoUrl());
         return response;
     } 
 
@@ -97,6 +98,7 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
         response.setCategory(podcast.getCategory());
         response.setDescription(podcast.getDescription());
         response.setCreationDate(podcast.getCreation_Date());
+        response.setPhotoUrl(podcast.getPhoto_Url());
         return response;
     }
 

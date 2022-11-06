@@ -12,4 +12,7 @@ public class CreatePlaylistRequest {
 
     private String duration;
 
+    private String photoUrl;
+
+
 }

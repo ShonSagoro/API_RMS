@@ -16,4 +16,6 @@ public class PodcastResponse {
 
     private String creationDate;
 
+    private String photoUrl;
+
 }

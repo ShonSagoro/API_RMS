@@ -46,11 +46,11 @@ public class ChapterServiceImpl implements IChapterService{
     }
 
     @Override
-    public BaseResponse upload(MultipartFile file){
+    public BaseResponse uploadChapter(MultipartFile file){
         String chapterUrl=fileService.upload(file);
         return BaseResponse.builder()
             .data(chapterUrl)
-            .message("Chapter uploaded correctly")
+            .message("The Chapter uploaded correctly")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
@@ -101,6 +101,7 @@ public class ChapterServiceImpl implements IChapterService{
     private Chapter update(Chapter chapter, UpdateChapterRequest request){
         chapter.setTitle(request.getTitle());
         chapter.setDescription(request.getDescription());
+        chapter.setPhotoUrl(request.getPhotoUrl());
         return repository.save(chapter);
     }
 
@@ -125,6 +126,7 @@ public class ChapterServiceImpl implements IChapterService{
         response.setChapterUrl(chapter.getChapterUrl());
         response.setCreationDate(chapter.getCreationDate());
         response.setPodcast(from(chapter.getPodcast()));
+        response.setPhotoUrl(chapter.getPhotoUrl());
         return response;
     }
 
@@ -135,6 +137,7 @@ public class ChapterServiceImpl implements IChapterService{
         response.setCategory(podcast.getCategory());
         response.setDescription(podcast.getDescription());
         response.setCreationDate(podcast.getCreationDate());
+        response.setPhotoUrl(podcast.getPhotoUrl());
         return response;
 
     }
@@ -145,6 +148,7 @@ public class ChapterServiceImpl implements IChapterService{
         chapter.setDescription(request.getDescription());
         chapter.setDuration(request.getDuration());
         chapter.setChapterUrl(request.getChapterUrl());
+        chapter.setPhotoUrl(request.getPhotoUrl());
         chapter.setCreationDate(getDate());
         chapter.setPodcast(podcastService.findById(request.getPodcastId()));
         return chapter;
@@ -159,6 +163,16 @@ public class ChapterServiceImpl implements IChapterService{
     private DateTimeFormatter getFormat(){
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
+    }
+
+    @Override
+    public BaseResponse uploadPhoto(MultipartFile file) {
+        String photoUrl=fileService.upload(file);
+        return BaseResponse.builder()
+            .data(photoUrl)
+            .message("The photo uploaded correctly")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
     }
 
 }

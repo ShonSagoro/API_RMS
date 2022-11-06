@@ -12,4 +12,6 @@ public class ArtistResponse {
 
     private Integer listener;
 
+    private String photoUrl;
+
 }

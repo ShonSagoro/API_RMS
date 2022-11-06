@@ -62,6 +62,7 @@ public class ArtistLibraryServiceImpl implements IArtistLibraryService {
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
 
@@ -90,6 +91,7 @@ public class ArtistLibraryServiceImpl implements IArtistLibraryService {
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhoto_Url());
         return response;
     }
 

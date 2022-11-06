@@ -63,13 +63,23 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
-    public BaseResponse upload(MultipartFile file){
+    public BaseResponse uploadSong(MultipartFile file){
         String songUrl= fileService.upload(file);
         return BaseResponse.builder()
                 .data(songUrl)
-                .message("Song uploaded correctly")
+                .message("The Song uploaded correctly")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
+    }
+
+    @Override
+    public BaseResponse uploadPhoto(MultipartFile file) {
+        String photoUrl=fileService.upload(file);
+        return BaseResponse.builder()
+            .data(photoUrl)
+            .message("The photo uploaded correctly")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
     }
 
     @Override
@@ -111,6 +121,7 @@ public class SongServiceImpl implements ISongService {
     private Song update(Song song, UpdateSongRequest request) {
         song.setName(request.getName());
         song.setDuration(request.getDuration());
+        song.setPhotoUrl(request.getPhotoUrl());
         return repository.save(song);
     }
 
@@ -122,6 +133,7 @@ public class SongServiceImpl implements ISongService {
         song.setArtist(artistService.findById(request.getArtistId()));
         song.setCreationDate(getDate());
         song.setSongUrl(request.getSongUrl());
+        song.setPhotoUrl(request.getPhotoUrl());
         return song;
     }
 
@@ -134,6 +146,7 @@ public class SongServiceImpl implements ISongService {
         response.setSongUrl(song.getSongUrl());
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));
+        response.setPhotoUrl(song.getPhotoUrl());
         return response;
     }
 
@@ -145,6 +158,7 @@ public class SongServiceImpl implements ISongService {
         response.setCreationDate(album.getCreationDate());
         response.setDescription(album.getDescription());
         response.setArtist(from(album.getArtist()));
+        response.setPhotoUrl(album.getPhotoUrl());
         return response;
     }
 
@@ -154,6 +168,7 @@ public class SongServiceImpl implements ISongService {
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
     

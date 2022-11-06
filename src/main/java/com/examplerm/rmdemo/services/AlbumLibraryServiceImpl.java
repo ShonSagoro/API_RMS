@@ -69,6 +69,7 @@ public class AlbumLibraryServiceImpl implements IAlbumLibraryService {
         response.setDuration(album.getDuration());
         response.setCreationDate(album.getCreationDate());
         response.setArtist(from(album.getArtist()));
+        response.setPhotoUrl(album.getPhotoUrl());
         return response;
     }
 
@@ -77,6 +78,7 @@ public class AlbumLibraryServiceImpl implements IAlbumLibraryService {
         response.setListener(artist.getListener());
         response.setName(artist.getName());
         response.setId(artist.getId());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
 
@@ -111,6 +113,7 @@ public class AlbumLibraryServiceImpl implements IAlbumLibraryService {
         response.setCreationDate(album.getCreation_Date());
         response.setDuration(album.getDuration());
         response.setArtist(from(artistService.findById(album.getArtist_Id())));
+        response.setPhotoUrl(album.getPhoto_Url());
         return response;
     }
 

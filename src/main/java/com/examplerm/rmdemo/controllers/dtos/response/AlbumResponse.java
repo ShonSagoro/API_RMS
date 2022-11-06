@@ -18,4 +18,7 @@ public class AlbumResponse {
     
     private ArtistResponse artist;
 
+    private String photoUrl;
+
+
 }

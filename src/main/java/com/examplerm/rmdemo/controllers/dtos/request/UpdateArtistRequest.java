@@ -9,5 +9,7 @@ public class UpdateArtistRequest {
     private String name;
 
     private Integer listener;
+
+    private String photoUrl;
     
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateArtistRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateArtistRequest;
@@ -14,12 +15,16 @@ import com.examplerm.rmdemo.controllers.dtos.response.GetArtistResponse;
 import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.repositories.IArtistRepository;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
+import com.examplerm.rmdemo.services.interfaces.IFileService;
 
 @Service
 public class ArtistServiceImpl implements IArtistService{
 
     @Autowired 
     private IArtistRepository repository;
+
+    @Autowired
+    private IFileService fileService;
 
     @Override
     public BaseResponse create(CreateArtistRequest request) {
@@ -76,6 +81,7 @@ public class ArtistServiceImpl implements IArtistService{
     private Artist update(Artist artist, UpdateArtistRequest request){
         artist.setName(request.getName());
         artist.setListener(request.getListener());
+        artist.setPhotoUrl(request.getPhotoUrl());
         return repository.save(artist);
     }
 
@@ -90,6 +96,7 @@ public class ArtistServiceImpl implements IArtistService{
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
 
@@ -97,6 +104,7 @@ public class ArtistServiceImpl implements IArtistService{
         Artist Artist= new Artist();
         Artist.setName(request.getName());
         Artist.setListener((Integer) 0);
+        Artist.setPhotoUrl(request.getPhotoUrl());
         return Artist;
     }
 
@@ -104,6 +112,16 @@ public class ArtistServiceImpl implements IArtistService{
     public Artist findById(Long id) {
         return repository.findById(id)
             .orElseThrow(()-> new RuntimeException("The Artist does not exist"));
+    }
+
+    @Override
+    public BaseResponse uploadPhoto(MultipartFile file) {
+        String photoUrl=fileService.upload(file);
+        return BaseResponse.builder()
+            .data(photoUrl)
+            .message("The photo uploaded correctly")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
     }
 
 }

@@ -81,6 +81,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setName(playlist.getName());
         response.setCreationDate(playlist.getCreationDate());
         response.setDescription(playlist.getDescription());
+        response.setPhotoUrl(playlist.getPhotoUrl());
         return response;
     }
 
@@ -91,6 +92,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setDuration(song.getDuration());
         response.setCreationDate(song.getCreationDate());
         response.setSongUrl(song.getSongUrl());
+        response.setPhotoUrl(song.getSongUrl());
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));
         return response;
@@ -104,6 +106,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setCreationDate(album.getCreationDate());
         response.setDescription(album.getDescription());
         response.setArtist(from(album.getArtist()));
+        response.setPhotoUrl(album.getPhotoUrl());
         return response;
 
     }
@@ -113,6 +116,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
 
@@ -155,6 +159,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setSongUrl(song.getSong_Url());
         response.setAlbum(from(albumService.findById(song.getAlbum_Id())));
         response.setArtist(from(artistService.findById(song.getArtist_Id())));
+        response.setPhotoUrl(song.getPhoto_Url());
         return response;
     }
 
@@ -166,6 +171,7 @@ public class SongPlaylistServiceImpl implements ISongPlaylistService{
         response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
         response.setCreationDate(playlist.getCreation_Date());
+        response.setPhotoUrl(playlist.getPhoto_Url());
         return response;
     }
     @Override

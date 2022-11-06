@@ -10,4 +10,6 @@ public class UpdateSongRequest {
     
     private String duration;
 
+    private String photoUrl;
+
 }

@@ -16,4 +16,6 @@ public interface SongProjection {
     
     Long getAlbum_Id();
 
+    String getPhoto_Url();
+
 }

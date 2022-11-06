@@ -3,6 +3,7 @@ package com.examplerm.rmdemo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateArtistRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateArtistRequest;
@@ -31,6 +32,12 @@ public class ArtistController {
     @PostMapping
     public ResponseEntity<BaseResponse>  create(@RequestBody CreateArtistRequest request){
         BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
+    @PostMapping("upload/photo")
+    public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadPhoto(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
