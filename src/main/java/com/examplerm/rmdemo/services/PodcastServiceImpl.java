@@ -69,6 +69,16 @@ public class PodcastServiceImpl implements IPodcastService{
     }
 
     @Override
+    public BaseResponse get(String name) {
+        GetPodcastResponse response= from(name);
+        return BaseResponse.builder()
+            .data(response)
+            .message("Podcast has been getted")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
+
+    @Override
     public BaseResponse list() {
         List<GetPodcastResponse> response = repository.findAll()
             .stream()
@@ -92,6 +102,12 @@ public class PodcastServiceImpl implements IPodcastService{
 
     private GetPodcastResponse from(Long id){
         return repository.findById(id).
+                map(this::from)
+                .orElseThrow(()-> new RuntimeException("The podcast does not exist"));
+    }
+
+    private GetPodcastResponse from(String name){
+        return repository.findByName(name).
                 map(this::from)
                 .orElseThrow(()-> new RuntimeException("The podcast does not exist"));
     }
@@ -131,6 +147,11 @@ public class PodcastServiceImpl implements IPodcastService{
     @Override
     public Podcast findById(Long id) {
         return repository.findById(id)
+         .orElseThrow(()-> new RuntimeException("The podcast does not exist"));
+    }
+    @Override
+    public Podcast findByName(String name) {
+        return repository.findByName(name)
          .orElseThrow(()-> new RuntimeException("The podcast does not exist"));
     }
 

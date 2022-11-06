@@ -45,6 +45,16 @@ public class AlbumServiceImpl implements IAlbumService {
     }
     
     @Override
+    public BaseResponse get(String name) {
+        GetAlbumResponse response=from(name);
+        return BaseResponse.builder()
+                .data(response)
+                .message("Album has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK).build();
+    }
+    
+    @Override
     public BaseResponse create(CreateAlbumRequest request) {
         Album album = from(request);
         GetAlbumResponse response= from(repository.save(album));
@@ -83,11 +93,6 @@ public class AlbumServiceImpl implements IAlbumService {
                 .httpStatus(HttpStatus.OK).build();
     }
 
-    @Override
-    public Album findById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("The album does not exist"));
-    }
 
     @Override
     public void delete(Long id) {
@@ -140,6 +145,12 @@ public class AlbumServiceImpl implements IAlbumService {
                 .orElseThrow(() -> new RuntimeException("The album does not exist"));
     }
 
+    private GetAlbumResponse from(String nameAlbum) {
+        return repository.findByName(nameAlbum)
+                .map(this::from)
+                .orElseThrow(() -> new RuntimeException("The album does not exist"));
+    }
+
     private String getDate(){
         LocalDateTime dateNow= LocalDateTime.now();
         String date=dateNow.format(getFormat());
@@ -159,5 +170,18 @@ public class AlbumServiceImpl implements IAlbumService {
             .message("The photo uploaded correctly")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
+    }
+
+    @Override
+    public Album findByName(String name) {
+        return repository.findByName(name)
+            .orElseThrow(()-> new RuntimeException("The album does not exist"));
+    }
+
+    
+    @Override
+    public Album findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("The album does not exist"));
     }
 }

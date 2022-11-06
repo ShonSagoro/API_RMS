@@ -83,6 +83,15 @@ public class ChapterServiceImpl implements IChapterService{
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
+    @Override
+    public BaseResponse get(String name) {
+        GetChapterResponse response= from(name);
+        return BaseResponse.builder()
+            .data(response)
+            .message("Chapter has been getted")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
 
     @Override
     public BaseResponse list() {
@@ -110,10 +119,20 @@ public class ChapterServiceImpl implements IChapterService{
                 map(this::from)
                 .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
     }
+    private GetChapterResponse from(String name){
+        return repository.findByName(name).
+                map(this::from)
+                .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
+    }
 
     @Override
     public Chapter findById(Long id) {
         return repository.findById(id)
+            .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
+    }
+    @Override
+    public Chapter findByName(String name) {
+        return repository.findByName(name)
             .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
     }
 

@@ -19,9 +19,13 @@ public interface IPodcastService {
     
     BaseResponse get(Long id);
     
+    BaseResponse get(String name);
+
     BaseResponse list();
 
     void delete(Long id);
 
     Podcast findById(Long id);
+
+    Podcast findByName(String name);
 }

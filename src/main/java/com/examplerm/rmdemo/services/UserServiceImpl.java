@@ -38,6 +38,17 @@ public class UserServiceImpl implements IUserService {
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
+    
+    @Override
+    public BaseResponse get(String name) {
+        GetUserResponse response=from(name);
+        return BaseResponse.builder()
+                .data(response)
+                .message("User has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
 
     public BaseResponse create(CreateUserRequest request) {
         Library library=libraryService.create();
@@ -111,11 +122,24 @@ public class UserServiceImpl implements IUserService {
                 .orElseThrow(() -> new RuntimeException("The user does not exist"));
     }
 
+    private GetUserResponse from(String name) {
+        return repository.findByName(name)
+                .map(this::from)
+                .orElseThrow(() -> new RuntimeException("The user does not exist"));
+    }
+
     @Override
     public User findById(Long id) {
         return repository.findById(id)
             .orElseThrow(() -> new RuntimeException("The user does not exist"));
     }
+
+    @Override
+    public User findByName(String name) {
+        return repository.findByName(name)
+            .orElseThrow(() -> new RuntimeException("The user does not exist"));
+    }
+
     @Override
     public BaseResponse uploadPhoto(MultipartFile file){
         String photoUrl= fileService.upload(file);

@@ -14,6 +14,8 @@ public interface IUserService {
     
     BaseResponse get(Long id);
 
+    BaseResponse get(String name);
+
     BaseResponse uploadPhoto(MultipartFile file);
     
     BaseResponse create(CreateUserRequest request);
@@ -21,4 +23,6 @@ public interface IUserService {
     User findById(Long id);
 
     void delete(Long id);
+
+    User findByName(String name);
 }

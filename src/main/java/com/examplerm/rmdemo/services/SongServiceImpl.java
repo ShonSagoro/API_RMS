@@ -52,6 +52,18 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
+    public BaseResponse get(String name) {
+        GetSongResponse response=from(name);
+
+        return BaseResponse.builder()
+                .data(response)
+                .message("Song has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
+    @Override
     public BaseResponse create(CreateSongRequest request) {
         Song song = from(request);
         GetSongResponse response = from(repository.save(song));
@@ -178,8 +190,18 @@ public class SongServiceImpl implements ISongService {
                 .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
 
+    private GetSongResponse from(String name) {
+        return repository.findByName(name)
+                .map(this::from)
+                .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+
     public Song findById(Long idSong){
         return repository.findById(idSong)
+        .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+    public Song findByName(String name){
+        return repository.findByName(name)
         .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
 

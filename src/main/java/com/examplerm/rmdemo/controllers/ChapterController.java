@@ -37,6 +37,12 @@ public class ChapterController {
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
+    @GetMapping("{name}")
+    public ResponseEntity<BaseResponse> get(@PathVariable String name){
+        BaseResponse baseResponse= service.get(name);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreateChapterRequest request){
         BaseResponse baseResponse= service.create(request);

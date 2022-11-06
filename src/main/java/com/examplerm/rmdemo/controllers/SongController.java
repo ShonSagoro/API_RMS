@@ -50,6 +50,12 @@ public class SongController {
 
     }
 
+    @GetMapping("{name}")
+    public ResponseEntity<BaseResponse> get(@PathVariable String name){
+        BaseResponse baseResponse= service.get(name);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);

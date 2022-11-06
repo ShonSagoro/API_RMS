@@ -41,6 +41,12 @@ public class AlbumController {
         BaseResponse baseResponse= service.get(id);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
+    
+    @GetMapping("{name}")
+    public ResponseEntity<BaseResponse> get(@PathVariable String name){
+        BaseResponse baseResponse= service.get(name);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
 
     @PutMapping("{id}")
     public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdateAlbumRequest request){

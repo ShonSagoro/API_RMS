@@ -16,11 +16,15 @@ public interface IPlaylistService {
     BaseResponse update(Long id, UpdatePlaylistRequest request);
     
     BaseResponse get(Long id);
+
+    BaseResponse get(String name);
     
     BaseResponse list();
 
     void delete(Long id);
 
     Playlist findById(Long id);
+
+    Playlist findByName(String name);
     
 }

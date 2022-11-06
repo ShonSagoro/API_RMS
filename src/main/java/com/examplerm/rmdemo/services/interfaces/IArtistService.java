@@ -17,6 +17,8 @@ public interface IArtistService {
 
     BaseResponse get(Long id);
     
+    BaseResponse get(String name);
+    
     BaseResponse list();
     
     BaseResponse update(Long id, UpdateArtistRequest request);
@@ -24,5 +26,7 @@ public interface IArtistService {
     void delete(Long id);
 
     Artist findById(Long id);
+
+    Artist findByName(String name);
 
 }
