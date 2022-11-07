@@ -190,18 +190,31 @@ public class SongServiceImpl implements ISongService {
                 .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
 
+
+
     private GetSongResponse from(String name) {
         return repository.findByName(name)
                 .map(this::from)
                 .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
-
+    @Override
     public Song findById(Long idSong){
         return repository.findById(idSong)
         .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
+    @Override
     public Song findByName(String name){
         return repository.findByName(name)
+        .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+    @Override
+    public Song findByArtistId(Long artistId){
+        return repository.findByArtistId(artistId)
+        .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+    @Override
+    public Song findByAlbumId(Long albumId){
+        return repository.findByAlbumId(albumId)
         .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
 
@@ -215,5 +228,31 @@ public class SongServiceImpl implements ISongService {
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
     }
+
+    @Override
+    public BaseResponse getByAlbumId(Long id) {
+        GetSongResponse response=from(findByAlbumId(id));
+
+        return BaseResponse.builder()
+                .data(response)
+                .message("Song has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
+    @Override
+    public BaseResponse getByArtistId(Long id) {
+        GetSongResponse response=from(findByArtistId(id));
+
+        return BaseResponse.builder()
+                .data(response)
+                .message("Song has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
+    
 
 }

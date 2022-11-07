@@ -1,6 +1,7 @@
 package com.examplerm.rmdemo.controllers;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateUserRequest;
+import com.examplerm.rmdemo.controllers.dtos.request.LoginRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateUserRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 
@@ -32,9 +33,9 @@ public class UserController {
 
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<BaseResponse> get(@PathVariable Long id){
-        BaseResponse baseResponse= service.get(id);
+    @GetMapping
+    public ResponseEntity<BaseResponse> get(@RequestBody LoginRequest request){
+        BaseResponse baseResponse= service.get(request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
 
     }

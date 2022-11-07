@@ -1,6 +1,7 @@
 package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateUserRequest;
+import com.examplerm.rmdemo.controllers.dtos.request.LoginRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateUserRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.controllers.dtos.response.GetUserResponse;
@@ -29,8 +30,8 @@ public class UserServiceImpl implements IUserService {
     private ILibraryService libraryService;
 
     @Override
-    public BaseResponse get(Long id) {
-        GetUserResponse response=from(id);
+    public BaseResponse get(LoginRequest request) {
+        GetUserResponse response=from(request);
         return BaseResponse.builder()
                 .data(response)
                 .message("User has been found")
@@ -116,11 +117,16 @@ public class UserServiceImpl implements IUserService {
         return response;
     }
 
-    private GetUserResponse from(Long idUser) {
-        return repository.findById(idUser)
+    private GetUserResponse from(LoginRequest request) {
+        System.out.println(request.getName()+" "+request.getPassword());
+        String name=request.getName();
+        String password=request.getPassword();
+        return repository.findByNameAndPassword(name, password)
                 .map(this::from)
-                .orElseThrow(() -> new RuntimeException("The user does not exist"));
+                .orElseThrow(() -> new RuntimeException("Incorrect sesion"));
     }
+
+
 
     private GetUserResponse from(String name) {
         return repository.findByName(name)

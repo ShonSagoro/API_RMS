@@ -55,6 +55,16 @@ public class SongController {
         BaseResponse baseResponse= service.get(name);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
+    @GetMapping("album/{albumId}")
+    public ResponseEntity<BaseResponse> getByAlbumId(@PathVariable Long albumId){
+        BaseResponse baseResponse= service.getByAlbumId(albumId);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+    @GetMapping("artist/{artistId}")
+    public ResponseEntity<BaseResponse> getByArtistId(@PathVariable Long artistId){
+        BaseResponse baseResponse= service.getByAlbumId(artistId);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
