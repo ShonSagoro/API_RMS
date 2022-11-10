@@ -58,4 +58,9 @@ public class UserController {
         service.delete(id);
     }
 
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
+
 }

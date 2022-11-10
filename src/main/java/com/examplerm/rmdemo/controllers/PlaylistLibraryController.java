@@ -36,5 +36,10 @@ public class PlaylistLibraryController {
     public void deletePlaylistFromLibraryByThierIds(@PathVariable Long playlistId, @PathVariable Long libraryId ){
         service.deletePlaylistFromLibraryByThierIds(playlistId,libraryId);
     }
+    
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
 
 }

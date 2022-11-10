@@ -47,4 +47,9 @@ public class SongPlaylistController {
         service.deleteSongFromUserByTheirIds(songId, playlistId);
     }
 
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
+
 }

@@ -22,5 +22,10 @@ public class LibraryController {
         BaseResponse baseResponse= service.list();
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
+
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
     
 }

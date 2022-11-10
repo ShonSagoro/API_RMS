@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("album")
@@ -58,6 +61,12 @@ public class AlbumController {
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
+    
 
 }
 

@@ -38,4 +38,8 @@ public class PodcastLibraryController {
         service.deletePodcastFromLibraryByThierIds(podcastId, libraryId);
     }
 
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
 }

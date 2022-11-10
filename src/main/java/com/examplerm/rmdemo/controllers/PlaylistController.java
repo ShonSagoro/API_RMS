@@ -65,4 +65,9 @@ public class PlaylistController {
         service.delete(id);
     }
 
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
+
 }

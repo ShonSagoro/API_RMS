@@ -75,5 +75,9 @@ public class SongController {
         BaseResponse baseResponse= service.update(id, request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
 
 }

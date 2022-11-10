@@ -65,4 +65,9 @@ public class PodcastController {
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
+
 }

@@ -31,4 +31,9 @@ public class AlbumLibraryController {
         service.deleteAlbumFromLibraryByThierIds(albumId, libraryId);
     }
 
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
+
 }

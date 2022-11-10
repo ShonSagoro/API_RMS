@@ -57,4 +57,9 @@ public class ArtistController {
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
 }

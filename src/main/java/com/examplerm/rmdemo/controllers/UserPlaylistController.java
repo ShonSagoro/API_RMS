@@ -40,5 +40,9 @@ public class UserPlaylistController {
     public void deletePlaylistsByIdUser(@PathVariable Long userId){
         service.deletePlaylistsByIdUser(userId);
     }
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
 
 }

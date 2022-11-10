@@ -31,4 +31,9 @@ public class ArtistLibraryController {
         service.deleteArtistFromLibraryByThierIds(artistId,libraryId);
     }
 
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
+    }
+
 }
