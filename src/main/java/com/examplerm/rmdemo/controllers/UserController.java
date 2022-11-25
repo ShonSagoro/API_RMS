@@ -33,9 +33,9 @@ public class UserController {
 
     }
 
-    @GetMapping
-    public ResponseEntity<BaseResponse> get(@RequestBody LoginRequest request){
-        BaseResponse baseResponse= service.get(request);
+    @PostMapping("login")
+    public ResponseEntity<BaseResponse> login(@RequestBody LoginRequest request){
+        BaseResponse baseResponse= service.login(request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
 
     }

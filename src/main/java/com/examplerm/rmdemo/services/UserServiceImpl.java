@@ -30,11 +30,11 @@ public class UserServiceImpl implements IUserService {
     private ILibraryService libraryService;
 
     @Override
-    public BaseResponse get(LoginRequest request) {
+    public BaseResponse login(LoginRequest request) {
         GetUserResponse response=from(request);
         return BaseResponse.builder()
                 .data(response)
-                .message("User has been found")
+                .message("You are Logged in")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.OK)
                 .build();

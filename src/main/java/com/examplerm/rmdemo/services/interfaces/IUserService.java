@@ -13,7 +13,7 @@ public interface IUserService {
 
     BaseResponse update(Long id, UpdateUserRequest request);
     
-    BaseResponse get(LoginRequest request);
+    BaseResponse login(LoginRequest request);
 
     BaseResponse get(String name);
 
