@@ -2,11 +2,11 @@ package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateAlbumRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateAlbumRequest;
-import com.examplerm.rmdemo.controllers.dtos.response.ArtistResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.GetAlbumResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.*;
 import com.examplerm.rmdemo.entities.Album;
 import com.examplerm.rmdemo.entities.Artist;
+import com.examplerm.rmdemo.entities.projections.AlbumProjection;
+import com.examplerm.rmdemo.entities.projections.SongProjection;
 import com.examplerm.rmdemo.repositories.IAlbumRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
@@ -178,7 +178,37 @@ public class AlbumServiceImpl implements IAlbumService {
             .orElseThrow(()-> new RuntimeException("The album does not exist"));
     }
 
-    
+    @Override
+    public BaseResponse getAlbums(Long id) {
+        List<AlbumProjection> response= repository.getAlbumsByArtistId(id);
+        if (!response.isEmpty()){
+            List<AlbumResponse> responseAlbum= response.stream()
+                    .map(this::from)
+                    .collect(Collectors.toList());
+            return BaseResponse.builder()
+                    .data(responseAlbum)
+                    .message("Albums by artist id have been found")
+                    .success(Boolean.TRUE)
+                    .httpStatus(HttpStatus.OK).build();
+        }
+        else{
+            return BaseResponse.builder().message("This artist doesn't have songs").build();
+        }
+    }
+
+    private AlbumResponse from(AlbumProjection albumProjection) {
+        AlbumResponse response= new AlbumResponse();
+        response.setId(albumProjection.getId());
+        response.setName(albumProjection.getName());
+        response.setDuration(albumProjection.getDuration());
+        response.setCreationDate(albumProjection.getCreation_Date());
+        response.setPhotoUrl(albumProjection.getPhoto_Url());
+        response.setArtist(from(artistService.findById(albumProjection.getArtist_Id())));
+        response.setDescription(albumProjection.getDescription());
+        return response;
+    }
+
+
     @Override
     public Album findById(Long id) {
         return repository.findById(id)

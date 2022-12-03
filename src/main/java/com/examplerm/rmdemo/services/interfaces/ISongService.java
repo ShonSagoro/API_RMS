@@ -27,4 +27,7 @@ public interface ISongService {
     Song findById(Long id);
 
     Song findByName(String name);
+
+    BaseResponse getSongs(Long id);
+
 }
