@@ -98,6 +98,7 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(request.getPassword());
         user.setPhotoUrl(request.getPhotoUrl());
         user.setLibrary(library);
+        user.setAdmin(request.getAdmin());
         return user;
     }
 
@@ -108,6 +109,7 @@ public class UserServiceImpl implements IUserService {
         response.setEmail(user.getEmail());
         response.setLibrary(from(user.getLibrary()));
         response.setPhotoUrl(user.getPhotoUrl());
+        response.setAdmin(user.getAdmin());
         return response;
     }
 
@@ -118,7 +120,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     private GetUserResponse from(LoginRequest request) {
-        System.out.println(request.getName()+" "+request.getPassword());
         String name=request.getName();
         String password=request.getPassword();
         return repository.findByNameAndPassword(name, password)

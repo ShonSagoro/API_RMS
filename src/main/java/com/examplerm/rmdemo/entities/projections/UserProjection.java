@@ -12,4 +12,6 @@ public interface UserProjection {
 
     String getPhoto_Url();
 
+    Boolean getAdmin();
+
 }

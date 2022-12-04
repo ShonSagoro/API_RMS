@@ -14,4 +14,5 @@ public class CreateUserRequest {
 
     private String photoUrl;
 
+    private Boolean admin;
 }

@@ -16,4 +16,5 @@ public class UserResponse {
 
     private String photoUrl;
 
+    private Boolean admin;
 }

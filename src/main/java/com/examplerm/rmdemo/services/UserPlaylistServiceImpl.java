@@ -74,6 +74,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setName(user.getName());
         response.setEmail(user.getEmail());
         response.setLibrary(from(user.getLibrary()));
+        response.setAdmin(user.getAdmin());
         response.setPhotoUrl(user.getPhotoUrl());
         return response;
     }
@@ -137,6 +138,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setLibrary(user.getLibrary_id());
         response.setPhotoUrl(user.getPhoto_Url());
         response.setPhotoUrl(user.getPhoto_Url());
+        response.setAdmin(user.getAdmin());
         return response;
     }
 
