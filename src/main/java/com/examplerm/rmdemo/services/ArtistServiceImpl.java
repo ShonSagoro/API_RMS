@@ -3,6 +3,8 @@ package com.examplerm.rmdemo.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.examplerm.rmdemo.services.interfaces.IAlbumService;
+import com.examplerm.rmdemo.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,15 @@ public class ArtistServiceImpl implements IArtistService{
     private IArtistRepository repository;
 
     @Autowired
+
     private IFileService fileService;
+
+    @Autowired
+    private ISongService songService;
+
+    @Autowired
+    private IAlbumService albumService;
+
 
     @Override
     public BaseResponse create(CreateArtistRequest request) {
@@ -54,6 +64,17 @@ public class ArtistServiceImpl implements IArtistService{
             .message("Artist have been found")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
+    }
+    public BaseResponse SonglistbyId(Long id) {
+        repository.findById(id).orElseThrow(()->new RuntimeException("The artist does not exist"));
+        return songService.getSongs(id);
+
+    }
+
+    @Override
+    public BaseResponse albumlistbyId(Long id) {
+        repository.findById(id).orElseThrow(()-> new RuntimeException("The artist does not exist"));
+        return albumService.getAlbums(id);
     }
 
     @Override
