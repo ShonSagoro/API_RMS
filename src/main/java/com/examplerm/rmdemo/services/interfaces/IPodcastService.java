@@ -21,6 +21,8 @@ public interface IPodcastService {
     
     BaseResponse get(String name);
 
+    BaseResponse chaptersByPodcastId(Long id);
+
     BaseResponse list();
 
     void delete(Long id);

@@ -44,6 +44,12 @@ public class AlbumController {
         BaseResponse baseResponse= service.get(id);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
+
+    @GetMapping("{id}/songs")
+    public ResponseEntity<BaseResponse> getSongsByAlbumId(@PathVariable long id){
+        BaseResponse baseResponse= service.getSongsByAlbumId(id);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
     
     @GetMapping("name/{name}")
     public ResponseEntity<BaseResponse> get(@PathVariable String name){

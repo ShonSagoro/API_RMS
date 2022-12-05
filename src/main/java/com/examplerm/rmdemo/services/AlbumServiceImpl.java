@@ -12,6 +12,7 @@ import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
 import com.examplerm.rmdemo.services.interfaces.IFileService;
 
+import com.examplerm.rmdemo.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Autowired
     private IFileService fileService;
+
+    @Autowired
+    private ISongService songService;
 
     @Override
     public BaseResponse get(Long id) {
@@ -194,6 +198,12 @@ public class AlbumServiceImpl implements IAlbumService {
         else{
             return BaseResponse.builder().message("This artist doesn't have songs").build();
         }
+    }
+
+    @Override
+    public BaseResponse getSongsByAlbumId(Long id) {
+        repository.findById(id).orElseThrow(()->new RuntimeException("The Album does not exist"));
+        return songService.getSongsbyAlbumId(id);
     }
 
     private AlbumResponse from(AlbumProjection albumProjection) {

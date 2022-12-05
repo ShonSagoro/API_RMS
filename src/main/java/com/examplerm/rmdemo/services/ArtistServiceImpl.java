@@ -65,6 +65,8 @@ public class ArtistServiceImpl implements IArtistService{
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
+
+
     public BaseResponse SonglistbyId(Long id) {
         repository.findById(id).orElseThrow(()->new RuntimeException("The artist does not exist"));
         return songService.getSongs(id);
