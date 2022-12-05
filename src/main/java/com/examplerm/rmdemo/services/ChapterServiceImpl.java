@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.examplerm.rmdemo.controllers.dtos.response.*;
-import com.examplerm.rmdemo.entities.projections.AlbumProjection;
 import com.examplerm.rmdemo.entities.projections.ChapterProjection;
-import com.examplerm.rmdemo.entities.projections.PodcastProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
