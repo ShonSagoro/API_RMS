@@ -10,7 +10,11 @@ import com.examplerm.rmdemo.entities.Artist;
 
 @Service
 public interface IArtistService {
-    
+
+    BaseResponse SonglistbyId(Long id);
+
+    BaseResponse albumlistbyId(Long id);
+
     BaseResponse create(CreateArtistRequest request);
 
     BaseResponse uploadPhoto(MultipartFile file);

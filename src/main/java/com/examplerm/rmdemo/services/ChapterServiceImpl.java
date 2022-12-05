@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.examplerm.rmdemo.controllers.dtos.response.*;
+import com.examplerm.rmdemo.entities.projections.AlbumProjection;
+import com.examplerm.rmdemo.entities.projections.ChapterProjection;
+import com.examplerm.rmdemo.entities.projections.PodcastProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,9 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateChapterRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateChapterRequest;
-import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.GetChapterResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.PodcastResponse;
 import com.examplerm.rmdemo.entities.Chapter;
 import com.examplerm.rmdemo.entities.Podcast;
 import com.examplerm.rmdemo.repositories.IChapterRepository;
@@ -72,6 +73,36 @@ public class ChapterServiceImpl implements IChapterService{
             .message("Chapter has been updated")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
+    }
+
+    public BaseResponse getChapters(Long id){
+        List<ChapterProjection> response= repository.getChaptersByPodcastId(id);
+        if (!response.isEmpty()){
+            List<ChapterResponse> responseChapter= response.stream()
+                    .map(this::from)
+                    .collect(Collectors.toList());
+            return BaseResponse.builder()
+                    .data(responseChapter)
+                    .message("Chapters by podcast id have been found")
+                    .success(Boolean.TRUE)
+                    .httpStatus(HttpStatus.OK).build();
+        }
+        else{
+            return BaseResponse.builder().message("This podcast doesn't have chapters").build();
+        }
+    }
+
+    private ChapterResponse from(ChapterProjection chapterProjection) {
+        ChapterResponse response= new ChapterResponse();
+        response.setId(chapterProjection.getId());
+        response.setTitle(chapterProjection.getTitle());
+        response.setDuration(chapterProjection.getDuration());
+        response.setCreationDate(chapterProjection.getCreation_Date());
+        response.setPhotoUrl(chapterProjection.getPhoto_Url());
+        response.setPodcast(from(podcastService.findById(chapterProjection.getPodcast_Id())));
+        response.setDescription(chapterProjection.getDescription());
+        response.setChapterUrl(chapterProjection.getChapter_Url());
+        return response;
     }
 
     @Override

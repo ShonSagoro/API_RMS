@@ -10,10 +10,6 @@ public interface ISongService {
 
     BaseResponse get(Long id);
 
-    BaseResponse getByAlbumId(Long id);
-    
-    BaseResponse getByArtistId(Long id);
-
     BaseResponse get(String name);
 
     BaseResponse create(CreateSongRequest request);
@@ -32,7 +28,7 @@ public interface ISongService {
 
     Song findByName(String name);
 
-    Song findByArtistId(Long artistId);
+    BaseResponse getSongsbyAlbumId(Long id);
 
-    Song findByAlbumId(Long albumId);
+    BaseResponse getSongs(Long id);
 }

@@ -20,13 +20,12 @@ public class SongController {
     public ResponseEntity<BaseResponse> uploadSong(@RequestParam MultipartFile file){
         BaseResponse baseResponse= service.uploadSong(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
+
     @PostMapping("upload/photo")
     public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
         BaseResponse baseResponse= service.uploadPhoto(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
 
     @PostMapping
@@ -40,7 +39,6 @@ public class SongController {
     public ResponseEntity<BaseResponse> list(){
         BaseResponse baseResponse= service.list();
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
 
     @GetMapping("{id}")
@@ -55,21 +53,12 @@ public class SongController {
         BaseResponse baseResponse= service.get(name);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
-    @GetMapping("album/{albumId}")
-    public ResponseEntity<BaseResponse> getByAlbumId(@PathVariable Long albumId){
-        BaseResponse baseResponse= service.getByAlbumId(albumId);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
-    @GetMapping("artist/{artistId}")
-    public ResponseEntity<BaseResponse> getByArtistId(@PathVariable Long artistId){
-        BaseResponse baseResponse= service.getByAlbumId(artistId);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdateSongRequest request){
         BaseResponse baseResponse= service.update(id, request);
