@@ -13,9 +13,9 @@ import com.examplerm.rmdemo.entities.Chapter;
 
 @Repository
 public interface IChapterRepository extends JpaRepository<Chapter,Long>{
-    @Query(value = "SELECT * FROM chapers WHERE name=:name", nativeQuery = true)
+    @Query(value = "SELECT * FROM chapters WHERE name=:name", nativeQuery = true)
     Optional<Chapter> findByName(String name);
 
-    @Query(value = "select * from albums WHERE artist_id= :artistId", nativeQuery= true)
-    List<ChapterProjection> getChaptersByPodcastId(Long artistId);
+    @Query(value = "select * from chapters WHERE podcast_id= :podcastId", nativeQuery= true)
+    List<ChapterProjection> getChaptersByPodcastId(Long podcastId);
 }
