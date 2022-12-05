@@ -31,12 +31,6 @@ public class PodcastController {
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
-    @GetMapping("{id}/chapters")
-    public ResponseEntity<BaseResponse>  getChaptersByPodcastId(@PathVariable long id){
-        BaseResponse baseResponse= service.chaptersByPodcastId(id);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
-
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreatePodcastRequest request){
         BaseResponse baseResponse= service.create(request);

@@ -2,11 +2,13 @@ package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateSongRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateSongRequest;
-import com.examplerm.rmdemo.controllers.dtos.response.*;
+import com.examplerm.rmdemo.controllers.dtos.response.AlbumResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.ArtistResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.GetSongResponse;
 import com.examplerm.rmdemo.entities.Album;
 import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.Song;
-import com.examplerm.rmdemo.entities.projections.SongProjection;
 import com.examplerm.rmdemo.repositories.ISongRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
@@ -81,54 +83,6 @@ public class SongServiceImpl implements ISongService {
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
     }
-
-    public BaseResponse getSongs(Long id){
-        List<SongProjection> response= repository.getSongsByArtistId(id);
-        if (!response.isEmpty()){
-            List<SongResponse> responseSong= response.stream()
-                    .map(this::from)
-                    .collect(Collectors.toList());
-            return BaseResponse.builder()
-                    .data(responseSong)
-                    .message("Songs by artist id have been found")
-                    .success(Boolean.TRUE)
-                    .httpStatus(HttpStatus.OK).build();
-        }
-        else{
-            return BaseResponse.builder().message("This artist doesn't have songs").build();
-        }
-    }
-
-    private SongResponse from(SongProjection songProjection) {
-        SongResponse response= new SongResponse();
-        response.setId(songProjection.getId());
-        response.setName(songProjection.getName());
-        response.setDuration(songProjection.getDuration());
-        response.setCreationDate(songProjection.getCreation_Date());
-        response.setAlbum(from(albumService.findById(songProjection.getAlbum_Id())));
-        response.setSongUrl(songProjection.getSong_Url());
-        response.setArtist(from(artistService.findById(songProjection.getArtist_Id())));
-        return response;
-    }
-
-    @Override
-    public BaseResponse getSongsbyAlbumId(Long id){
-        List<SongProjection> response= repository.getSongsByAlbumId(id);
-        if (!response.isEmpty()){
-            List<SongResponse> responseSong= response.stream()
-                    .map(this::from)
-                    .collect(Collectors.toList());
-            return BaseResponse.builder()
-                    .data(responseSong)
-                    .message("Songs by album id have been found")
-                    .success(Boolean.TRUE)
-                    .httpStatus(HttpStatus.OK).build();
-        }
-        else{
-            return BaseResponse.builder().message("This album doesn't have songs").build();
-        }
-    }
-
 
     @Override
     public BaseResponse uploadPhoto(MultipartFile file) {
@@ -253,7 +207,16 @@ public class SongServiceImpl implements ISongService {
         return repository.findByName(name)
         .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
-
+    @Override
+    public Song findByArtistId(Long artistId){
+        return repository.findByArtistId(artistId)
+        .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+    @Override
+    public Song findByAlbumId(Long albumId){
+        return repository.findByAlbumId(albumId)
+        .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
 
     private String getDate(){
         LocalDateTime dateNow= LocalDateTime.now();
@@ -266,5 +229,30 @@ public class SongServiceImpl implements ISongService {
         return format;
     }
 
+    @Override
+    public BaseResponse getByAlbumId(Long id) {
+        GetSongResponse response=from(findByAlbumId(id));
+
+        return BaseResponse.builder()
+                .data(response)
+                .message("Song has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
+    @Override
+    public BaseResponse getByArtistId(Long id) {
+        GetSongResponse response=from(findByArtistId(id));
+
+        return BaseResponse.builder()
+                .data(response)
+                .message("Song has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
+    
 
 }

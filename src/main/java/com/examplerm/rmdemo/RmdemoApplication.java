@@ -19,8 +19,7 @@ public class RmdemoApplication {
 				@Override
 				public void addCorsMappings(CorsRegistry registry) {
 					registry.addMapping("/**")
-						.allowedOrigins("http://127.0.0.1:5173",
-						"http://localhost:5173")
+						.allowedOrigins("http://127.0.0.1:5173","http://localhost:1573")
 						.allowedMethods("GET","POST","PUT","DELETE","OPTIONS","HEAD")
 						.allowedHeaders("*");
 				}	

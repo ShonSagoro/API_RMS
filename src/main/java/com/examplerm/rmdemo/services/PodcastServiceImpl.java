@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.examplerm.rmdemo.repositories.IChapterRepository;
-import com.examplerm.rmdemo.services.interfaces.IChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,9 +26,6 @@ public class PodcastServiceImpl implements IPodcastService{
     private IPodcastRepository repository;
 
     @Autowired
-    private IChapterService chapterService;
-
-    @Autowired
     private IFileService fileService;
     
     @Override
@@ -48,12 +43,6 @@ public class PodcastServiceImpl implements IPodcastService{
     public void delete(Long id) {
         repository.deleteById(id);
         
-    }
-
-    @Override
-    public BaseResponse chaptersByPodcastId(Long id){
-        repository.findById(id).orElseThrow(()->new RuntimeException("The podcast does not exist"));
-        return chapterService.getChapters(id);
     }
 
     @Override

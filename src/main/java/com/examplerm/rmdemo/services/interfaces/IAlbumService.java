@@ -28,7 +28,4 @@ public interface IAlbumService {
 
     Album findByName(String name);
 
-    BaseResponse getAlbums(Long id);
-
-    BaseResponse getSongsByAlbumId(Long id);
 }

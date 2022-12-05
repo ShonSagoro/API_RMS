@@ -22,17 +22,6 @@ public class ArtistController {
         BaseResponse baseResponse= service.list();
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
-    @GetMapping("{id}/songs")
-    public ResponseEntity<BaseResponse>  SongsArtist(@PathVariable long id){
-        BaseResponse baseResponse= service.SonglistbyId(id);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
-
-    @GetMapping("{id}/albums")
-    public ResponseEntity<BaseResponse>  AlbumsArtist(@PathVariable long id){
-        BaseResponse baseResponse= service.albumlistbyId(id);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
 
     @GetMapping("{id}")
     public ResponseEntity<BaseResponse>  get(@PathVariable long id){

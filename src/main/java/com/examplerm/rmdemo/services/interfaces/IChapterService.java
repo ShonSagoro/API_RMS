@@ -20,8 +20,6 @@ public interface IChapterService {
     BaseResponse get(Long id);
 
     BaseResponse get(String name);
-
-    BaseResponse getChapters(Long id);
     
     BaseResponse list();
     
