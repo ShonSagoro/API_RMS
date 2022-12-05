@@ -120,9 +120,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     private GetUserResponse from(LoginRequest request) {
-        String name=request.getName();
+        String gmail=request.getGmail();
         String password=request.getPassword();
-        return repository.findByNameAndPassword(name, password)
+        return repository.findByNameAndPassword(gmail, password)
                 .map(this::from)
                 .orElseThrow(() -> new RuntimeException("Incorrect sesion"));
     }
