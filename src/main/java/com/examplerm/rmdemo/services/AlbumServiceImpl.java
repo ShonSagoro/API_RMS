@@ -2,9 +2,7 @@ package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateAlbumRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateAlbumRequest;
-import com.examplerm.rmdemo.controllers.dtos.response.ArtistResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.GetAlbumResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.*;
 import com.examplerm.rmdemo.entities.Album;
 import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.repositories.IAlbumRepository;
@@ -33,6 +31,7 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Autowired
     private IFileService fileService;
+
 
     @Override
     public BaseResponse get(Long id) {
@@ -178,7 +177,7 @@ public class AlbumServiceImpl implements IAlbumService {
             .orElseThrow(()-> new RuntimeException("The album does not exist"));
     }
 
-    
+
     @Override
     public Album findById(Long id) {
         return repository.findById(id)
