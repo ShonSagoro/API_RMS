@@ -13,26 +13,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
-public class JWTAuthorizationFilter extends OncePerRequestFilter{
+public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+                String bearerToken= request.getHeader("Authorization");
 
-                System.out.println("entre we");
+                if(bearerToken != null && bearerToken.startsWith("Bearer ")){
+                    String token= bearerToken.replace("Bearer ", "");
+                    UsernamePasswordAuthenticationToken usernamePAT = TokenUtils.getAuthentication(token);
+                    SecurityContextHolder.getContext().setAuthentication(usernamePAT);
+                }
 
-        String bearerToken= request.getHeader("Authorization");
-
-
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")){
-            String token = bearerToken.replace("Bearer " , "");
-            UsernamePasswordAuthenticationToken usernamePAT = TokenUtils.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(usernamePAT);
-        }
+                filterChain.doFilter(request, response);
                 
-        filterChain.doFilter(request, response);
-
     }
     
-
 }

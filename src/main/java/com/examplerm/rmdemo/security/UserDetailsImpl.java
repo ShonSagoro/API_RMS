@@ -30,10 +30,6 @@ public class UserDetailsImpl implements UserDetails{
         return user.getEmail();
     }
 
-    public String getName() {
-        return user.getName();
-    }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -54,6 +50,8 @@ public class UserDetailsImpl implements UserDetails{
         return true;
     }
 
-    
+    public String getName(){
+        return user.getName();
+    }
     
 }
