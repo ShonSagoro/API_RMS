@@ -3,7 +3,6 @@ package com.examplerm.rmdemo.repositories;
 import java.util.List;
 import java.util.Optional;
 
-import com.examplerm.rmdemo.entities.projections.AlbumProjection;
 import com.examplerm.rmdemo.entities.projections.ChapterProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
