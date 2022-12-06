@@ -88,7 +88,7 @@ public class UserServiceImpl implements IUserService {
 
     private User update(User user, UpdateUserRequest request) {
         user.setName(request.getName());
-        user.setPassword(request.getPassword());
+        user.setPassword(encoder(request.getPassword()));
         user.setPhotoUrl(request.getPhotoUrl());
         return repository.save(user);
     }
@@ -97,7 +97,7 @@ public class UserServiceImpl implements IUserService {
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(encoder(request.getPassword()));
         user.setPhotoUrl(request.getPhotoUrl());
         user.setLibrary(library);
         user.setAdmin(request.getAdmin());
