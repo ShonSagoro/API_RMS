@@ -6,7 +6,6 @@ import com.examplerm.rmdemo.controllers.dtos.response.*;
 import com.examplerm.rmdemo.entities.Album;
 import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.projections.AlbumProjection;
-import com.examplerm.rmdemo.entities.projections.SongProjection;
 import com.examplerm.rmdemo.repositories.IAlbumRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
