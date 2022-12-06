@@ -34,6 +34,8 @@ public class WebSecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/album/list","/artist/list","/chapter/list","/library/list","/playlist/list", "/podcast/list", "/song/list")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

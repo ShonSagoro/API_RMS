@@ -21,7 +21,7 @@ public class AlbumController {
     @Autowired
     private IAlbumService service;
 
-    @GetMapping
+    @GetMapping("list")
     public ResponseEntity<BaseResponse> list(){
         BaseResponse baseResponse= service.list();
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
