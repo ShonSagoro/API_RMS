@@ -10,6 +10,8 @@ public interface ILibraryService {
 
     BaseResponse get(Long id);
 
+    BaseResponse list();
+
     void delete(Long id);
 
     Library findById(Long id);

@@ -8,7 +8,6 @@ public interface IAlbumLibraryService {
     BaseResponse create(CreateAlbumLibraryRequest request);
 
     BaseResponse listAllAlbumsByIdLibrary(Long libraryId);
-
-    void deleteAlbumsByIdFromLibraryId(Long albumId, Long libraryId);
-
+    
+    void deleteAlbumFromLibraryByThierIds(Long albumId, Long libraryId);
 }

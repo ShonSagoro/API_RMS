@@ -15,5 +15,7 @@ public class PlaylistResponse {
     private String duration;
 
     private String creationDate;
+
+    private String photoUrl;
     
 }

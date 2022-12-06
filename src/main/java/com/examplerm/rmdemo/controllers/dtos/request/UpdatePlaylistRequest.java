@@ -12,4 +12,6 @@ public class UpdatePlaylistRequest {
 
     private String duration;
 
+    private String photoUrl;
+
 }

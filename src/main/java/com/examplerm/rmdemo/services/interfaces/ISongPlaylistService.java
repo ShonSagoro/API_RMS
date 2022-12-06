@@ -7,13 +7,12 @@ public interface ISongPlaylistService {
 
     BaseResponse create(CreateSongPlaylistRequest request);
 
-    BaseResponse listAllSongByIdPlaylist(Long playlistId);
+    BaseResponse listAllSongsByIdPlaylist(Long playlistId);
 
     BaseResponse listAllPlaylistByIdSong(Long songId);
 
     void deleteSongsByIdPlaylist(Long playlistId);
     
     void deleteSongFromUserByTheirIds(Long songId,Long playlistId);
-
 
 }

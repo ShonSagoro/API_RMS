@@ -16,6 +16,18 @@ public class SongController {
     @Autowired
     private ISongService service;
 
+    @PostMapping("upload/song")
+    public ResponseEntity<BaseResponse> uploadSong(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadSong(file);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
+    @PostMapping("upload/photo")
+    public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadPhoto(file);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreateSongRequest request){
         BaseResponse baseResponse= service.create(request);
@@ -23,17 +35,10 @@ public class SongController {
 
     }
 
-    @PostMapping("upload")
-    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
-        BaseResponse baseResponse= service.upload(file);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
-
     @GetMapping
     public ResponseEntity<BaseResponse> list(){
         BaseResponse baseResponse= service.list();
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-
     }
 
     @GetMapping("{id}")
@@ -43,14 +48,25 @@ public class SongController {
 
     }
 
+    @GetMapping("name/{name}")
+    public ResponseEntity<BaseResponse> get(@PathVariable String name){
+        BaseResponse baseResponse= service.get(name);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdateSongRequest request){
         BaseResponse baseResponse= service.update(id, request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
     }
 
 }

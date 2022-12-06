@@ -32,7 +32,7 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
     @Override
     public BaseResponse create(CreateUserPlaylistRequest request) {
         UserPlaylist userPlaylist= from(request);
-        GetUserPlaylistResponse response = from(userPlaylist);
+        GetUserPlaylistResponse response = from(repository.save(userPlaylist));
         return BaseResponse.builder()
                 .data(response)
                 .message("Relation between User and Playlist has been created correctly")
@@ -61,8 +61,10 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         PlaylistResponse response= new PlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setCreationDate(playlist.getDateCreation());
+        response.setCreationDate(playlist.getCreationDate());
+        response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
+        response.setPhotoUrl(playlist.getPhotoUrl());
         return response;
     }
 
@@ -71,7 +73,14 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
+        response.setLibrary(from(user.getLibrary()));
+        response.setAdmin(user.getAdmin());
+        response.setPhotoUrl(user.getPhotoUrl());
         return response;
+    }
+
+    private Long from(Library library){
+        return library.getId();
     }
 
     @Override
@@ -114,9 +123,10 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         PlaylistResponse response= new PlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setCreationDate(playlist.getCreationDate());
+        response.setCreationDate(playlist.getCreation_Date());
         response.setDuration(playlist.getDuration());
         response.setDescription(playlist.getDescription());
+        response.setPhotoUrl(playlist.getPhoto_Url());
         return response;
     }
 
@@ -125,6 +135,10 @@ public class UserPlaylistServiceImpl implements IUserPlaylistService {
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
+        response.setLibrary(user.getLibrary_id());
+        response.setPhotoUrl(user.getPhoto_Url());
+        response.setPhotoUrl(user.getPhoto_Url());
+        response.setAdmin(user.getAdmin());
         return response;
     }
 

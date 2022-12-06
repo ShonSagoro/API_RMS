@@ -18,4 +18,6 @@ public class GetAlbumResponse {
     
     private ArtistResponse artist;
 
+    private String photoUrl;
+
 }

@@ -9,5 +9,7 @@ public class UpdateChapterRequest {
     private String title;
 
     private String description;
+
+    private String photoUrl;
     
 }

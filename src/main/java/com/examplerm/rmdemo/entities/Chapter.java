@@ -34,6 +34,8 @@ public class Chapter {
     @Column(nullable = false)
     private String chapterUrl;
 
+    private String photoUrl;
+
     @ManyToOne
     private Podcast podcast;
 

@@ -4,6 +4,10 @@ import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.repositories.ILibraryRepository;
 import com.examplerm.rmdemo.services.interfaces.ILibraryService;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -54,4 +58,20 @@ public class LibraryServiceImpl implements ILibraryService {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The user does not exist"));
     }
+
+    @Override
+    public BaseResponse list() {
+        List<GetLibraryResponse> response=repository.findAll()
+            .stream()
+            .map(this::from)
+            .collect(Collectors.toList());             
+       
+            return BaseResponse.builder()
+            .data(response)
+            .message("Libraries founded")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK)
+            .build();
+    }
+    
 }

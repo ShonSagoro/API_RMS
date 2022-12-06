@@ -21,8 +21,8 @@ public class UserPlaylistController {
     }
 
     @GetMapping("playlists/user/{userId}")
-    public ResponseEntity<BaseResponse> listAllPlaylistsByUserId(@PathVariable Long UserId){
-        BaseResponse baseResponse=service.listAllPlaylistsByUserId(UserId);
+    public ResponseEntity<BaseResponse> listAllPlaylistsByUserId(@PathVariable Long userId){
+        BaseResponse baseResponse=service.listAllPlaylistsByUserId(userId);
         return new ResponseEntity<>(baseResponse,baseResponse.getHttpStatus());
     }
 
@@ -39,6 +39,10 @@ public class UserPlaylistController {
     @DeleteMapping("playlists/user/{userId}")
     public void deletePlaylistsByIdUser(@PathVariable Long userId){
         service.deletePlaylistsByIdUser(userId);
+    }
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
     }
 
 }

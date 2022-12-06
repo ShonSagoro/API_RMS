@@ -35,6 +35,8 @@ public class Podcast {
     @Column(nullable = false)
     private String creationDate;
 
+    private String photoUrl;
+
     @OneToMany(mappedBy = "podcast")  
     private List<PodcastLibrary> podcast_Libraries; 
 

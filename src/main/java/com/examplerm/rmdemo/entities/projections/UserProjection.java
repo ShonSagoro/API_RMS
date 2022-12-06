@@ -8,4 +8,10 @@ public interface UserProjection {
 
     String getEmail();
 
+    Long getLibrary_id();
+
+    String getPhoto_Url();
+
+    Boolean getAdmin();
+
 }

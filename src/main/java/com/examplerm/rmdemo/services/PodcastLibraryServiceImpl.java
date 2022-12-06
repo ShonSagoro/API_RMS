@@ -66,6 +66,7 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
         response.setCategory(podcast.getCategory());
         response.setDescription(podcast.getDescription());
         response.setCreationDate(podcast.getCreationDate());
+        response.setPhotoUrl(podcast.getPhotoUrl());
         return response;
     } 
 
@@ -82,16 +83,12 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
             .map(this::from)
             .collect(Collectors.toList());
 
+
         return BaseResponse.builder()
             .data(response)
             .message("Podcast list by library id")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
-    }
-
-    @Override
-    public void deletePodcastsByIdLibrary(Long libraryId) {
-        repository.deletePodcastsByIdLibrary(libraryId);
     }
 
     private PodcastResponse from(PodcastProjection podcast){
@@ -100,8 +97,14 @@ public class PodcastLibraryServiceImpl implements IPodcastLibraryService{
         response.setName(podcast.getName());
         response.setCategory(podcast.getCategory());
         response.setDescription(podcast.getDescription());
-        response.setCreationDate(podcast.getCreationDate());
+        response.setCreationDate(podcast.getCreation_Date());
+        response.setPhotoUrl(podcast.getPhoto_Url());
         return response;
+    }
+
+    @Override
+    public void deletePodcastFromLibraryByThierIds(Long podcastId, Long libraryId) {
+        repository.deletePodcastFromLibraryByThierIds(podcastId, libraryId);        
     }
 
     

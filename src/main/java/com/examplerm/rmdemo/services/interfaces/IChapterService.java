@@ -9,18 +9,25 @@ import com.examplerm.rmdemo.entities.Chapter;
 
 
 public interface IChapterService {
-
     BaseResponse create(CreateChapterRequest request);
 
-    BaseResponse upload(MultipartFile file);
+    BaseResponse uploadPhoto(MultipartFile file);
+
+    BaseResponse uploadChapter(MultipartFile file);
     
     BaseResponse update(Long id, UpdateChapterRequest request);
     
     BaseResponse get(Long id);
+
+    BaseResponse get(String name);
+
+    BaseResponse getChapters(Long id);
     
     BaseResponse list();
     
     void delete(Long id);
     
     Chapter findById(Long id);
+
+    Chapter findByName(String name);
 }

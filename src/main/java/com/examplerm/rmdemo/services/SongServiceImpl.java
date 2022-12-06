@@ -2,13 +2,11 @@ package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateSongRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateSongRequest;
-import com.examplerm.rmdemo.controllers.dtos.response.AlbumResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.ArtistResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.GetSongResponse;
+import com.examplerm.rmdemo.controllers.dtos.response.*;
 import com.examplerm.rmdemo.entities.Album;
 import com.examplerm.rmdemo.entities.Artist;
 import com.examplerm.rmdemo.entities.Song;
+import com.examplerm.rmdemo.entities.projections.SongProjection;
 import com.examplerm.rmdemo.repositories.ISongRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
 import com.examplerm.rmdemo.services.interfaces.IArtistService;
@@ -52,6 +50,18 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
+    public BaseResponse get(String name) {
+        GetSongResponse response=from(name);
+
+        return BaseResponse.builder()
+                .data(response)
+                .message("Song has been found")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
+    @Override
     public BaseResponse create(CreateSongRequest request) {
         Song song = from(request);
         GetSongResponse response = from(repository.save(song));
@@ -63,13 +73,71 @@ public class SongServiceImpl implements ISongService {
     }
 
     @Override
-    public BaseResponse upload(MultipartFile file){
+    public BaseResponse uploadSong(MultipartFile file){
         String songUrl= fileService.upload(file);
         return BaseResponse.builder()
                 .data(songUrl)
-                .message("Song uploaded correctly")
+                .message("The Song uploaded correctly")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
+    }
+
+    public BaseResponse getSongs(Long id){
+        List<SongProjection> response= repository.getSongsByArtistId(id);
+        if (!response.isEmpty()){
+            List<SongResponse> responseSong= response.stream()
+                    .map(this::from)
+                    .collect(Collectors.toList());
+            return BaseResponse.builder()
+                    .data(responseSong)
+                    .message("Songs by artist id have been found")
+                    .success(Boolean.TRUE)
+                    .httpStatus(HttpStatus.OK).build();
+        }
+        else{
+            return BaseResponse.builder().message("This artist doesn't have songs").build();
+        }
+    }
+
+    private SongResponse from(SongProjection songProjection) {
+        SongResponse response= new SongResponse();
+        response.setId(songProjection.getId());
+        response.setName(songProjection.getName());
+        response.setDuration(songProjection.getDuration());
+        response.setCreationDate(songProjection.getCreation_Date());
+        response.setAlbum(from(albumService.findById(songProjection.getAlbum_Id())));
+        response.setSongUrl(songProjection.getSong_Url());
+        response.setArtist(from(artistService.findById(songProjection.getArtist_Id())));
+        return response;
+    }
+
+    @Override
+    public BaseResponse getSongsbyAlbumId(Long id){
+        List<SongProjection> response= repository.getSongsByAlbumId(id);
+        if (!response.isEmpty()){
+            List<SongResponse> responseSong= response.stream()
+                    .map(this::from)
+                    .collect(Collectors.toList());
+            return BaseResponse.builder()
+                    .data(responseSong)
+                    .message("Songs by album id have been found")
+                    .success(Boolean.TRUE)
+                    .httpStatus(HttpStatus.OK).build();
+        }
+        else{
+            return BaseResponse.builder().message("This album doesn't have songs").build();
+        }
+    }
+
+
+    @Override
+    public BaseResponse uploadPhoto(MultipartFile file) {
+        String photoUrl=fileService.upload(file);
+        return BaseResponse.builder()
+            .data(photoUrl)
+            .message("The photo uploaded correctly")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
     }
 
     @Override
@@ -111,6 +179,7 @@ public class SongServiceImpl implements ISongService {
     private Song update(Song song, UpdateSongRequest request) {
         song.setName(request.getName());
         song.setDuration(request.getDuration());
+        song.setPhotoUrl(request.getPhotoUrl());
         return repository.save(song);
     }
 
@@ -122,6 +191,7 @@ public class SongServiceImpl implements ISongService {
         song.setArtist(artistService.findById(request.getArtistId()));
         song.setCreationDate(getDate());
         song.setSongUrl(request.getSongUrl());
+        song.setPhotoUrl(request.getPhotoUrl());
         return song;
     }
 
@@ -134,6 +204,7 @@ public class SongServiceImpl implements ISongService {
         response.setSongUrl(song.getSongUrl());
         response.setAlbum(from(song.getAlbum()));
         response.setArtist(from(song.getArtist()));
+        response.setPhotoUrl(song.getPhotoUrl());
         return response;
     }
 
@@ -145,6 +216,7 @@ public class SongServiceImpl implements ISongService {
         response.setCreationDate(album.getCreationDate());
         response.setDescription(album.getDescription());
         response.setArtist(from(album.getArtist()));
+        response.setPhotoUrl(album.getPhotoUrl());
         return response;
     }
 
@@ -154,6 +226,7 @@ public class SongServiceImpl implements ISongService {
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
     
@@ -163,10 +236,24 @@ public class SongServiceImpl implements ISongService {
                 .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
 
+
+
+    private GetSongResponse from(String name) {
+        return repository.findByName(name)
+                .map(this::from)
+                .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+    @Override
     public Song findById(Long idSong){
         return repository.findById(idSong)
         .orElseThrow(() -> new RuntimeException("The song does not exist"));
     }
+    @Override
+    public Song findByName(String name){
+        return repository.findByName(name)
+        .orElseThrow(() -> new RuntimeException("The song does not exist"));
+    }
+
 
     private String getDate(){
         LocalDateTime dateNow= LocalDateTime.now();
@@ -178,4 +265,6 @@ public class SongServiceImpl implements ISongService {
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
     }
+
+
 }

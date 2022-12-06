@@ -20,15 +20,20 @@ public class ArtistLibraryController {
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
-    @GetMapping("artist/library/{libraryId}")
-    public ResponseEntity<BaseResponse> listAllArtistByIdLibrary(@PathVariable Long libraryId){
+    @GetMapping("artists/library/{libraryId}")
+    public ResponseEntity<BaseResponse> listAllArtistsByIdLibrary(@PathVariable Long libraryId){
         BaseResponse baseResponse= service.listAllArtistsByIdLibrary(libraryId);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
-    @DeleteMapping("artists/{artistId}/library/{libraryId}")
-    public void deleteArtistByIdfromLibraryId(@PathVariable Long artistId,@PathVariable Long libraryId){
-        service.deleteArtistByIdFromLibraryId(artistId,libraryId);
+    @DeleteMapping("artist/{artistId}/library/{libraryId}")
+    public void deleteArtistFromLibraryByThierIds(@PathVariable Long artistId,@PathVariable Long libraryId){
+        service.deleteArtistFromLibraryByThierIds(artistId,libraryId);
+    }
+
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
     }
 
 }

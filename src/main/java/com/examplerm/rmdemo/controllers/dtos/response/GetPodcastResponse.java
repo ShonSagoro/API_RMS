@@ -16,4 +16,6 @@ public class GetPodcastResponse {
 
     private String creationDate;
 
+    private String photoUrl;
+
 }

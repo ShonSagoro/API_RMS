@@ -10,6 +10,7 @@ import com.examplerm.rmdemo.entities.projections.AlbumProjection;
 import com.examplerm.rmdemo.repositories.IAlbumLibraryRepository;
 import com.examplerm.rmdemo.services.interfaces.IAlbumLibraryService;
 import com.examplerm.rmdemo.services.interfaces.IAlbumService;
+import com.examplerm.rmdemo.services.interfaces.IArtistService;
 import com.examplerm.rmdemo.services.interfaces.ILibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AlbumLibraryImpl implements IAlbumLibraryService {
+public class AlbumLibraryServiceImpl implements IAlbumLibraryService {
 
     @Autowired
     private IAlbumLibraryRepository repository;
@@ -29,6 +30,9 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
 
     @Autowired
     private ILibraryService libraryService;
+    
+    @Autowired
+    private IArtistService artistService;
 
     @Override
     public BaseResponse create(CreateAlbumLibraryRequest request) {
@@ -61,10 +65,11 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
         AlbumResponse response= new AlbumResponse();
         response.setId(album.getId());
         response.setName(album.getName());
-        response.setArtist(from(album.getArtist()));
         response.setDescription(album.getDescription());
         response.setDuration(album.getDuration());
         response.setCreationDate(album.getCreationDate());
+        response.setArtist(from(album.getArtist()));
+        response.setPhotoUrl(album.getPhotoUrl());
         return response;
     }
 
@@ -73,6 +78,7 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
         response.setListener(artist.getListener());
         response.setName(artist.getName());
         response.setId(artist.getId());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
 
@@ -96,17 +102,18 @@ public class AlbumLibraryImpl implements IAlbumLibraryService {
     }
 
     @Override
-    public void deleteAlbumsByIdFromLibraryId(Long albumId, Long libraryId) {
-        repository.deleteAlbumsByIdFromLibraryId(albumId,libraryId);
+    public void deleteAlbumFromLibraryByThierIds(Long albumId, Long libraryId) {
+        repository.deleteAlbumFromLibraryByThierIds(albumId,libraryId);
     }
 
     private AlbumResponse from(AlbumProjection album){
         AlbumResponse response= new AlbumResponse();
         response.setId(album.getId());
         response.setName(album.getName());
-        response.setCreationDate(album.getCreationDate());
+        response.setCreationDate(album.getCreation_Date());
         response.setDuration(album.getDuration());
-        response.setArtist(from(album.getArtist()));
+        response.setArtist(from(artistService.findById(album.getArtist_Id())));
+        response.setPhotoUrl(album.getPhoto_Url());
         return response;
     }
 

@@ -1,18 +1,21 @@
 package com.examplerm.rmdemo.entities.projections;
 
-public interface AlbumProjection {
+public interface ChapterProjection {
 
     Long getId();
 
     String getCreation_Date();
-    
-    String getDescription();
-    
+
     String getDuration();
-    
-    String getName();
+
+    String getTitle();
+
+    String getChapter_Url();
+
+    String getDescription();
+
+    Long getPodcast_Id();
 
     String getPhoto_Url();
 
-    Long getArtist_Id();
 }

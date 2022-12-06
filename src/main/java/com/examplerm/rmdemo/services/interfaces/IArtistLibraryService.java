@@ -10,6 +10,6 @@ public interface IArtistLibraryService {
 
     BaseResponse listAllArtistsByIdLibrary(Long libraryId);
 
-    void deleteArtistByIdFromLibraryId(Long artistId, Long libraryId);
+    void deleteArtistFromLibraryByThierIds(Long artistId, Long libraryId);
 
 }

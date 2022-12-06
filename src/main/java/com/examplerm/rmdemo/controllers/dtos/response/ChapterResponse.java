@@ -19,5 +19,7 @@ public class ChapterResponse {
     private String chapterUrl;
 
     private PodcastResponse podcast;
+
+    private String photoUrl;
     
 }

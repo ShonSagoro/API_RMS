@@ -11,5 +11,5 @@ public interface IPodcastLibraryService {
 
     BaseResponse listAllPodcastsByIdLibrary(Long librarytId);
     
-    void deletePodcastsByIdLibrary(Long libraryId);
+    void deletePodcastFromLibraryByThierIds(Long podcastId, Long libraryId);
 }

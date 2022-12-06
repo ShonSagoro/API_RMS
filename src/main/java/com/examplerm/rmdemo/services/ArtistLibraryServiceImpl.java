@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ArtistLibraryImpl implements IArtistLibraryService {
+public class ArtistLibraryServiceImpl implements IArtistLibraryService {
 
     @Autowired
     private IArtistLibraryRepository repository;
@@ -62,6 +62,7 @@ public class ArtistLibraryImpl implements IArtistLibraryService {
         response.setId(artist.getId());
         response.setName(artist.getName());
         response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhotoUrl());
         return response;
     }
 
@@ -85,16 +86,19 @@ public class ArtistLibraryImpl implements IArtistLibraryService {
                 .httpStatus(HttpStatus.OK).build();
     }
 
-    @Override
-    public void deleteArtistByIdFromLibraryId(Long artistId, Long libraryId) {
-        repository.deleteArtistbyIdUserId(artistId,libraryId);
-    }
-
     private ArtistResponse from(ArtistProjection artist){
         ArtistResponse response= new ArtistResponse();
         response.setId(artist.getId());
         response.setName(artist.getName());
+        response.setListener(artist.getListener());
+        response.setPhotoUrl(artist.getPhoto_Url());
         return response;
+    }
+
+    @Override
+    public void deleteArtistFromLibraryByThierIds(Long artistId, Long libraryId) {
+        repository.deleteArtistFromLibraryByThierIds(artistId, libraryId);
+        
     }
 
 }

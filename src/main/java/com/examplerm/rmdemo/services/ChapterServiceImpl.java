@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.examplerm.rmdemo.controllers.dtos.response.*;
+import com.examplerm.rmdemo.entities.projections.AlbumProjection;
+import com.examplerm.rmdemo.entities.projections.ChapterProjection;
+import com.examplerm.rmdemo.entities.projections.PodcastProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,9 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateChapterRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateChapterRequest;
-import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.GetChapterResponse;
-import com.examplerm.rmdemo.controllers.dtos.response.PodcastResponse;
 import com.examplerm.rmdemo.entities.Chapter;
 import com.examplerm.rmdemo.entities.Podcast;
 import com.examplerm.rmdemo.repositories.IChapterRepository;
@@ -23,7 +24,7 @@ import com.examplerm.rmdemo.services.interfaces.IFileService;
 import com.examplerm.rmdemo.services.interfaces.IPodcastService;
 
 @Service
-public class ChapterSeriveImpl implements IChapterService{
+public class ChapterServiceImpl implements IChapterService{
     
     @Autowired
     private IChapterRepository repository;
@@ -46,11 +47,11 @@ public class ChapterSeriveImpl implements IChapterService{
     }
 
     @Override
-    public BaseResponse upload(MultipartFile file){
+    public BaseResponse uploadChapter(MultipartFile file){
         String chapterUrl=fileService.upload(file);
         return BaseResponse.builder()
             .data(chapterUrl)
-            .message("Chapter uploaded correctly")
+            .message("The Chapter uploaded correctly")
             .success(Boolean.TRUE)
             .httpStatus(HttpStatus.OK).build();
     }
@@ -74,9 +75,48 @@ public class ChapterSeriveImpl implements IChapterService{
             .httpStatus(HttpStatus.OK).build();
     }
 
+    public BaseResponse getChapters(Long id){
+        List<ChapterProjection> response= repository.getChaptersByPodcastId(id);
+        if (!response.isEmpty()){
+            List<ChapterResponse> responseChapter= response.stream()
+                    .map(this::from)
+                    .collect(Collectors.toList());
+            return BaseResponse.builder()
+                    .data(responseChapter)
+                    .message("Chapters by podcast id have been found")
+                    .success(Boolean.TRUE)
+                    .httpStatus(HttpStatus.OK).build();
+        }
+        else{
+            return BaseResponse.builder().message("This podcast doesn't have chapters").build();
+        }
+    }
+
+    private ChapterResponse from(ChapterProjection chapterProjection) {
+        ChapterResponse response= new ChapterResponse();
+        response.setId(chapterProjection.getId());
+        response.setTitle(chapterProjection.getTitle());
+        response.setDuration(chapterProjection.getDuration());
+        response.setCreationDate(chapterProjection.getCreation_Date());
+        response.setPhotoUrl(chapterProjection.getPhoto_Url());
+        response.setPodcast(from(podcastService.findById(chapterProjection.getPodcast_Id())));
+        response.setDescription(chapterProjection.getDescription());
+        response.setChapterUrl(chapterProjection.getChapter_Url());
+        return response;
+    }
+
     @Override
     public BaseResponse get(Long id) {
         GetChapterResponse response= from(id);
+        return BaseResponse.builder()
+            .data(response)
+            .message("Chapter has been getted")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
+    @Override
+    public BaseResponse get(String name) {
+        GetChapterResponse response= from(name);
         return BaseResponse.builder()
             .data(response)
             .message("Chapter has been getted")
@@ -101,6 +141,7 @@ public class ChapterSeriveImpl implements IChapterService{
     private Chapter update(Chapter chapter, UpdateChapterRequest request){
         chapter.setTitle(request.getTitle());
         chapter.setDescription(request.getDescription());
+        chapter.setPhotoUrl(request.getPhotoUrl());
         return repository.save(chapter);
     }
 
@@ -109,10 +150,20 @@ public class ChapterSeriveImpl implements IChapterService{
                 map(this::from)
                 .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
     }
+    private GetChapterResponse from(String name){
+        return repository.findByName(name).
+                map(this::from)
+                .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
+    }
 
     @Override
     public Chapter findById(Long id) {
         return repository.findById(id)
+            .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
+    }
+    @Override
+    public Chapter findByName(String name) {
+        return repository.findByName(name)
             .orElseThrow(()-> new RuntimeException("The chapter does not exist"));
     }
 
@@ -125,6 +176,7 @@ public class ChapterSeriveImpl implements IChapterService{
         response.setChapterUrl(chapter.getChapterUrl());
         response.setCreationDate(chapter.getCreationDate());
         response.setPodcast(from(chapter.getPodcast()));
+        response.setPhotoUrl(chapter.getPhotoUrl());
         return response;
     }
 
@@ -135,6 +187,7 @@ public class ChapterSeriveImpl implements IChapterService{
         response.setCategory(podcast.getCategory());
         response.setDescription(podcast.getDescription());
         response.setCreationDate(podcast.getCreationDate());
+        response.setPhotoUrl(podcast.getPhotoUrl());
         return response;
 
     }
@@ -145,6 +198,7 @@ public class ChapterSeriveImpl implements IChapterService{
         chapter.setDescription(request.getDescription());
         chapter.setDuration(request.getDuration());
         chapter.setChapterUrl(request.getChapterUrl());
+        chapter.setPhotoUrl(request.getPhotoUrl());
         chapter.setCreationDate(getDate());
         chapter.setPodcast(podcastService.findById(request.getPodcastId()));
         return chapter;
@@ -159,6 +213,16 @@ public class ChapterSeriveImpl implements IChapterService{
     private DateTimeFormatter getFormat(){
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
+    }
+
+    @Override
+    public BaseResponse uploadPhoto(MultipartFile file) {
+        String photoUrl=fileService.upload(file);
+        return BaseResponse.builder()
+            .data(photoUrl)
+            .message("The photo uploaded correctly")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
     }
 
 }

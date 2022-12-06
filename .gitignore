@@ -31,4 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
-./src/main/java/com/examplerm/rmdemo/services/FileServiceImpl.java
+
+FileServiceImpl.java
+application.propierties

@@ -22,5 +22,6 @@ public class FileController {
     public String upload(@RequestParam MultipartFile file) {
         return service.upload(file);
     }
+
     
 }

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreatePlaylistRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdatePlaylistRequest;
@@ -34,9 +36,21 @@ public class PlaylistController {
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
+    @GetMapping("name/{name}")
+    public ResponseEntity<BaseResponse> get(@PathVariable String name){
+        BaseResponse baseResponse= service.get(name);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreatePlaylistRequest request){
         BaseResponse baseResponse= service.create(request);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+    
+    @PostMapping("upload/photo")
+    public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadPhoto(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
@@ -49,6 +63,11 @@ public class PlaylistController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
+    }
+
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
     }
 
 }

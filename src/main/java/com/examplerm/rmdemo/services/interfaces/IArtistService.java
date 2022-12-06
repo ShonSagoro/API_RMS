@@ -1,6 +1,7 @@
 package com.examplerm.rmdemo.services.interfaces;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateArtistRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateArtistRequest;
@@ -9,10 +10,18 @@ import com.examplerm.rmdemo.entities.Artist;
 
 @Service
 public interface IArtistService {
-    
+
+    BaseResponse SonglistbyId(Long id);
+
+    BaseResponse albumlistbyId(Long id);
+
     BaseResponse create(CreateArtistRequest request);
 
+    BaseResponse uploadPhoto(MultipartFile file);
+
     BaseResponse get(Long id);
+    
+    BaseResponse get(String name);
     
     BaseResponse list();
     
@@ -21,5 +30,7 @@ public interface IArtistService {
     void delete(Long id);
 
     Artist findById(Long id);
+
+    Artist findByName(String name);
 
 }

@@ -3,12 +3,15 @@ package com.examplerm.rmdemo.repositories;
 import com.examplerm.rmdemo.entities.projections.PlaylistProjection;
 import com.examplerm.rmdemo.entities.projections.UserProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.examplerm.rmdemo.entities.pivots.UserPlaylist;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 @Repository
 public interface IUserPlaylistRepository extends JpaRepository<UserPlaylist, Long> {
@@ -25,9 +28,13 @@ public interface IUserPlaylistRepository extends JpaRepository<UserPlaylist, Lon
             "where user_playlist.playlist_id = :playlistId", nativeQuery = true)
     List<UserProjection> listAllUsersByIdPlaylist(Long playlistId);
 
+    @Transactional
+    @Modifying
     @Query(value = "DELETE FROM user_playlist WHERE user_id= :userId", nativeQuery = true)
     void deletePlaylistsByIdUser(Long userId);
 
+    @Transactional
+    @Modifying
     @Query(value = "DELETE FROM user_playlist WHERE user_id= :userId AND playlist_id= :playlistId", nativeQuery= true)
     void deletePlaylistFromUserByThierIds(Long playlistId, Long userId);
 

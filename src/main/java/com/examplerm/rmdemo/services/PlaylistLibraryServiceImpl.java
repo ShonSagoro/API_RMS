@@ -63,8 +63,10 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
         PlaylistResponse response= new PlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
-        response.setCreationDate(playlist.getDateCreation());
+        response.setCreationDate(playlist.getCreationDate());
         response.setDescription(playlist.getDescription());
+        response.setDuration(playlist.getDuration());
+        response.setPhotoUrl(playlist.getPhotoUrl());
         return response;
 
     }
@@ -77,10 +79,11 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
 
     @Override
     public BaseResponse listAllPlaylistByIdLibrary(Long librarytId) {
-        List<PlaylistProjection> playlists= repository.listAllPlaylistByLibraryId(librarytId);
+        List<PlaylistProjection> playlists= repository.listAllPlaylistsByLibraryId(librarytId);
         List<PlaylistResponse> response= playlists.stream()
             .map(this::from)
             .collect(Collectors.toList());
+            
         return BaseResponse.builder()
             .data(response)
             .message("Playlist list by library id")
@@ -88,19 +91,20 @@ public class PlaylistLibraryServiceImpl implements IPlaylistLibraryService{
             .httpStatus(HttpStatus.OK).build();
     }
 
-    @Override
-    public void deletePlaylistsByIdLibrary(Long libraryId) {
-        repository.deletePlaylistsByIdLibrary(libraryId);        
-    }
-
     private PlaylistResponse from(PlaylistProjection playlist){
         PlaylistResponse response= new PlaylistResponse();
         response.setId(playlist.getId());
         response.setName(playlist.getName());
         response.setDuration(playlist.getDuration());
-        response.setCreationDate(playlist.getCreationDate());
+        response.setCreationDate(playlist.getCreation_Date());
         response.setDescription(playlist.getDescription());
+        response.setPhotoUrl(playlist.getPhoto_Url());
         return response;
+    }
+
+    @Override
+    public void deletePlaylistFromLibraryByThierIds(Long playlistId, Long libraryId) {
+        repository.deletePlaylistFromLibraryByThierIds(playlistId, libraryId);        
     }
 
 }

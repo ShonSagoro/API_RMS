@@ -10,15 +10,25 @@ public interface ISongService {
 
     BaseResponse get(Long id);
 
+    BaseResponse get(String name);
+
     BaseResponse create(CreateSongRequest request);
 
-    BaseResponse upload(MultipartFile file);
+    BaseResponse uploadPhoto(MultipartFile file);
+
+    BaseResponse uploadSong(MultipartFile file);
 
     BaseResponse list();
-
+    
     BaseResponse update(Long id, UpdateSongRequest request);
-
+    
     void delete(Long id);
-
+    
     Song findById(Long id);
+
+    Song findByName(String name);
+
+    BaseResponse getSongsbyAlbumId(Long id);
+
+    BaseResponse getSongs(Long id);
 }

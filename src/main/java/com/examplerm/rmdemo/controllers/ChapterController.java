@@ -37,14 +37,26 @@ public class ChapterController {
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
+    @GetMapping("name/{name}")
+    public ResponseEntity<BaseResponse> get(@PathVariable String name){
+        BaseResponse baseResponse= service.get(name);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
     @PostMapping
     public ResponseEntity<BaseResponse> create(@RequestBody CreateChapterRequest request){
         BaseResponse baseResponse= service.create(request);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
-    @PostMapping("upload")
-    public ResponseEntity<BaseResponse> upload(@RequestParam MultipartFile file){
-        BaseResponse baseResponse= service.upload(file);
+    @PostMapping("upload/chapter")
+    public ResponseEntity<BaseResponse> uploadChapter(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadChapter(file);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+
+    @PostMapping("upload/photo")
+    public ResponseEntity<BaseResponse> uploadPhoto(@RequestParam MultipartFile file){
+        BaseResponse baseResponse= service.uploadPhoto(file);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
 
@@ -57,6 +69,11 @@ public class ChapterController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
+    }
+
+    @GetMapping("health")
+    public String health() {
+        return "Ok";
     }
 
 }

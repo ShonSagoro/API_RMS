@@ -35,6 +35,8 @@ public class Album {
     
     @Column(nullable = false)
     private String creationDate;
+
+    private String photoUrl;
     
     @ManyToOne
     private Artist artist;
@@ -44,5 +46,9 @@ public class Album {
 
     @OneToMany(mappedBy = "album")
     private List<Song> songs;
+
+    public Album orElseThrow(Object object) {
+        return null;
+    }
     
 }

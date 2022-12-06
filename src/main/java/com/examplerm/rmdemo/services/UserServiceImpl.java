@@ -1,6 +1,7 @@
 package com.examplerm.rmdemo.services;
 
 import com.examplerm.rmdemo.controllers.dtos.request.CreateUserRequest;
+import com.examplerm.rmdemo.controllers.dtos.request.LoginRequest;
 import com.examplerm.rmdemo.controllers.dtos.request.UpdateUserRequest;
 import com.examplerm.rmdemo.controllers.dtos.response.BaseResponse;
 import com.examplerm.rmdemo.controllers.dtos.response.GetUserResponse;
@@ -8,14 +9,19 @@ import com.examplerm.rmdemo.controllers.dtos.response.LibraryResponse;
 import com.examplerm.rmdemo.entities.Library;
 import com.examplerm.rmdemo.entities.User;
 import com.examplerm.rmdemo.repositories.IUserRepository;
+import com.examplerm.rmdemo.services.interfaces.IFileService;
 import com.examplerm.rmdemo.services.interfaces.ILibraryService;
 import com.examplerm.rmdemo.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UserServiceImpl implements IUserService {
+
+    @Autowired
+    private IFileService fileService;
 
     @Autowired
     private IUserRepository repository;
@@ -24,8 +30,19 @@ public class UserServiceImpl implements IUserService {
     private ILibraryService libraryService;
 
     @Override
-    public BaseResponse get(Long id) {
-        GetUserResponse response=from(id);
+    public BaseResponse login(LoginRequest request) {
+        GetUserResponse response=from(request);
+        return BaseResponse.builder()
+                .data(response)
+                .message("You are Logged in")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+    
+    @Override
+    public BaseResponse get(String name) {
+        GetUserResponse response=from(name);
         return BaseResponse.builder()
                 .data(response)
                 .message("User has been found")
@@ -63,13 +80,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void delete(Long id) {
         User user=findById(id);
-        libraryService.delete(user.getLibrary().getId());
         repository.deleteById(id);
+        libraryService.delete(user.getLibrary().getId());
     }
 
     private User update(User user, UpdateUserRequest request) {
         user.setName(request.getName());
         user.setPassword(request.getPassword());
+        user.setPhotoUrl(request.getPhotoUrl());
         return repository.save(user);
     }
 
@@ -78,7 +96,9 @@ public class UserServiceImpl implements IUserService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
+        user.setPhotoUrl(request.getPhotoUrl());
         user.setLibrary(library);
+        user.setAdmin(request.getAdmin());
         return user;
     }
 
@@ -88,6 +108,8 @@ public class UserServiceImpl implements IUserService {
         response.setName(user.getName());
         response.setEmail(user.getEmail());
         response.setLibrary(from(user.getLibrary()));
+        response.setPhotoUrl(user.getPhotoUrl());
+        response.setAdmin(user.getAdmin());
         return response;
     }
 
@@ -97,8 +119,18 @@ public class UserServiceImpl implements IUserService {
         return response;
     }
 
-    private GetUserResponse from(Long idUser) {
-        return repository.findById(idUser)
+    private GetUserResponse from(LoginRequest request) {
+        String name=request.getName();
+        String password=request.getPassword();
+        return repository.findByNameAndPassword(name, password)
+                .map(this::from)
+                .orElseThrow(() -> new RuntimeException("Incorrect sesion"));
+    }
+
+
+
+    private GetUserResponse from(String name) {
+        return repository.findByName(name)
                 .map(this::from)
                 .orElseThrow(() -> new RuntimeException("The user does not exist"));
     }
@@ -107,5 +139,21 @@ public class UserServiceImpl implements IUserService {
     public User findById(Long id) {
         return repository.findById(id)
             .orElseThrow(() -> new RuntimeException("The user does not exist"));
+    }
+
+    @Override
+    public User findByName(String name) {
+        return repository.findByName(name)
+            .orElseThrow(() -> new RuntimeException("The user does not exist"));
+    }
+
+    @Override
+    public BaseResponse uploadPhoto(MultipartFile file){
+        String photoUrl= fileService.upload(file);
+        return BaseResponse.builder()
+                .data(photoUrl)
+                .message("The photo of user uploaded correctly")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.CREATED).build();
     }
 }

@@ -32,10 +32,12 @@ public class Playlist {
     private String description;
     
     @Column(nullable = false)
-    private String dateCreation;
+    private String creationDate;
     
     @Column(nullable = false)
     private String duration;
+
+    private String photoUrl;
     
     @OneToMany(mappedBy = "playlist")  
     private List<PlaylistLibrary> playlist_Libraries;

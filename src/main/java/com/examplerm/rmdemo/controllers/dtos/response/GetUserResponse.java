@@ -14,4 +14,9 @@ public class GetUserResponse {
 
     private LibraryResponse library;
 
+    private String photoUrl;
+
+    private Boolean admin;
+    
+
 }
