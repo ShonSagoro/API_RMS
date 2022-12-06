@@ -14,6 +14,7 @@ import com.examplerm.rmdemo.services.interfaces.ILibraryService;
 import com.examplerm.rmdemo.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,13 +32,14 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public BaseResponse login(LoginRequest request) {
-        GetUserResponse response=from(request);
-        return BaseResponse.builder()
-                .data(response)
-                .message("You are Logged in")
-                .success(Boolean.TRUE)
-                .httpStatus(HttpStatus.OK)
-                .build();
+        GetUserResponse response= repository.findOneByEmail(request.getEmail()).map(this::from)
+            .orElseThrow(() -> new RuntimeException("The User does not exist"));
+
+            return BaseResponse.builder()
+            .data(response)
+            .message("logged")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.FOUND).build();
     }
     
     @Override
@@ -86,7 +88,7 @@ public class UserServiceImpl implements IUserService {
 
     private User update(User user, UpdateUserRequest request) {
         user.setName(request.getName());
-        user.setPassword(request.getPassword());
+        user.setPassword(encoder(request.getPassword()));
         user.setPhotoUrl(request.getPhotoUrl());
         return repository.save(user);
     }
@@ -95,7 +97,7 @@ public class UserServiceImpl implements IUserService {
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(encoder(request.getPassword()));
         user.setPhotoUrl(request.getPhotoUrl());
         user.setLibrary(library);
         user.setAdmin(request.getAdmin());
@@ -117,14 +119,6 @@ public class UserServiceImpl implements IUserService {
         LibraryResponse response=new LibraryResponse();
         response.setId(library.getId());
         return response;
-    }
-
-    private GetUserResponse from(LoginRequest request) {
-        String name=request.getName();
-        String password=request.getPassword();
-        return repository.findByNameAndPassword(name, password)
-                .map(this::from)
-                .orElseThrow(() -> new RuntimeException("Incorrect sesion"));
     }
 
 
@@ -155,5 +149,10 @@ public class UserServiceImpl implements IUserService {
                 .message("The photo of user uploaded correctly")
                 .success(Boolean.TRUE)
                 .httpStatus(HttpStatus.CREATED).build();
+    }
+
+    private String encoder(String password){
+        String encode= new BCryptPasswordEncoder().encode(password);
+        return encode;
     }
 }
