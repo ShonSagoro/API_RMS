@@ -153,7 +153,6 @@ public class UserServiceImpl implements IUserService {
 
     private String encoder(String password){
         String encode= new BCryptPasswordEncoder().encode(password);
-        System.out.println(encode);
         return encode;
     }
 }
